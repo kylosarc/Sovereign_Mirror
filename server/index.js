@@ -6,20 +6,28 @@ import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
 import { veracityGate, calculateQuorum, calculateAtrophyDecay, getThresholdWithEntropy } from './logic/kernel.js';
 import { getAllWeights, recordFeedback, applyVerdict, getRecentFeedback, recordAnalysis, getRecentAnalyses } from './feedbackStore.js';
+import { saveEntry, loadAll, loadSince, getStats } from './ledgerStore.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
-const CRYPTO_BIN = process.env.CRYPTO_SERVER_BIN || 'wsl.exe';
-let CRYPTO_ARGS;
-try {
-  CRYPTO_ARGS = process.env.CRYPTO_SERVER_ARGS
-    ? JSON.parse(process.env.CRYPTO_SERVER_ARGS)
-    : ['/home/retroporter/cup/kylos-qpadl/target/release/kylos-crypto-server'];
-} catch {
-  CRYPTO_ARGS = ['/home/retroporter/cup/kylos-qpadl/target/release/kylos-crypto-server'];
-}
-if (!Array.isArray(CRYPTO_ARGS) || CRYPTO_ARGS.length === 0) {
+let CRYPTO_BIN = process.env.CRYPTO_SERVER_BIN;
+let CRYPTO_ARGS = [];
+
+if (CRYPTO_BIN) {
+  try {
+    CRYPTO_ARGS = process.env.CRYPTO_SERVER_ARGS ? JSON.parse(process.env.CRYPTO_SERVER_ARGS) : [];
+  } catch {
+    CRYPTO_ARGS = [];
+  }
+} else if (existsSync('/opt/sovereign-mirror/kylos-crypto-server')) {
+  CRYPTO_BIN = '/opt/sovereign-mirror/kylos-crypto-server';
+  CRYPTO_ARGS = [];
+} else if (existsSync('/home/retroporter/cup/kylos-qpadl/target/release/kylos-crypto-server')) {
+  CRYPTO_BIN = '/home/retroporter/cup/kylos-qpadl/target/release/kylos-crypto-server';
+  CRYPTO_ARGS = [];
+} else {
+  CRYPTO_BIN = 'wsl.exe';
   CRYPTO_ARGS = ['/home/retroporter/cup/kylos-qpadl/target/release/kylos-crypto-server'];
 }
 const CRYPTO_MAX_RESTARTS = 5;
@@ -1577,6 +1585,47 @@ Deep: Individual and collective flourishing align when the conditions for indivi
       res.writeHead(400, { 'Content-Type': 'application/json' });
       res.end(JSON.stringify({ error: err }));
     });
+    return;
+  }
+
+  if (url.pathname === '/api/ledger/entry' && req.method === 'POST') {
+    let body = '';
+    let size = 0;
+    req.on('data', chunk => {
+      size += chunk.length;
+      if (size > MAX_BODY_SIZE) { req.destroy(); return; }
+      body += chunk;
+    });
+    req.on('end', () => {
+      if (req.destroyed) return;
+      try {
+        const { slice, event } = JSON.parse(body);
+        if (!slice || !event || !event.id) {
+          res.writeHead(400, { 'Content-Type': 'application/json' });
+          res.end(JSON.stringify({ error: 'slice and event.id required' }));
+          return;
+        }
+        saveEntry(slice, event);
+        res.writeHead(200, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ ok: true }));
+      } catch (e) {
+        res.writeHead(400, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ error: e.message }));
+      }
+    });
+    return;
+  }
+
+  if (url.pathname === '/api/ledger/history' && req.method === 'GET') {
+    try {
+      const since = url.searchParams.get('since');
+      const entries = since ? loadSince(Number(since)) : loadAll();
+      res.writeHead(200, { 'Content-Type': 'application/json' });
+      res.end(JSON.stringify({ entries, count: entries.length }));
+    } catch (e) {
+      res.writeHead(500, { 'Content-Type': 'application/json' });
+      res.end(JSON.stringify({ error: e.message }));
+    }
     return;
   }
 
