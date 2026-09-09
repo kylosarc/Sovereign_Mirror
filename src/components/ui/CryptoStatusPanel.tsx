@@ -104,18 +104,24 @@ export function CryptoStatusPanel() {
     setTestResult(null);
     const start = performance.now();
     try {
+      // 1. Generate keypair with MAYO-1
       const kpRes = await cryptoKeypair('mayo1');
       if (!kpRes.ok || !kpRes.data) {
         throw new Error(kpRes.error || 'Keypair generation failed');
       }
 
-      const testMsg = `QPADL_VERIFY_${Date.now()}`;
-      const signRes = await cryptoSign('mayo1', testMsg, kpRes.data.secret_key);
+      // 2. Base64-encode test payload for the liboqs binary daemon
+      const testPayload = `QPADL_VERIFY_${Date.now()}`;
+      const b64Msg = btoa(testPayload);
+
+      // 3. Sign
+      const signRes = await cryptoSign('mayo1', b64Msg, kpRes.data.secret_key);
       if (!signRes.ok || !signRes.data) {
         throw new Error(signRes.error || 'Signing operation failed');
       }
 
-      const verifyRes = await cryptoVerify('mayo1', testMsg, signRes.data.signature, kpRes.data.public_key);
+      // 4. Verify
+      const verifyRes = await cryptoVerify('mayo1', b64Msg, signRes.data.signature, kpRes.data.public_key);
       if (!verifyRes.ok || !verifyRes.data?.valid) {
         throw new Error(verifyRes.error || 'Signature verification invalid');
       }
