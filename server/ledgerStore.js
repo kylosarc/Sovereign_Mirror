@@ -3,13 +3,13 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const DB_PATH = path.join(__dirname, '..', 'data', 'ledger.db');
+const DB_PATH = path.join(__dirname, 'data', 'ledger.db');
 
 const db = new Database(DB_PATH);
 db.pragma('journal_mode = WAL');
 db.pragma('synchronous = NORMAL');
 
-db.exec(\
+db.exec(`
   CREATE TABLE IF NOT EXISTS ledger_entries (
     id TEXT PRIMARY KEY,
     slice TEXT NOT NULL,
@@ -22,30 +22,30 @@ db.exec(\
   CREATE INDEX IF NOT EXISTS idx_ledger_timestamp ON ledger_entries(timestamp);
   CREATE INDEX IF NOT EXISTS idx_ledger_slice_type ON ledger_entries(slice, eventType);
   CREATE INDEX IF NOT EXISTS idx_ledger_nodeId ON ledger_entries(nodeId);
-\);
+`);
 
-const insertStmt = db.prepare(\
+const insertStmt = db.prepare(`
   INSERT OR REPLACE INTO ledger_entries (id, slice, nodeId, eventType, timestamp, payload)
   VALUES (@id, @slice, @nodeId, @eventType, @timestamp, @payload)
-\);
+`);
 
-const selectAllStmt = db.prepare(\
+const selectAllStmt = db.prepare(`
   SELECT * FROM ledger_entries ORDER BY timestamp DESC LIMIT 200
-\);
+`);
 
-const selectSinceStmt = db.prepare(\
+const selectSinceStmt = db.prepare(`
   SELECT * FROM ledger_entries WHERE timestamp >= ? ORDER BY timestamp DESC LIMIT 200
-\);
+`);
 
-const selectBySliceStmt = db.prepare(\
+const selectBySliceStmt = db.prepare(`
   SELECT * FROM ledger_entries WHERE slice = ? ORDER BY timestamp DESC LIMIT 200
-\);
+`);
 
-const countStmt = db.prepare(\SELECT COUNT(*) AS n FROM ledger_entries\);
+const countStmt = db.prepare(`SELECT COUNT(*) AS n FROM ledger_entries`);
 
-const statsByTypeStmt = db.prepare(\
+const statsByTypeStmt = db.prepare(`
   SELECT slice, eventType, COUNT(*) AS n FROM ledger_entries GROUP BY slice, eventType
-\);
+`);
 
 export function saveEntry(slice, event) {
   if (!event || !event.id) throw new Error('event.id required');
@@ -85,4 +85,4 @@ function rowToEntry(row) {
   };
 }
 
-console.log(\[LEDGER] SQLite store initialized at \\);
+console.log(`[LEDGER] SQLite store initialized at ${DB_PATH}`);
