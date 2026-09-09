@@ -1,7 +1,7 @@
 # Sovereign Mirror Architecture Specification
 
 ## Thesis Statement
-The Sovereign Mirror is a non-moral, procedural computing interface engineered to structurally isolate and safeguard human cognitive focus. It does not possess, simulate, or exercise moral judgment, nor does it claim unconditioned semantic neutrality. Recognizing that semantic classification is inherently probabilistic rather than absolute, the system functions as a transparent, graded bounding box—executing localized filters and real-time gate severities to insulate human agency from known, catalogued vectors of telemetry exploitation and information manipulation.
+The Sovereign Mirror is a non-moral, procedural computing interface engineered to structurally isolate and safeguard human cognitive focus. It does not possess, simulate, or exercise moral judgment, nor does it claim unconditioned semantic neutrality. Recognizing that semantic classification is inherently probabilistic rather than absolute, the system functions as a transparent, graded bounding box - executing localized filters and real-time gate severities to insulate human agency from known, catalogued vectors of telemetry exploitation and information manipulation.
 
 ---
 

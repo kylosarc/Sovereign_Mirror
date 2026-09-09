@@ -9,7 +9,7 @@ export function ModuleStub({ pillar, title, subtitle, description }: ModuleStubP
   return (
     <div className="stub-container">
       <div className="stub-card">
-        <div className="stub-tag">PILLAR {pillar} — CORE MODULE</div>
+        <div className="stub-tag">PILLAR {pillar} - CORE MODULE</div>
         <h2 className="stub-title">{title}</h2>
         <div className="stub-subtitle">{subtitle}</div>
         <p className="stub-desc">{description}</p>

@@ -117,7 +117,7 @@ export function ModuleRouter({ pillarId }: ModuleRouterProps) {
           onChange={e => setActive(e.target.value)} aria-label="Select pillar">
           {Object.entries(MODULE_META).map(([id, meta]) => (
             <option key={id} value={id}>
-              {String(id).padStart(2, '0')} — {meta.full}
+              {String(id).padStart(2, '0')} - {meta.full}
               {!meta.live ? ' (Coming Soon)' : progress[id] ? ' ✓' : ''}
             </option>
           ))}
@@ -190,7 +190,7 @@ export function ModuleRouter({ pillarId }: ModuleRouterProps) {
         <main className="kylos-main">
           {!isUnlocked(active) && MODULE_META[active]?.live && (
             <div className="kylos-locked-banner">
-              LOCKED — complete Pillar {Number(active) - 1}:{' '}
+              LOCKED - complete Pillar {Number(active) - 1}:{' '}
               {MODULE_META[String(Number(active) - 1)]?.full} first
             </div>
           )}

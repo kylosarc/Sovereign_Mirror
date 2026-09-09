@@ -14,7 +14,7 @@ interface Result    { depth: Depth; reflection: string; }
 
 const QUESTIONS: Question[] = [
   { id: 'q1', text: 'What is the difference between a tool that makes you more capable and one that makes you dependent on it?', hint: 'Think about what changes in you when you use each kind.' },
-  { id: 'q2', text: 'If an AI system were fully aligned with your personal values but misaligned with broader social values, what would that look like — and is it a problem?', hint: null },
+  { id: 'q2', text: 'If an AI system were fully aligned with your personal values but misaligned with broader social values, what would that look like - and is it a problem?', hint: null },
   { id: 'q3', text: 'Name something you interact with daily that is a system. Describe one property of it that most users never perceive.', hint: 'Look for feedback loops, emergent behavior, or hidden dependencies.' },
   { id: 'q4', text: 'Exponential growth is often cited as the engine of technological progress. When is exponential growth a warning signal rather than a feature?', hint: null },
 ];
@@ -53,7 +53,7 @@ export default function Module4() {
       setResult(data);
       setResults(prev => { const n = [...prev]; n[index] = data; return n; });
     } catch {
-      setError('Evaluation unavailable — try again.');
+      setError('Evaluation unavailable - try again.');
     } finally {
       setLoading(false);
     }
@@ -75,13 +75,13 @@ export default function Module4() {
     <>
       <div className="mod-container">
         <div className="mod-header" style={{ borderBottomColor: 'rgba(249,115,22,0.2)' }}>
-          <div className="mod-pillar-tag" style={{ color: '#F97316' }}>PILLAR 4 — TECHNOLOGICAL FLUENCY</div>
+          <div className="mod-pillar-tag" style={{ color: '#F97316' }}>PILLAR 4 - TECHNOLOGICAL FLUENCY</div>
           <div className="mod-pillar-sub">AI Alignment · Systems Architecture · Exponential Tooling</div>
         </div>
 
         <div className="mod-instructions">
           <strong>How this works:</strong> You will answer four Socratic questions about technology, AI, and systems thinking.
-          Each response is evaluated for depth of understanding — not technical knowledge, but quality of thinking about complex systems.
+          Each response is evaluated for depth of understanding - not technical knowledge, but quality of thinking about complex systems.
         </div>
 
         <div className="mod-progress">
@@ -141,7 +141,7 @@ function Summary({ results, onRestart }: { results: (Result | null)[]; onRestart
       <div className="mod-complete-banner" style={{ background: 'rgba(249,115,22,0.08)', borderBottomColor: 'rgba(249,115,22,0.2)' }}>
         <div className="mod-complete-icon" style={{ background: '#F97316' }}>✓</div>
         <div>
-          <div className="mod-complete-title">Pillar 4 — Complete</div>
+          <div className="mod-complete-title">Pillar 4 - Complete</div>
           <div className="mod-complete-sub" style={{ color: DEPTH_COLOR[overallDepth] }}>
             Overall depth: {DEPTH_LABEL[overallDepth]}
           </div>
@@ -150,7 +150,7 @@ function Summary({ results, onRestart }: { results: (Result | null)[]; onRestart
 
       <div className="mod-container">
         <div className="mod-header" style={{ borderBottomColor: 'rgba(249,115,22,0.2)' }}>
-          <div className="mod-pillar-tag" style={{ color: '#F97316' }}>PILLAR 4 — TECHNOLOGICAL FLUENCY</div>
+          <div className="mod-pillar-tag" style={{ color: '#F97316' }}>PILLAR 4 - TECHNOLOGICAL FLUENCY</div>
         </div>
 
         <div className="mod-summary-list">

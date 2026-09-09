@@ -100,7 +100,7 @@ export function CognoscentaeUltrans() {
         if (result.inverion_triggered || result.bypass_triggered) {
           triggerIntercept();
         }
-        // Always attempt reframe — fires in background, doesn't block UI
+        // Always attempt reframe - fires in background, doesn't block UI
         setIsReframing(true);
         reframeStatement(inputText).then((r) => {
           setReframe(r);
@@ -177,7 +177,7 @@ export function CognoscentaeUltrans() {
           </div>
 
           <div className="cui-instructions">
-            <p>Submit statements to analyze them for logical fallacies and cognitive biases. Any statement works — a belief you hold, a claim you've heard, or an argument you want to test.</p>
+            <p>Submit statements to analyze them for logical fallacies and cognitive biases. Any statement works - a belief you hold, a claim you've heard, or an argument you want to test.</p>
             <p><strong>To complete this module:</strong> earn {PASSES_NEEDED} passing statements (a statement passes when its fallacy score is below the veracity threshold).</p>
           </div>
 
@@ -238,7 +238,7 @@ export function CognoscentaeUltrans() {
                         }
                       }}
                       className={`flag-btn${flagged ? ' flag-btn--done' : ''}`}
-                      title={flagged ? 'Flagged — thank you' : 'Flag as missed fallacy'}
+                      title={flagged ? 'Flagged - thank you' : 'Flag as missed fallacy'}
                     >{flagged ? '✓ Flagged' : 'Flag missed'}</button>
                   );
                 })()}
@@ -301,7 +301,7 @@ export function CognoscentaeUltrans() {
                 </div>
               ) : (
                 <div style={{ color: 'rgba(212,212,216,0.25)', fontSize: '0.875rem' }}>
-                  —
+                   - 
                 </div>
               )}
             </div>
@@ -329,7 +329,7 @@ export function CognoscentaeUltrans() {
               const weighted = lastBreakdown?.weightedScore ?? null;
               const passed = weighted === null ? null : weighted < FALLACY_CRITICAL_THRESHOLD;
               if (passed === null) {
-                return <div className="veracity-pending"><span>—</span><span>Awaiting first analysis</span></div>;
+                return <div className="veracity-pending"><span> - </span><span>Awaiting first analysis</span></div>;
               }
               return passed ? (
                 <div className="veracity-passed">
@@ -358,7 +358,7 @@ export function CognoscentaeUltrans() {
               <span className="metric-card-desc">passes / personal best</span>
             </div>
           </div>
-          <div className="metric-weights" title="Classifier agent confidence weights — auto-adjust as you flag correct/incorrect verdicts">
+          <div className="metric-weights" title="Classifier agent confidence weights - auto-adjust as you flag correct/incorrect verdicts">
             <span>R: {weights.roberta?.toFixed(2) ?? '1.00'}</span>
             <span>GROQ: {weights.groq?.toFixed(2) ?? '1.00'}</span>
             <span>OR: {weights.openrouter?.toFixed(2) ?? '1.00'}</span>

@@ -142,7 +142,7 @@ The design system utilizes **Sharp (0px)** corners for all UI elements. This rei
 - **Data Tables:** Borderless rows with 1px horizontal dividers. Alternating row highlights should be avoided; use subtle text-dimming instead.
 ---
 
-## Session Log — June 2026
+## Session Log - June 2026
 
 ### Aether-HUD integration status
 The Aether-HUD design spec is being incrementally applied to the live app. Current alignment:
@@ -164,12 +164,12 @@ The Aether-HUD design spec is being incrementally applied to the live app. Curre
 | **Data tables: 1px horizontal dividers, no alternating rows** | ✓ Done | `VeracityLog.tsx` |
 
 ### CSS classes ready but not yet applied
-- `.cui-scanline` — animated amber scanline (2px height, 6s loop, fades at top and bottom)
-- `.cui-corner.tl/tr/bl/br` — 12×12 L-shaped corner brackets in `#FFB300`
-- `.cui-header` — flex header bar with amber gradient
-- `.cui-main` — main panel area, 1-column on mobile, 2-column on desktop
-- `.cui-footer` — footer bar with threshold display
-- `.cui-wrapper` / `.cui-wrapper-inner` — flex container for the Ultrans screen
+- `.cui-scanline` - animated amber scanline (2px height, 6s loop, fades at top and bottom)
+- `.cui-corner.tl/tr/bl/br` - 12×12 L-shaped corner brackets in `#FFB300`
+- `.cui-header` - flex header bar with amber gradient
+- `.cui-main` - main panel area, 1-column on mobile, 2-column on desktop
+- `.cui-footer` - footer bar with threshold display
+- `.cui-wrapper` / `.cui-wrapper-inner` - flex container for the Ultrans screen
 
 ### Pending application
 The Ultrans panel (`CognoscentaeUltrans.tsx`) does not yet use `.cui-header`, `.cui-main`, `.cui-footer`, `.cui-scanline`, or `.cui-corner` classes. They were defined in `src/index.css` but only `.cui-wrapper` and `.cui-wrapper-inner` are wired up.

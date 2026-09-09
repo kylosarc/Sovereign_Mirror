@@ -393,7 +393,7 @@ get_header();
 The simulation will run automatically, cycling through 8 different profiles every 15 seconds, with no server-side code required.
 ---
 
-## Session Log — June 2026
+## Session Log - June 2026
 
 ### Current Vercel URL
 The WordPress iframe is hardcoded to:
@@ -420,4 +420,4 @@ The Hetzner production deployment is at `http://178.156.135.222/`. WordPress ifr
 This avoids the Vercel dependency entirely. The bundle is the same one the Vercel deployment would serve.
 
 ### WordPress plugin update (kylosarc-wp-api.php)
-The WordPress plugin at `~/experiment/map/kylosarc-wp-api.php` exposes the API as WP REST endpoints. With the new feedback endpoints in `server/index.js` (`/api/feedback/*`), the plugin should be updated to proxy these as well. **Not done yet** — pending Vercel redeploy.
+The WordPress plugin at `~/experiment/map/kylosarc-wp-api.php` exposes the API as WP REST endpoints. With the new feedback endpoints in `server/index.js` (`/api/feedback/*`), the plugin should be updated to proxy these as well. **Not done yet** - pending Vercel redeploy.

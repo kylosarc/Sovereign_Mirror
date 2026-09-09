@@ -85,9 +85,9 @@ All gates have comprehensive test coverage in `*.test.ts` files.
 
 ---
 
-## Session Log — June 2026
+## Session Log - June 2026
 
-### Five gates — verified pure
+### Five gates - verified pure
 All five gates remain pure functions:
 - `veracityGate(V_active, V_control): max(0, V_active - V_control)`
 - `pGate(nodeId, affirming, total): { triggered, quorumSize }` where `quorum = min(N, ⌈√N⌉ + 2)`

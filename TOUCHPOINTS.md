@@ -1,4 +1,4 @@
-# Sovereign Mirror — Attack Surface & Touchpoint Inventory
+# Sovereign Mirror - Attack Surface & Touchpoint Inventory
 
 ## 1. Remote Touchpoints (external network)
 
@@ -10,7 +10,7 @@
 | 4 | **GitHub liboqs release** | build_liboqs.sh → external | HTTPS | SHA-256 verified via release tag | `LIBOQS_VERSION` env |
 | 5 | **npm registry** | `npm install` → external | HTTPS | Lockfile (`package-lock.json`) pins transitive deps | `package.json` |
 | 6 | **crates.io** | `cargo build` → external | HTTPS | `serde_json = "=1.0.150"` exact pin; no other internet crates | `Cargo.toml` |
-| 7 | **Vite dev server** | Browser → localhost:3000 | HTTP | Dev only; prod serves from static build | — |
+| 7 | **Vite dev server** | Browser → localhost:3000 | HTTP | Dev only; prod serves from static build | - |
 
 ## 2. Local Touchpoints (server → subsystem)
 
@@ -83,7 +83,7 @@
 
 ## 7. Remaining Acceptable Risk
 
-- **No authentication on `/api/crypto/*`**: keypair/sign/verify are unauthenticated like the rest of the API surface — acceptable while this is a single-operator deployment, but a multi-tenant deployment would need this addressed before relying on these endpoints for anything beyond demonstration.
+- **No authentication on `/api/crypto/*`**: keypair/sign/verify are unauthenticated like the rest of the API surface - acceptable while this is a single-operator deployment, but a multi-tenant deployment would need this addressed before relying on these endpoints for anything beyond demonstration.
 - **Falcon-512 floating-point FFT**: documented in `kylos-qpadl/QPADL_THREAT_MODEL.md` as a temp patch pending NIST On-Ramp.
 - **NOAA SWPC dependency**: external API; degraded experience (503) on fetch failure, not a crash.
 - **`sovereign-mirror.service` runs as root in production** (Hetzner): the Node backend should run as an unprivileged user; this is a known gap, not yet remediated.

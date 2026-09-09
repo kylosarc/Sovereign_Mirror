@@ -88,7 +88,7 @@ export function ExperimentMap() {
           viewBox={`0 0 ${W} ${H}`}
           className="w-full max-w-5xl rounded-lg"
           style={{ border: '1px solid rgba(255,255,255,0.08)', backgroundColor: 'rgba(4,4,4,0.9)' }}
-          aria-label="Planetary ecological reference map — equirectangular projection"
+          aria-label="Planetary ecological reference map - equirectangular projection"
         >
           {/* Latitude grid */}
           {LAT_LINES.map(lat => {
@@ -164,11 +164,11 @@ export function ExperimentMap() {
             );
           })}
 
-          {/* Data source annotation — prime meridian callout */}
+          {/* Data source annotation - prime meridian callout */}
           <line x1={W / 2} y1={0} x2={W / 2} y2={H}
             stroke={color} strokeWidth={0.4} strokeDasharray="3,4" opacity={0.2} />
           <text x={W / 2 + 4} y={10} fill="rgba(255,255,255,0.2)" fontSize={7} fontFamily="monospace">
-            0° MERIDIAN — all collection points
+            0° MERIDIAN - all collection points
           </text>
 
           {/* ecoHealth fill bar */}

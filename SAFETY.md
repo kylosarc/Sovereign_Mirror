@@ -1,4 +1,4 @@
-# SAFETY.md — Sovereign Mirror & Tropelex Convergence
+# SAFETY.md - Sovereign Mirror & Tropelex Convergence
 
 ## Purpose & Scope
 This document outlines the safety architecture and procedural constraints for **Sovereign Mirror** and its structural convergence with **Tropelex**.

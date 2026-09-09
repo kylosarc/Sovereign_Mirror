@@ -92,12 +92,12 @@ To achieve the intended "Blinding" effect, the following settings must be strict
 
 ---
 
-## Session Log — June 2026
+## Session Log - June 2026
 
 ### ResonanceTrajectory changes
-- `src/components/three/ResonanceTrajectory.tsx:122` — `KineticQuads` particle opacity reduced from 0.65 to 0.35. The earlier 0.65 was rendering the additive blending bright enough to wash out the orbital rings entirely.
-- `ResonanceTrajectory.tsx:574` — InstancedMesh uses `frustumCulled={false}` so particles don't pop out at the camera edges (per the Stability Guards section in `AGENTS.md`).
-- `ResonanceTrajectory.tsx:622-639` — ResizeObserver explicitly sets `canvas.style.width/height` on container resize (was missing).
+- `src/components/three/ResonanceTrajectory.tsx:122` - `KineticQuads` particle opacity reduced from 0.65 to 0.35. The earlier 0.65 was rendering the additive blending bright enough to wash out the orbital rings entirely.
+- `ResonanceTrajectory.tsx:574` - InstancedMesh uses `frustumCulled={false}` so particles don't pop out at the camera edges (per the Stability Guards section in `AGENTS.md`).
+- `ResonanceTrajectory.tsx:622-639` - ResizeObserver explicitly sets `canvas.style.width/height` on container resize (was missing).
 
 ### OrbitalRings changes (NEW)
 - Complete rewrite of `src/components/three/OrbitalRings.tsx`. Old file was 3 thin concentric rings flattened onto the XZ plane. New file:
@@ -128,5 +128,5 @@ The `UI2/UI-enhanced/DESIGN.md` spec is being incrementally integrated. Current 
 ### Pending from Aether-HUD
 - Scanline effect (CSS class `.cui-scanline` defined, not yet applied to panels)
 - 45° chamfered corners on panel headers (CSS class `.cui-corner` defined, not yet applied)
-- Module ID prefixes in panel headers (e.g., `MOD-0192`) — not yet added
-- Square brackets around status chips (e.g., `[ STATUS: OK ]`) — not yet added
+- Module ID prefixes in panel headers (e.g., `MOD-0192`) - not yet added
+- Square brackets around status chips (e.g., `[ STATUS: OK ]`) - not yet added

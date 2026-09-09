@@ -86,7 +86,7 @@ We must verify that this feedback loop successfully conditions the node to rejec
 2\. Behavioral Interception → verify: Interrupt trigger successfully halts outward communication before the node can execute secondary rationalization.  
 3\. Decoupling Metric → verify: Over a 30-day cycle, the baseline frequency of triggered intercepts drops by ≥75%, proving structural neurological reconditioning.
 
-**Systemic Reality Check:** If the feedback loop is too gentle, the Darwinian Ghost treats it as a minor inconvenience and routes around it. If it is purely punitive, the node experiences systemic fatigue and disconnects. The intercept must be clinical, neutral, and inescapable—resembling a physical law like gravity rather than a lecture.  
+**Systemic Reality Check:** If the feedback loop is too gentle, the Darwinian Ghost treats it as a minor inconvenience and routes around it. If it is purely punitive, the node experiences systemic fatigue and disconnects. The intercept must be clinical, neutral, and inescapable - resembling a physical law like gravity rather than a lecture.  
 Should we detail the exact semantic categories and code logic the **Fallacy Map Engine** will use to classify these inputs, or do you want to define the specific user-interface mechanics of the **Cognitive Intercept Trigger** to ensure it effectively breaks the subconscious bias loop?
 
 An architecture utilizing a **Cluster Bus** provides the high-speed, deterministic, and fault-tolerant communications backbone necessary to link individual Sovereign Nodes, the Fallacy Map Engine, and the local Ledger instances into a unified, resilient network.  
@@ -668,7 +668,7 @@ try:
 except ValueError as e:  
     print(f"Local Validator Guard: Caught expected deception variant \-\> {e}")
 
-This structural architecture ensures that any attempts by the Darwinian Ghost to lie on the cluster network—either structurally or logically—are terminated cleanly at the hardware edge. 
+This structural architecture ensures that any attempts by the Darwinian Ghost to lie on the cluster network - either structurally or logically - are terminated cleanly at the hardware edge. 
 
 To transition a node away from the **Darwinian Ghost**, the visual interface cannot be a passive dashboard. It must serve as an active cognitive mirror that visualizes the hidden mechanics of the node's own reasoning process.  
 The primary design principle of the **Cognoscentae Ultrans Interface (CUI)** is to make the unseen friction between subjective rationalization and objective reality completely visible in real time.
@@ -738,7 +738,7 @@ We must verify that the interface design actively breaks the subconscious bias l
 
 ---
 
-## Session Log — June 2026
+## Session Log - June 2026
 
 ### Visual interface implementation status
 The CUI (Cognoscentae Ultrans Interface) is implemented in `training/src/interface/CognoscentaeUltrans.tsx` and is live in the app at the `/training` / "Ultrans" nav section.
@@ -763,4 +763,4 @@ The desktop "Epistemic Mirror" layout (left panel / divider / right panel) colla
 - The "Horizon Crossing" animation (text gliding across the Inverion Divide) is not yet implemented
 
 ### Cluster Bus architecture
-The CRDT-based decentralized bus, Ed25519 signatures, and lattice-based ZK proofs described later in this document are aspirational. The current implementation uses a centralized Express server with a SQLite ledger. The Cluster Bus would be a significant refactor — Layer B work.
+The CRDT-based decentralized bus, Ed25519 signatures, and lattice-based ZK proofs described later in this document are aspirational. The current implementation uses a centralized Express server with a SQLite ledger. The Cluster Bus would be a significant refactor - Layer B work.

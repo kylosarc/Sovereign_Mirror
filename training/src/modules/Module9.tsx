@@ -13,10 +13,10 @@ interface Question { id: string; text: string; hint: string | null; }
 interface Result    { depth: Depth; reflection: string; }
 
 const QUESTIONS: Question[] = [
-  { id: 'q1', text: 'GDP is the dominant metric of national success. What does it structurally fail to measure — and why does that failure matter for governance?', hint: 'Look at what it includes that it shouldn\'t, not just what it leaves out.' },
-  { id: 'q2', text: 'What is the structural difference between a system that is robust and one that is anti-fragile?', hint: 'Consider what each requires in order to work — and what happens when they encounter a threat they weren\'t designed for.' },
-  { id: 'q3', text: 'If you had to design a single metric for flourishing in a community, what would you measure and why — and what are the hardest tradeoffs in that design?', hint: 'Think about Goodhart\'s Law: when a measure becomes a target, it ceases to be a good measure.' },
-  { id: 'q4', text: 'Does individual flourishing and collective flourishing always align — and if not, what determines when they conflict?', hint: null },
+  { id: 'q1', text: 'GDP is the dominant metric of national success. What does it structurally fail to measure - and why does that failure matter for governance?', hint: 'Look at what it includes that it shouldn\'t, not just what it leaves out.' },
+  { id: 'q2', text: 'What is the structural difference between a system that is robust and one that is anti-fragile?', hint: 'Consider what each requires in order to work - and what happens when they encounter a threat they weren\'t designed for.' },
+  { id: 'q3', text: 'If you had to design a single metric for flourishing in a community, what would you measure and why - and what are the hardest tradeoffs in that design?', hint: 'Think about Goodhart\'s Law: when a measure becomes a target, it ceases to be a good measure.' },
+  { id: 'q4', text: 'Does individual flourishing and collective flourishing always align - and if not, what determines when they conflict?', hint: null },
 ];
 
 const DEPTH_COLOR: Record<Depth, string> = { surface: '#F43F5E', developing: '#F97316', deep: '#3FF4D5' };
@@ -54,7 +54,7 @@ export default function Module9() {
       setResult(data);
       setResults(prev => { const n = [...prev]; n[index] = data; return n; });
     } catch {
-      setError('Evaluation unavailable — try again.');
+      setError('Evaluation unavailable - try again.');
     } finally {
       setLoading(false);
     }
@@ -76,7 +76,7 @@ export default function Module9() {
     <>
       <div className="mod-container">
         <div className="mod-header" style={{ borderBottomColor: `rgba(16,185,129,0.2)` }}>
-          <div className="mod-pillar-tag" style={{ color: PILLAR_COLOR }}>PILLAR 9 — THE FLOURISHING METRIC</div>
+          <div className="mod-pillar-tag" style={{ color: PILLAR_COLOR }}>PILLAR 9 - THE FLOURISHING METRIC</div>
           <div className="mod-pillar-sub">Multi-Capital Accounting · Wellbeing Indices · Anti-Fragility</div>
         </div>
 
@@ -142,7 +142,7 @@ function Summary({ results, onRestart }: { results: (Result | null)[]; onRestart
       <div className="mod-complete-banner" style={{ background: 'rgba(16,185,129,0.08)', borderBottomColor: 'rgba(16,185,129,0.2)' }}>
         <div className="mod-complete-icon" style={{ background: PILLAR_COLOR }}>✓</div>
         <div>
-          <div className="mod-complete-title">Pillar 9 — Complete</div>
+          <div className="mod-complete-title">Pillar 9 - Complete</div>
           <div className="mod-complete-sub" style={{ color: DEPTH_COLOR[overallDepth] }}>
             Overall depth: {DEPTH_LABEL[overallDepth]}
           </div>
@@ -151,7 +151,7 @@ function Summary({ results, onRestart }: { results: (Result | null)[]; onRestart
 
       <div className="mod-container">
         <div className="mod-header" style={{ borderBottomColor: 'rgba(16,185,129,0.2)' }}>
-          <div className="mod-pillar-tag" style={{ color: PILLAR_COLOR }}>PILLAR 9 — THE FLOURISHING METRIC</div>
+          <div className="mod-pillar-tag" style={{ color: PILLAR_COLOR }}>PILLAR 9 - THE FLOURISHING METRIC</div>
         </div>
 
         <div className="mod-summary-list">

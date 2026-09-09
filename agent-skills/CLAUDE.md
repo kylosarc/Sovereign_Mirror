@@ -1,6 +1,6 @@
 # agent-skills
 
-This is the agent-skills project — a collection of production-grade engineering skills for AI coding agents.
+This is the agent-skills project - a collection of production-grade engineering skills for AI coding agents.
 
 ## Project Structure
 
@@ -33,22 +33,22 @@ docs/         → Setup guides for different tools
 
 ## Commands
 
-- `npm test` — Not applicable (this is a documentation project)
+- `npm test` - Not applicable (this is a documentation project)
 - Validate: Check that all SKILL.md files have valid YAML frontmatter with name and description
 
 ## Boundaries
 
 - Always: Follow the skill-anatomy.md format for new skills
 - Never: Add skills that are vague advice instead of actionable processes
-- Never: Duplicate content between skills — reference other skills instead
+- Never: Duplicate content between skills - reference other skills instead
 
 ---
 
-## Session Log — June 2026
+## Session Log - June 2026
 
 ### Working style notes from this session
 - **Always surface what changed**: when fixing a bug, list the symptoms observed, the hypotheses tested, and the root cause
-- **Visual confirmation matters**: a "working" state machine change isn't enough — the user needs a visible indicator that the action took effect (e.g., the Test API button needs to show "Flux: 0.750" after the request, not just a console.log)
+- **Visual confirmation matters**: a "working" state machine change isn't enough - the user needs a visible indicator that the action took effect (e.g., the Test API button needs to show "Flux: 0.750" after the request, not just a console.log)
 - **Defer to user's judgment on direction**: when the user said "Just fix what's broken first," do exactly that. Don't add features or refactors that weren't asked for
 - **Security scan before git push**: every commit to a public repo should pass: zero secrets, zero .pyc, zero .venv, zero SSH keys, zero tarballs. Make this a habit, not a one-off
 
@@ -61,4 +61,4 @@ For any "user labels output as right or wrong" feedback system:
 - Clamp to a sensible range (e.g., [0.1, 5.0])
 - Reward agents that agreed with the user; penalize those that disagreed
 - Persist every weight change as an audit event (weight_before, weight_after, verdict, user_id)
-- All weights are derivable from the event log — no separate state synchronization needed
+- All weights are derivable from the event log - no separate state synchronization needed

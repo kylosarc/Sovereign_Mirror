@@ -13,10 +13,10 @@ interface Question { id: string; text: string; hint: string | null; }
 interface Result    { depth: Depth; reflection: string; }
 
 const QUESTIONS: Question[] = [
-  { id: 'q1', text: 'Where do genuinely new ideas come from? Not improved ones — structurally novel ones.', hint: 'Think about what conditions produce ideas that have no precedent, not just better versions of existing ones.' },
+  { id: 'q1', text: 'Where do genuinely new ideas come from? Not improved ones - structurally novel ones.', hint: 'Think about what conditions produce ideas that have no precedent, not just better versions of existing ones.' },
   { id: 'q2', text: 'What makes an analogy between two domains useful rather than merely decorative?', hint: 'Consider the difference between an analogy that illuminates and one that generates predictions.' },
   { id: 'q3', text: 'Why does expertise in a field sometimes make it harder to solve problems in that field?', hint: null },
-  { id: 'q4', text: 'What is the difference between a creative person and a creative process — and why does the distinction matter?', hint: 'Consider what changes when you attribute creativity to a person versus to a set of conditions.' },
+  { id: 'q4', text: 'What is the difference between a creative person and a creative process - and why does the distinction matter?', hint: 'Consider what changes when you attribute creativity to a person versus to a set of conditions.' },
 ];
 
 const DEPTH_COLOR: Record<Depth, string> = { surface: '#F43F5E', developing: '#F97316', deep: '#3FF4D5' };
@@ -54,7 +54,7 @@ export default function Module7() {
       setResult(data);
       setResults(prev => { const n = [...prev]; n[index] = data; return n; });
     } catch {
-      setError('Evaluation unavailable — try again.');
+      setError('Evaluation unavailable - try again.');
     } finally {
       setLoading(false);
     }
@@ -76,13 +76,13 @@ export default function Module7() {
     <>
       <div className="mod-container">
         <div className="mod-header" style={{ borderBottomColor: `rgba(245,158,11,0.2)` }}>
-          <div className="mod-pillar-tag" style={{ color: PILLAR_COLOR }}>PILLAR 7 — CREATIVE SYNTHESIS</div>
+          <div className="mod-pillar-tag" style={{ color: PILLAR_COLOR }}>PILLAR 7 - CREATIVE SYNTHESIS</div>
           <div className="mod-pillar-sub">Cross-Domain Transfer · Lateral Thinking · Innovation Pipeline</div>
         </div>
 
         <div className="mod-instructions">
           <strong>How this works:</strong> You will answer four Socratic questions about where novel ideas come from and how to cultivate the capacity to generate them.
-          Creative synthesis is not inspiration — it is a learnable structural capacity. Answer from your own thinking and experience.
+          Creative synthesis is not inspiration - it is a learnable structural capacity. Answer from your own thinking and experience.
         </div>
 
         <div className="mod-progress">
@@ -142,7 +142,7 @@ function Summary({ results, onRestart }: { results: (Result | null)[]; onRestart
       <div className="mod-complete-banner" style={{ background: 'rgba(245,158,11,0.08)', borderBottomColor: 'rgba(245,158,11,0.2)' }}>
         <div className="mod-complete-icon" style={{ background: PILLAR_COLOR }}>✓</div>
         <div>
-          <div className="mod-complete-title">Pillar 7 — Complete</div>
+          <div className="mod-complete-title">Pillar 7 - Complete</div>
           <div className="mod-complete-sub" style={{ color: DEPTH_COLOR[overallDepth] }}>
             Overall depth: {DEPTH_LABEL[overallDepth]}
           </div>
@@ -151,7 +151,7 @@ function Summary({ results, onRestart }: { results: (Result | null)[]; onRestart
 
       <div className="mod-container">
         <div className="mod-header" style={{ borderBottomColor: 'rgba(245,158,11,0.2)' }}>
-          <div className="mod-pillar-tag" style={{ color: PILLAR_COLOR }}>PILLAR 7 — CREATIVE SYNTHESIS</div>
+          <div className="mod-pillar-tag" style={{ color: PILLAR_COLOR }}>PILLAR 7 - CREATIVE SYNTHESIS</div>
         </div>
 
         <div className="mod-summary-list">

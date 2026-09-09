@@ -6,12 +6,12 @@ A non-moral, procedural computing interface engineered to structurally isolate a
 
 ## Thesis & Architecture Specification
 
-The Sovereign Mirror does not possess, simulate, or exercise moral judgment, nor does it claim unconditioned semantic neutrality. Recognizing that semantic classification is inherently probabilistic rather than absolute, the system functions as a transparent, graded bounding box—executing localized filters and real-time gate severities to insulate human agency from known, catalogued vectors of telemetry exploitation and information manipulation.
+The Sovereign Mirror does not possess, simulate, or exercise moral judgment, nor does it claim unconditioned semantic neutrality. Recognizing that semantic classification is inherently probabilistic rather than absolute, the system functions as a transparent, graded bounding box - executing localized filters and real-time gate severities to insulate human agency from known, catalogued vectors of telemetry exploitation and information manipulation.
 
 For full architectural blueprints, see:
-- [ARCHITECTURE.md](file:///home/retroporter/cup/ARCHITECTURE.md) — Comprehensive 4-Pillar Specification
-- [SAFETY.md](file:///home/retroporter/cup/SAFETY.md) — Tropelex Gate Policy & Safety Convergence
-- [token-weights-matrix.schema.json](file:///home/retroporter/cup/token-weights-matrix.schema.json) — Operator Token Matrix JSON Validation Schema
+- [ARCHITECTURE.md](file:///home/retroporter/cup/ARCHITECTURE.md) - Comprehensive 4-Pillar Specification
+- [SAFETY.md](file:///home/retroporter/cup/SAFETY.md) - Tropelex Gate Policy & Safety Convergence
+- [token-weights-matrix.schema.json](file:///home/retroporter/cup/token-weights-matrix.schema.json) - Operator Token Matrix JSON Validation Schema
 
 ---
 
@@ -82,5 +82,5 @@ npm run server
 
 ## Links & Ecosystem
 
-- [KylosArc.com](https://kylosarc.com) — Project Home
-- [Tropelex Convergence](file:///home/retroporter/cup/SAFETY.md) — Shared Gate Severity Architecture
+- [KylosArc.com](https://kylosarc.com) - Project Home
+- [Tropelex Convergence](file:///home/retroporter/cup/SAFETY.md) - Shared Gate Severity Architecture

@@ -7,7 +7,7 @@
 
 **Location**: `.tmp/sessions/{YYYY-MM-DD}-{task-slug}/context.md`
 
-**Key Principle**: ContextScout discovers paths. The orchestrator persists them into context.md AFTER approval. Downstream agents read from context.md — no re-discovery.
+**Key Principle**: ContextScout discovers paths. The orchestrator persists them into context.md AFTER approval. Downstream agents read from context.md - no re-discovery.
 
 ---
 
@@ -47,7 +47,7 @@ Created: {ISO timestamp}
 Status: in_progress
 
 ## Current Request
-{What user asked for — verbatim or close paraphrase}
+{What user asked for - verbatim or close paraphrase}
 
 ## Context Files (Standards to Follow)
 Paths ContextScout discovered. Downstream agents load these for coding standards.
@@ -55,17 +55,17 @@ Paths ContextScout discovered. Downstream agents load these for coding standards
 - {other paths}
 
 ## Reference Files (Source Material)
-Project files relevant to the task — NOT standards.
+Project files relevant to the task - NOT standards.
 - {e.g. package.json}
 - {e.g. src/existing-module.ts}
 
 ## External Context Fetched
 Live docs fetched via ExternalScout. Read-only cache.
-- `.tmp/external-context/{package}/{topic}.md` — {description}
+- `.tmp/external-context/{package}/{topic}.md` - {description}
 
 ## Components
-- {Component 1} — {what it does}
-- {Component 2} — {what it does}
+- {Component 1} - {what it does}
+- {Component 2} - {what it does}
 
 ## Constraints
 {Technical constraints, preferences, version requirements}

@@ -16,9 +16,9 @@ Core Logic Gates:
 
 ---
 
-## Session Log — June 2026
+## Session Log - June 2026
 
-### Core logic gates — verified pure
+### Core logic gates - verified pure
 All five gates (`veracityGate`, `pGate`, `inverionDivide`, `abolitionOfPain`, `atrophyTimer`) remain pure functions. No side effects, no state mutations. Validated in `src/logic/`.
 
 ### Threshold re-tuning
@@ -29,7 +29,7 @@ All five gates (`veracityGate`, `pGate`, `inverionDivide`, `abolitionOfPain`, `a
 ### Adaptive weight logic (NEW in `server/feedbackStore.js`)
 - `applyVerdict(verdict, agentScores)`:
   - `correct`: agents that voted `detected` get `+0.1` weight; agents that voted `not detected` get `-0.1`
-  - `incorrect`: reverse — agents that voted `not detected` get `+0.1`; agents that voted `detected` get `-0.1`
+  - `incorrect`: reverse - agents that voted `not detected` get `+0.1`; agents that voted `detected` get `-0.1`
 - All weights clamped to `[0.1, 5.0]`
 - Stored in SQLite at `/opt/sovereign-mirror/data/feedback.db`, table `agent_weights` (PRIMARY KEY = agent name)
 

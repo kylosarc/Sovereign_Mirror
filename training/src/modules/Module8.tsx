@@ -13,10 +13,10 @@ interface Question { id: string; text: string; hint: string | null; }
 interface Result    { depth: Depth; reflection: string; }
 
 const QUESTIONS: Question[] = [
-  { id: 'q1', text: 'What is the structural difference between majority rule and consent-based governance — and when does the distinction matter most?', hint: 'Think about what each system does to the minority, and what that costs over time.' },
+  { id: 'q1', text: 'What is the structural difference between majority rule and consent-based governance - and when does the distinction matter most?', hint: 'Think about what each system does to the minority, and what that costs over time.' },
   { id: 'q2', text: 'How does a quorum threshold protect a governance system against capture by a coordinated minority?', hint: 'Consider what a small, organized group can accomplish when the majority is absent or disorganized.' },
-  { id: 'q3', text: 'What does it mean for a governance system to be "trustless" — and when would that property be worth pursuing?', hint: null },
-  { id: 'q4', text: 'What is the structural difference between meritocratic allocation and power-responsive allocation — and how would you tell them apart in a real system?', hint: 'Consider what diagnostic test would reveal which one is actually operating.' },
+  { id: 'q3', text: 'What does it mean for a governance system to be "trustless" - and when would that property be worth pursuing?', hint: null },
+  { id: 'q4', text: 'What is the structural difference between meritocratic allocation and power-responsive allocation - and how would you tell them apart in a real system?', hint: 'Consider what diagnostic test would reveal which one is actually operating.' },
 ];
 
 const DEPTH_COLOR: Record<Depth, string> = { surface: '#F43F5E', developing: '#F97316', deep: '#3FF4D5' };
@@ -54,7 +54,7 @@ export default function Module8() {
       setResult(data);
       setResults(prev => { const n = [...prev]; n[index] = data; return n; });
     } catch {
-      setError('Evaluation unavailable — try again.');
+      setError('Evaluation unavailable - try again.');
     } finally {
       setLoading(false);
     }
@@ -76,13 +76,13 @@ export default function Module8() {
     <>
       <div className="mod-container">
         <div className="mod-header" style={{ borderBottomColor: `rgba(14,165,233,0.2)` }}>
-          <div className="mod-pillar-tag" style={{ color: PILLAR_COLOR }}>PILLAR 8 — COLLABORATIVE GOVERNANCE</div>
+          <div className="mod-pillar-tag" style={{ color: PILLAR_COLOR }}>PILLAR 8 - COLLABORATIVE GOVERNANCE</div>
           <div className="mod-pillar-sub">DAO Primitives · Consent-Based Governance · Meritocratic Allocation</div>
         </div>
 
         <div className="mod-instructions">
           <strong>How this works:</strong> You will answer four Socratic questions about the architecture of distributed decision-making.
-          Governance is not the rules people follow — it is the system that determines which rules can be changed, by whom, and under what conditions. Answer from first principles.
+          Governance is not the rules people follow - it is the system that determines which rules can be changed, by whom, and under what conditions. Answer from first principles.
         </div>
 
         <div className="mod-progress">
@@ -142,7 +142,7 @@ function Summary({ results, onRestart }: { results: (Result | null)[]; onRestart
       <div className="mod-complete-banner" style={{ background: 'rgba(14,165,233,0.08)', borderBottomColor: 'rgba(14,165,233,0.2)' }}>
         <div className="mod-complete-icon" style={{ background: PILLAR_COLOR }}>✓</div>
         <div>
-          <div className="mod-complete-title">Pillar 8 — Complete</div>
+          <div className="mod-complete-title">Pillar 8 - Complete</div>
           <div className="mod-complete-sub" style={{ color: DEPTH_COLOR[overallDepth] }}>
             Overall depth: {DEPTH_LABEL[overallDepth]}
           </div>
@@ -151,7 +151,7 @@ function Summary({ results, onRestart }: { results: (Result | null)[]; onRestart
 
       <div className="mod-container">
         <div className="mod-header" style={{ borderBottomColor: 'rgba(14,165,233,0.2)' }}>
-          <div className="mod-pillar-tag" style={{ color: PILLAR_COLOR }}>PILLAR 8 — COLLABORATIVE GOVERNANCE</div>
+          <div className="mod-pillar-tag" style={{ color: PILLAR_COLOR }}>PILLAR 8 - COLLABORATIVE GOVERNANCE</div>
         </div>
 
         <div className="mod-summary-list">

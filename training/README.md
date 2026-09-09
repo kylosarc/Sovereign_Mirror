@@ -97,18 +97,18 @@ This training module integrates with the existing Sovereign Mirror system:
 3. **Decoupling Metric**: Baseline frequency of triggered intercepts drops by ≥75% over 30 days
 ---
 
-## Session Log — June 2026
+## Session Log - June 2026
 
-### `interface/CognoscentaeUltrans.tsx` — major updates
+### `interface/CognoscentaeUltrans.tsx` - major updates
 - Mobile responsiveness: 1-column layout (was 3-column with divider). On `<768px`, `.cui-main` collapses to flex-direction column.
 - Loading state: button shows `ANALYZING...` with a spinning indicator while `analyzeInput` is pending. Pulsing dot + "ROUTING TO RO+BERTa · GROQ · OPENROUTER" subtext below.
 - Per-fallacy spectrograph: weighted score + per-agent breakdown (groq, openrouter) with `✓` / `✗` verdict buttons that call `markVerdict`.
-- LEDGER CORE: was showing "Radical Veracity Passed" regardless of actual state. Now reads `lastBreakdown.weightedScore` directly: shows "—Awaiting first analysis" when null, "Radical Veracity Passed (X.XX < 0.15)" when below threshold, "Radical Veracity Failed (X.XX ≥ 0.15)" in red when above.
+- LEDGER CORE: was showing "Radical Veracity Passed" regardless of actual state. Now reads `lastBreakdown.weightedScore` directly: shows " - Awaiting first analysis" when null, "Radical Veracity Passed (X.XX < 0.15)" when below threshold, "Radical Veracity Failed (X.XX ≥ 0.15)" in red when above.
 - CURRENT box: always shows the latest analyzed text, falling back to current `inputText`.
 - Footer: shows `Threshold: 0.15 (score: X.XX)` when a breakdown exists.
 - Tooltips on Intercepts, Streak, Weights, Current State, Threshold.
 
-### `interface/TrainingSession.ts` — adaptive weights
+### `interface/TrainingSession.ts` - adaptive weights
 - `useTrainingSession` now fetches weights on mount via `useEffect`
 - Collects per-agent raw scores: `robertaMax`, `groqScore`, `openrouterMean`
 - Computes weighted score: `Σ(agent.score × agent.weight) / Σ(weight)`, clamped to `[0, 1]`
@@ -119,7 +119,7 @@ This training module integrates with the existing Sovereign Mirror system:
 - Added two `useEffect` hooks that log `lastBreakdown` / `statementLog` state changes for debugging
 
 ### `engines/FallacyDataset.ts`
-- `loadFallacyDataset()` now hits `/classify/fallacy-data` (was `/classify/fallacy-data` — same endpoint, just confirmed)
+- `loadFallacyDataset()` now hits `/classify/fallacy-data` (was `/classify/fallacy-data` - same endpoint, just confirmed)
 - `findMatchingFallacy()` uses word-overlap threshold of 0.6 (the existing implementation)
 
 ### Decoupling metric

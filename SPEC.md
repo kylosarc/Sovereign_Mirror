@@ -344,7 +344,7 @@ No formal test framework configured yet. Manual testing via dev server.
 - [ ] Is there a maximum node count for quorum calculation?
 ---
 
-## Session Log — June 2026
+## Session Log - June 2026
 
 ### Tech stack actual versions
 | Component | Technology | Actual version in `package.json` |
@@ -361,7 +361,7 @@ No formal test framework configured yet. Manual testing via dev server.
 | Build | Vite | **7.3** (was 6.4 in earlier docs) |
 | `better-sqlite3` | NEW | used by `server/feedbackStore.js` for weight persistence |
 
-### `src/components/three/OrbitalRings.tsx` — major rewrite
+### `src/components/three/OrbitalRings.tsx` - major rewrite
 5-layer concentric ring system (was 3 thin layers). All face the camera. Includes spokes, particles, wireframe outer sphere, reticle crosshair, pulse ring, glow ring. See commit `f2f5641` for details.
 
 ### `src/components/three/ResonanceTrajectory.tsx`
@@ -369,10 +369,10 @@ No formal test framework configured yet. Manual testing via dev server.
 - ResizeObserver now explicitly sets `canvas.style.width/height` to match container
 
 ### `src/components/ui/Dashboard.tsx`
-- `<main>` changed from `md:overflow-hidden` to `md:overflow-hidden overflow-y-auto` — fixes mobile clipping
+- `<main>` changed from `md:overflow-hidden` to `md:overflow-hidden overflow-y-auto` - fixes mobile clipping
 - Cognoscentae Ultrans wrapper uses `.cui-wrapper` (min/max-height + overflow), collapsible to 1 column on mobile
 
-### State slices — added
+### State slices - added
 - `src/state/ledger/ledgerThunks.ts`: thunks for `fetchLedgerHistory`
 - `src/state/middleware/ledgerPersist.ts`: persists `veracity/logEvent` and `physicalization/triggerPhysicalization` actions to `/api/ledger/entry`
 

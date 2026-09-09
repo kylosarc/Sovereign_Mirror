@@ -1,22 +1,23 @@
 import { useState, useEffect } from 'react';
-import { ResonanceTrajectory } from '../three/ResonanceTrajectory';
-import { VeracityLog } from '../hud/VeracityLog';
-import { useHUDStore } from '../../state/stores/hudStore';
 import { useNodeStore } from '../../state/stores/nodeStore';
-import { SystemicSliders } from './SystemicSliders';
+import { useHUDStore } from '../../state/stores/hudStore';
 import { PGateButton } from './PGateButton';
-import { CryptoStatusPanel } from './CryptoStatusPanel';
+import { SystemicSliders } from './SystemicSliders';
 import { EcologyMap } from './EcologyMap';
+import { VeracityLog } from '../hud/VeracityLog';
+import { CryptoStatusPanel } from './CryptoStatusPanel';
 
-type NavSection = 'analytics' | 'grain' | 'bolt' | 'architecture' | 'training';
+type NavSection = 'analytics' | 'grain' | 'bolt' | 'architecture' | 'training' | 'crypto';
 
 export function Dashboard() {
-  const [sidebarOpen, setSidebarOpen] = useState(false);
   const [activeSection, setActiveSection] = useState<NavSection>('analytics');
+  const [sidebarOpen, setSidebarOpen] = useState(false);
 
   const handleNavClick = (section: string) => {
     const sectionMap: Record<string, NavSection> = {
       'Systemic Parameters': 'analytics',
+      'QPADL Crypto': 'crypto',
+      'Crypto': 'crypto',
       'Trajectory Matrix': 'grain',
       'Flux Density': 'bolt',
       'Quantum Alignment': 'architecture',
@@ -28,11 +29,11 @@ export function Dashboard() {
       setActiveSection(mapped);
       setSidebarOpen(false);
     }
-    // Placeholder nav items (sensors, network_ping, settings) are intentionally no-ops
   };
 
   const navItems: { id: NavSection; icon: string; label: string; sectionKey: string }[] = [
     { id: 'analytics', icon: 'analytics', label: 'Parameters', sectionKey: 'Systemic Parameters' },
+    { id: 'crypto', icon: 'shield_lock', label: 'QPADL Crypto', sectionKey: 'QPADL Crypto' },
     { id: 'grain', icon: 'grain', label: 'Trajectory', sectionKey: 'Trajectory Matrix' },
     { id: 'bolt', icon: 'bolt', label: 'Flux', sectionKey: 'Flux Density' },
     { id: 'architecture', icon: 'architecture', label: 'Quantum', sectionKey: 'Quantum Alignment' },
@@ -44,10 +45,10 @@ export function Dashboard() {
       <header className="backdrop-blur-xl border-b flex justify-between items-center w-full px-4 md:px-16 h-12 md:h-16 shrink-0" style={{ backgroundColor: 'rgba(10, 10, 10, 0.8)', borderColor: 'rgba(255, 255, 255, 0.1)' }}>
         <div className="flex items-center gap-2 md:gap-6">
           <button onClick={() => setSidebarOpen(!sidebarOpen)} className="md:hidden w-8 h-8 flex flex-col justify-center items-center cursor-pointer" style={{ background: 'none', border: 'none' }}>
-                <span className={`w-5 h-0.5 mb-1 transition-all ${sidebarOpen ? 'rotate-45 translate-y-2' : ''}`} style={{ backgroundColor: '#ffffff' }}></span>
-                <span className={`w-5 h-0.5 mb-1 transition-all ${sidebarOpen ? 'opacity-0' : ''}`} style={{ backgroundColor: '#ffffff' }}></span>
-                <span className={`w-5 h-0.5 transition-all ${sidebarOpen ? '-rotate-45 -translate-y-2' : ''}`} style={{ backgroundColor: '#ffffff' }}></span>
-              </button>
+            <span className={`w-5 h-0.5 mb-1 transition-all ${sidebarOpen ? 'rotate-45 translate-y-2' : ''}`} style={{ backgroundColor: '#ffffff' }}></span>
+            <span className={`w-5 h-0.5 mb-1 transition-all ${sidebarOpen ? 'opacity-0' : ''}`} style={{ backgroundColor: '#ffffff' }}></span>
+            <span className={`w-5 h-0.5 transition-all ${sidebarOpen ? '-rotate-45 -translate-y-2' : ''}`} style={{ backgroundColor: '#ffffff' }}></span>
+          </button>
           <h1 className="text-sm md:text-xl font-bold tracking-tighter" style={{ color: '#ffffff' }}>SOVEREIGN MIRROR</h1>
           <span className="text-xs px-2 py-1 hidden md:inline" style={{ color: '#FFB300', backgroundColor: 'rgba(255, 179, 0, 0.1)', border: '1px solid rgba(255, 179, 0, 0.2)' }}>RESONANCE_TRAJECTORY</span>
         </div>
@@ -71,16 +72,16 @@ export function Dashboard() {
               <div className="text-[8px] md:text-[10px] opacity-60" style={{ color: '#c4c7c8' }}>SYSTEMIC_PARAMETERS_v4.2</div>
             </div>
             <button onClick={() => setSidebarOpen(false)} className="md:hidden w-8 h-8 flex flex-col justify-center items-center">
-                <span className="w-5 h-0.5 rotate-45 translate-y-1" style={{ backgroundColor: '#ffffff' }}></span>
-                <span className="w-5 h-0.5 -rotate-45 -translate-y-1" style={{ backgroundColor: '#ffffff' }}></span>
-              </button>
+              <span className="w-5 h-0.5 rotate-45 translate-y-1" style={{ backgroundColor: '#ffffff' }}></span>
+              <span className="w-5 h-0.5 -rotate-45 -translate-y-1" style={{ backgroundColor: '#ffffff' }}></span>
+            </button>
           </div>
           <div className="flex-1 py-2 md:py-4 flex flex-col gap-0 md:gap-1 overflow-y-auto">
             {navItems.map((item) => (
               <button
                 key={item.id}
                 onClick={() => handleNavClick(item.sectionKey)}
-                className="pl-3 md:pl-4 py-2 md:py-3 transition-all flex items-center gap-2 md:gap-3 border-l-2 text-left"
+                className="pl-3 md:pl-4 py-2 md:py-3 transition-all flex items-center gap-2 md:gap-3 border-l-2 text-left cursor-pointer"
                 style={{
                   backgroundColor: activeSection === item.id ? 'rgba(255, 255, 255, 0.05)' : 'none',
                   color: '#c4c7c8',
@@ -120,18 +121,8 @@ export function Dashboard() {
                   <span className="hidden md:inline">FRAME: <span style={{ color: '#FFB300' }}>16.6ms</span></span>
                 </div>
               </div>
-              <div className="flex-1 relative" style={{ minHeight: '300px', height: 'clamp(300px, 40vh, 400px)' }}>
-                <ResonanceTrajectory />
-                {/* HUD Overlay - Top Left */}
-                <div className="absolute top-2 left-2 z-20 p-2 border backdrop-blur-md rounded" style={{ backgroundColor: 'rgba(10, 10, 10, 0.7)', borderColor: 'rgba(255, 255, 255, 0.1)' }}>
-                  <div className="text-[9px] font-mono text-amber-400 mb-1">RESONANCE TRAJECTORY</div>
-                  <div className="space-y-0.5 text-[9px] font-mono" style={{ color: '#c4c7c8' }}>
-                    <div className="flex justify-between gap-4"><span>dV:</span> <span style={{ color: '#ffffff' }}>~±1.42</span></div>
-                    <div className="flex justify-between gap-4"><span>FRAME:</span> <span style={{ color: '#FFB300' }}>16.6ms</span></div>
-                  </div>
-                </div>
-                {/* HUD Overlay - Top Right */}
-                <div className="absolute top-2 right-2 z-20 text-[9px] font-mono" style={{ color: '#c4c7c8' }}>
+              <div className="flex-1 relative rounded border overflow-hidden flex items-center justify-center min-h-0" style={{ backgroundColor: 'rgba(0, 0, 0, 0.4)', borderColor: 'rgba(255, 255, 255, 0.05)' }}>
+                <div className="text-center font-mono text-[9px] md:text-[10px] space-y-1" style={{ color: '#636565' }}>
                   INVERION_DIVIDE: SHRED_ACTIVE
                 </div>
                 {/* HUD Overlay - Bottom Left */}
@@ -169,6 +160,15 @@ export function Dashboard() {
                     </div>
                     <PGateButton nodeId="NODE_001" />
                   </div>
+
+                  <CryptoStatusPanel />
+                </>
+              )}
+
+              {activeSection === 'crypto' && (
+                <>
+                  <CryptoStatusPanel />
+                  <QuantumAlignmentPanel />
                 </>
               )}
 
@@ -248,7 +248,7 @@ export function Dashboard() {
             <span className="text-[8px] md:text-[10px] font-mono" style={{ color: '#ffffff' }}>LEDGER</span>
           </div>
           <div className="font-mono text-[7px] md:text-[9px] tracking-[0.1em] hidden md:inline" style={{ color: '#636565' }}>
-            KEY: 72A-D9K-X04
+            STATUS: ENCRYPTED // ZK-PROOF VERIFIED
           </div>
         </div>
       </footer>
@@ -386,7 +386,7 @@ function QuantumAlignmentPanel() {
           <div className="text-2xl md:text-3xl font-bold" style={{ color: '#FFB300' }}>{alignment.toFixed(4)}</div>
           <div className="text-[8px] opacity-50">ALIGNMENT_SCORE</div>
         </div>
-<div className="space-y-2 font-mono text-[9px] md:text-[10px]" style={{ color: '#c4c7c8' }}>
+        <div className="space-y-2 font-mono text-[9px] md:text-[10px]" style={{ color: '#c4c7c8' }}>
           <div className="flex justify-between">
             <span>Stability:</span>
             <span>{(1 - noiseFilter).toFixed(4)}</span>

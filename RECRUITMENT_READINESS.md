@@ -5,7 +5,7 @@
 
 ## Executive Summary
 
-The Sovereign Mirror is a distributed governance simulator built on **Radical Veracity** principles—where mathematical truth, not social consensus, governs system state. The architecture implements five mandatory Logic Gates that enforce deterministic behavior across 1,000+ concurrent Node entities.
+The Sovereign Mirror is a distributed governance simulator built on **Radical Veracity** principles - where mathematical truth, not social consensus, governs system state. The architecture implements five mandatory Logic Gates that enforce deterministic behavior across 1,000+ concurrent Node entities.
 
 ---
 
@@ -132,11 +132,11 @@ POST /api/atrophy/calculate   → { atrophied }
 
 ### Formal Verification Sources
 
-1. **Stochastic Resonance**: Benzi et al. (1981) — noise enhances weak signal detection
-2. **Quadratic Voting**: Lalley & Weyl (2018) — √N scaling prevents whale dominance
-3. **CAP Theorem**: Brewer (2012) — Consistency prioritized over Availability
-4. **Event Sourcing**: Fowler (2005) — Immutable audit for governance systems
-5. **Memory Decay**: Ebbinghaus (1885) — Exponential decay maintains systemic integrity
+1. **Stochastic Resonance**: Benzi et al. (1981) - noise enhances weak signal detection
+2. **Quadratic Voting**: Lalley & Weyl (2018) - √N scaling prevents whale dominance
+3. **CAP Theorem**: Brewer (2012) - Consistency prioritized over Availability
+4. **Event Sourcing**: Fowler (2005) - Immutable audit for governance systems
+5. **Memory Decay**: Ebbinghaus (1885) - Exponential decay maintains systemic integrity
 
 ---
 
@@ -193,7 +193,7 @@ The Sovereign Mirror architecture is **production-ready for adversarial testing*
 2. State injection via browser console
 3. P-Gate trigger with < 7 confirmation cycles
 
-The architecture is designed to **fail visibly and freeze** under attack—never silently corrupt.
+The architecture is designed to **fail visibly and freeze** under attack - never silently corrupt.
 
 ---
 
@@ -233,12 +233,12 @@ We are actively seeking **Sustainability Scientists** and **ZK-Engineers** to pa
 *Status: LAUNCH_CANDIDATE*
 ---
 
-## Session Log — June 2026
+## Session Log - June 2026
 
 ### Production status
 The architecture is now deployed at `http://178.156.135.222/` on Hetzner, not Cloudflare. Hetzner is the new production host. The dev tunnels (`cloudflared tunnel --url ...`) described in the file are no longer in use.
 
-### Adversarial readiness — updates this session
+### Adversarial readiness - updates this session
 | Threat | Status | Mitigation verified |
 |--------|--------|---------------------|
 | Sybil Attack | ✓ unchanged | `Q = min(N, ⌈√N⌉ + 2)` still in place |
@@ -252,7 +252,7 @@ The architecture is now deployed at `http://178.156.135.222/` on Hetzner, not Cl
 ### New: Adaptive agent weighting
 - RoBERTa, Groq, and OpenRouter votes are now blended with learned weights (`/api/feedback` endpoints, `server/feedbackStore.js`)
 - A user marking a verdict "correct" or "incorrect" adjusts each agent's weight by ±0.1, clamped to `[0.1, 5.0]`
-- This makes the "Sybil Attack" threat model more relevant — an attacker would need to flood the feedback API with consistent marks to game the weights
+- This makes the "Sybil Attack" threat model more relevant - an attacker would need to flood the feedback API with consistent marks to game the weights
 
 ### New: Test API audit trail
 - Every P-Gate engagement attempt is now logged with the actual flux value before/after
@@ -260,14 +260,14 @@ The architecture is now deployed at `http://178.156.135.222/` on Hetzner, not Cl
 
 ### Open positions update
 The two open positions are still valid, but the scope has shifted:
-1. **Sustainability Scientists** — still needed for `layerZeroBridge.ts` validation
-2. **ZK-Engineers** — `zkProof.ts` is still a shell; the actual ZK circuit for veracity gate verification is unimplemented
+1. **Sustainability Scientists** - still needed for `layerZeroBridge.ts` validation
+2. **ZK-Engineers** - `zkProof.ts` is still a shell; the actual ZK circuit for veracity gate verification is unimplemented
 
 ### New open position
-3. **AI Safety Researchers** — given the adaptive weight system, we need adversarial testers to attempt to manipulate weights via the feedback API. The current defenses are:
+3. **AI Safety Researchers** - given the adaptive weight system, we need adversarial testers to attempt to manipulate weights via the feedback API. The current defenses are:
   - Weight change is capped at ±0.1 per verdict
   - All verdicts are logged with their full context
   - But there's no per-user rate limit on feedback submission yet
 
 ### Build artifact
-- `f2f5641 Mobile overflow + 5-layer orbital rings + P-Gate test feedback` on branch `feat/mobile-overflow-and-rings` (local, not pushed — GitHub credentials missing)
+- `f2f5641 Mobile overflow + 5-layer orbital rings + P-Gate test feedback` on branch `feat/mobile-overflow-and-rings` (local, not pushed - GitHub credentials missing)

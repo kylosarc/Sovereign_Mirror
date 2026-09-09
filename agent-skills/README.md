@@ -29,7 +29,7 @@ Skills encode the workflows, quality gates, and best practices that senior engin
 | Simplify the code | `/code-simplify` | Clarity over cleverness |
 | Ship to production | `/ship` | Faster is safer |
 
-Skills also activate automatically based on what you're doing — designing an API triggers `api-and-interface-design`, building UI triggers `frontend-ui-engineering`, and so on.
+Skills also activate automatically based on what you're doing - designing an API triggers `api-and-interface-design`, building UI triggers `frontend-ui-engineering`, and so on.
 
 ---
 
@@ -127,7 +127,7 @@ Skills are plain Markdown - they work with any agent that accepts system prompts
 
 ## All 22 Skills
 
-The commands above are entry points. The pack includes 22 skills total — 21 lifecycle skills plus the `using-agent-skills` meta-skill. Each skill is a structured workflow with steps, verification gates, and anti-rationalization tables. You can also reference any skill directly.
+The commands above are entry points. The pack includes 22 skills total - 21 lifecycle skills plus the `using-agent-skills` meta-skill. Each skill is a structured workflow with steps, verification gates, and anti-rationalization tables. You can also reference any skill directly.
 
 ### Meta - Discover which skill applies
 
@@ -287,7 +287,7 @@ AI coding agents default to the shortest path - which often means skipping specs
 
 Each skill encodes hard-won engineering judgment: *when* to write a spec, *what* to test, *how* to review, and *when* to ship. These aren't generic prompts - they're the kind of opinionated, process-driven workflows that separate production-quality work from prototype-quality work.
 
-Skills bake in best practices from Google's engineering culture — including concepts from [Software Engineering at Google](https://abseil.io/resources/swe-book) and Google's [engineering practices guide](https://google.github.io/eng-practices/). You'll find Hyrum's Law in API design, the Beyonce Rule and test pyramid in testing, change sizing and review speed norms in code review, Chesterton's Fence in simplification, trunk-based development in git workflow, Shift Left and feature flags in CI/CD, and a dedicated deprecation skill treating code as a liability. These aren't abstract principles — they're embedded directly into the step-by-step workflows agents follow.
+Skills bake in best practices from Google's engineering culture - including concepts from [Software Engineering at Google](https://abseil.io/resources/swe-book) and Google's [engineering practices guide](https://google.github.io/eng-practices/). You'll find Hyrum's Law in API design, the Beyonce Rule and test pyramid in testing, change sizing and review speed norms in code review, Chesterton's Fence in simplification, trunk-based development in git workflow, Shift Left and feature flags in CI/CD, and a dedicated deprecation skill treating code as a liability. These aren't abstract principles - they're embedded directly into the step-by-step workflows agents follow.
 
 ---
 
@@ -305,16 +305,16 @@ MIT - use these skills in your projects, teams, and tools.
 
 ---
 
-## Session Log — June 2026
+## Session Log - June 2026
 
 ### Agent system status
 - CodeNomad subagents in `agent-skills/` are the source-of-truth for AI-driven development of the Sovereign Mirror
 - Active skills: `spec-driven-development`, `frontend-ui-engineering`, `debugging-and-error-recovery`, `incremental-implementation`
 
 ### Changes this session relevant to agent skills
-- Mobile responsiveness patterns (`.cui-wrapper`, `.cui-container`, `.cui-main`) added — should be documented in `frontend-ui-engineering` skill as a "responsive panel" pattern
-- Adaptive weight feedback system (`server/feedbackStore.js`) is a new "veracity-graded learning" pattern — relevant to `spec-driven-development` and `incremental-implementation`
-- Rate-limit cascading bug (ABM flooding `/api/ledger/entry` starving user requests) is a classic case of shared-token-bucket starvation — should be added to `debugging-and-error-recovery` as a "rate-limit cascade" failure mode
+- Mobile responsiveness patterns (`.cui-wrapper`, `.cui-container`, `.cui-main`) added - should be documented in `frontend-ui-engineering` skill as a "responsive panel" pattern
+- Adaptive weight feedback system (`server/feedbackStore.js`) is a new "veracity-graded learning" pattern - relevant to `spec-driven-development` and `incremental-implementation`
+- Rate-limit cascading bug (ABM flooding `/api/ledger/entry` starving user requests) is a classic case of shared-token-bucket starvation - should be added to `debugging-and-error-recovery` as a "rate-limit cascade" failure mode
 
 ### Not done yet
 - These skill updates should be written by a subagent when Layer A work begins

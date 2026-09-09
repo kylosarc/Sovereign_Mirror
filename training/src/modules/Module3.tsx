@@ -14,8 +14,8 @@ interface SocraticResult   { depth: Depth; reflection: string; }
 interface SequenceResult   { score: number; label: string; canonical: string[]; canonicalLabels: Record<string, string>; explanation: string; }
 
 const QUESTIONS: SocraticQuestion[] = [
-  { id: 'q1', text: 'When two resource systems are in competition — say, energy and water — what principle guides which to address first?', hint: 'Think about dependencies: does solving one unlock the other?' },
-  { id: 'q2', text: 'What is a second-order consequence? Describe one from any system you can think of.', hint: 'A consequence of a consequence — trace at least two steps.' },
+  { id: 'q1', text: 'When two resource systems are in competition - say, energy and water - what principle guides which to address first?', hint: 'Think about dependencies: does solving one unlock the other?' },
+  { id: 'q2', text: 'What is a second-order consequence? Describe one from any system you can think of.', hint: 'A consequence of a consequence - trace at least two steps.' },
   { id: 'q3', text: 'What distinguishes a regenerative approach to ecological systems from a merely sustainable one?', hint: null },
 ];
 
@@ -64,7 +64,7 @@ export default function Module3() {
       setResult(data);
       setQResults(prev => { const n = [...prev]; n[qIndex] = data; return n; });
     } catch {
-      setError('Evaluation unavailable — try again.');
+      setError('Evaluation unavailable - try again.');
     } finally {
       setLoading(false);
     }
@@ -95,7 +95,7 @@ export default function Module3() {
       if (!res.ok) throw new Error(`${res.status}`);
       setSeqResult(await res.json() as SequenceResult);
     } catch {
-      setError('Submission failed — try again.');
+      setError('Submission failed - try again.');
     } finally {
       setSeqLoading(false);
     }
@@ -107,13 +107,13 @@ export default function Module3() {
     return (
       <div className="mod-container">
         <div className="mod-header">
-          <div className="mod-pillar-tag">PILLAR 3 — ENVIRONMENTAL STEWARDSHIP · PHASE I</div>
+          <div className="mod-pillar-tag">PILLAR 3 - ENVIRONMENTAL STEWARDSHIP · PHASE I</div>
           <div className="mod-pillar-sub">Systems Reasoning · Second-Order Consequences · Regenerative Design</div>
         </div>
 
         <div className="mod-instructions">
-          <strong>Phase I — Systems Reflection:</strong> Answer three questions about ecological and systems reasoning.
-          Think carefully — depth of analysis matters more than breadth of vocabulary.
+          <strong>Phase I - Systems Reflection:</strong> Answer three questions about ecological and systems reasoning.
+          Think carefully - depth of analysis matters more than breadth of vocabulary.
           Phase II will follow: you will sequence four real-world interventions for a resource crisis.
         </div>
 
@@ -178,20 +178,20 @@ export default function Module3() {
     return (
       <div className="mod-container">
         <div className="mod-header">
-          <div className="mod-pillar-tag">PILLAR 3 — ENVIRONMENTAL STEWARDSHIP · PHASE II</div>
+          <div className="mod-pillar-tag">PILLAR 3 - ENVIRONMENTAL STEWARDSHIP · PHASE II</div>
           <div className="mod-pillar-sub">WEFE Nexus · Intervention Sequencing</div>
         </div>
 
         <div className="mod-instructions">
-          <strong>Phase II — Intervention Sequencing:</strong> A regional WEFE nexus crisis requires four interventions.
-          Click each intervention in the order it should be deployed — cascade dependencies determine the correct sequence.
+          <strong>Phase II - Intervention Sequencing:</strong> A regional WEFE nexus crisis requires four interventions.
+          Click each intervention in the order it should be deployed - cascade dependencies determine the correct sequence.
           Which must come first to unlock the others?
         </div>
 
         {!seqResult ? (
           <>
             <div className="mod-scenario">
-              <div className="mod-scenario-tag">SCENARIO — WEFE NEXUS CRISIS</div>
+              <div className="mod-scenario-tag">SCENARIO - WEFE NEXUS CRISIS</div>
               <div className="mod-scenario-stats">
                 <div>
                   <span className="mod-scenario-stat-num" style={{ color: '#F43F5E' }}>−42%</span>
@@ -204,11 +204,11 @@ export default function Module3() {
               </div>
               <div className="mod-scenario-text">
                 Four interventions are available. Sequence them from first to last based on cascade
-                dependency — which must precede which to make the others viable?
+                dependency - which must precede which to make the others viable?
               </div>
             </div>
 
-            <div className="mod-seq-label">YOUR SEQUENCE — click interventions in order</div>
+            <div className="mod-seq-label">YOUR SEQUENCE - click interventions in order</div>
             <div className="mod-seq-slots">
               {[0,1,2,3].map(i => {
                 const id = sequence[i];
@@ -301,7 +301,7 @@ function SequenceResultPanel({ result, userSequence, onRetake, onFinish }: {
       <div className="mod-depth-row">
         <div className="mod-depth-dot" style={{ background: color }} />
         <span className="mod-depth-label" style={{ color }}>
-          {SCORE_LABEL(result.label)} — {result.score}/4
+          {SCORE_LABEL(result.label)} - {result.score}/4
         </span>
         <div className="mod-depth-line" style={{ background: `${color}33` }} />
       </div>
@@ -351,14 +351,14 @@ function Summary({ qResults, seqResult, onRestart }: {
       <div className="mod-complete-banner">
         <div className="mod-complete-icon">✓</div>
         <div>
-          <div className="mod-complete-title">Pillar 3 — Complete</div>
-          <div className="mod-complete-sub">Environmental Stewardship — both phases recorded</div>
+          <div className="mod-complete-title">Pillar 3 - Complete</div>
+          <div className="mod-complete-sub">Environmental Stewardship - both phases recorded</div>
         </div>
       </div>
 
       <div className="mod-container">
         <div className="mod-header">
-          <div className="mod-pillar-tag">PILLAR 3 — COMPLETE</div>
+          <div className="mod-pillar-tag">PILLAR 3 - COMPLETE</div>
         </div>
 
         <div className="mod-summary-list">
@@ -380,7 +380,7 @@ function Summary({ qResults, seqResult, onRestart }: {
               <div>
                 <div className="mod-summary-q">WEFE Intervention Sequence</div>
                 <div className="mod-summary-depth" style={{ color: SCORE_COLOR(seqResult.label) }}>
-                  {SCORE_LABEL(seqResult.label)} — {seqResult.score}/4
+                  {SCORE_LABEL(seqResult.label)} - {seqResult.score}/4
                 </div>
               </div>
             </div>

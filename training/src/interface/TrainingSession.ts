@@ -234,7 +234,7 @@ export function useTrainingSession({ nodeId, onFrameCreated }: TrainingSessionPr
     }
     setDetectedFallacies([...detectedFallacies]);
 
-    // BACKGROUND: API calls with tight timeouts — don't block UI
+    // BACKGROUND: API calls with tight timeouts - don't block UI
     const classifyPromise = USE_ROBERTA
       ? (async () => {
           try {
@@ -339,7 +339,7 @@ export function useTrainingSession({ nodeId, onFrameCreated }: TrainingSessionPr
     setDetectedFallacies(detectedFallacies);
 
     const w = (n: string) => weights[n] ?? 1.0;
-    // When RoBERTa times out, contextual regex results are in robertaFallaciesForLog — use them
+    // When RoBERTa times out, contextual regex results are in robertaFallaciesForLog - use them
     // as a fallback at 0.7× weight (regex is less reliable than the ML model).
     const contextualFired = !robertaData && robertaFallaciesForLog.length > 0;
     const robertaScore = robertaResults.length > 0
@@ -352,7 +352,7 @@ export function useTrainingSession({ nodeId, onFrameCreated }: TrainingSessionPr
 
     const contributors: Array<{ name: string; score: number; weight: number }> = [];
     if (robertaScore > 0) contributors.push({ name: 'roberta', score: robertaScore, weight: w('roberta') });
-    // Only include LLM agents when confidence is meaningful — confidence < 0.3 means errored or
+    // Only include LLM agents when confidence is meaningful - confidence < 0.3 means errored or
     // genuinely uncertain, and `1 - confidence` would otherwise inject a spurious positive signal.
     if (groqNumeric !== null && groqScore && groqScore.confidence >= 0.3) contributors.push({ name: 'groq', score: groqNumeric, weight: w('groq') });
     if (openrouterMean !== null && openrouterScores.some(o => o.confidence >= 0.3)) contributors.push({ name: 'openrouter', score: openrouterMean, weight: w('openrouter') });

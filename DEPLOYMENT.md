@@ -140,7 +140,7 @@ No server setup needed. Frontend uses `BrowserSimulation.ts` which:
 
 ---
 
-## Session Log — June 2026
+## Session Log - June 2026
 
 ### Build path resolution
 - Vite no longer fails from the `\wsl$\Ubuntu\...` UNC path. Build is now run via `wsl.exe -e bash -c "cd /home/retroporter/cup && PATH=/home/retroporter/.nvm/versions/node/v24.15.0/bin:/usr/bin:/bin npm run build"`. The WSL node at `/home/retroporter/.nvm/versions/node/v24.15.0/bin/` is the correct path (was previously documented as v20.20.2).
@@ -165,5 +165,5 @@ The app is now live on Hetzner at `http://178.156.135.222/` (not Cloudflare). sy
 
 ### Vercel + WordPress
 - The WordPress iframe is hardcoded to `https://dist-alpha-topaz-27.vercel.app` (per current `WORDPRESS_INTEGRATION.md`)
-- Vercel CLI is installed (`Vercel CLI 54.4.1`) but not authenticated — push deferred
+- Vercel CLI is installed (`Vercel CLI 54.4.1`) but not authenticated - push deferred
 - When ready: `cd dist && vercel --prod --yes` to redeploy with the latest bundle

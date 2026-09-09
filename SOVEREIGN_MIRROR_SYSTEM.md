@@ -266,7 +266,7 @@ cup/
 5. **Add automated tests** for inference pipeline
 ---
 
-## Session Log — June 2026
+## Session Log - June 2026
 
 ### Component port changes
 The old dev port mapping (5001/5002/5003) is still in effect locally, but in production the Hetzner deployment uses:
@@ -280,7 +280,7 @@ The old dev port mapping (5001/5002/5003) is still in effect locally, but in pro
 - Functions: `getAllWeights`, `recordFeedback`, `applyVerdict`, `getRecentFeedback`, `recordAnalysis`, `getRecentAnalyses`
 - Adaptive weight logic: `±0.1` per verdict, clamped to `[0.1, 5.0]`. Marking `correct` rewards agents that voted `detected`; marking `incorrect` rewards agents that voted `not detected`.
 
-### `server/index.js` — new endpoints
+### `server/index.js` - new endpoints
 | Endpoint | Method | Purpose |
 |----------|--------|---------|
 | `/api/feedback/weights` | GET | Current agent weights |
@@ -289,7 +289,7 @@ The old dev port mapping (5001/5002/5003) is still in effect locally, but in pro
 | `/api/feedback/analyze` | POST | Logs every analysis run with full breakdown (roberta, groq, openrouter, weightedScore, state, raw responses) |
 | `/api/feedback/analyses` | GET | Recent analysis events |
 
-### Cognoscentae Ultrans — weighted voting
+### Cognoscentae Ultrans - weighted voting
 - `useTrainingSession` now fetches weights on mount, collects per-agent raw scores (robertaMax, groqScore, openrouterMean), and computes a weighted score:
   ```
   weightedScore = Σ(agent.score × agent.weight) / Σ(weight)
@@ -298,8 +298,8 @@ The old dev port mapping (5001/5002/5003) is still in effect locally, but in pro
 - Per-fallacy `✓` / `✗` buttons in the spectrograph call `markVerdict`
 
 ### Confidence threshold update
-- `ROBERTA_THRESHOLD` is now 0.60 (up from 0.50) — free agents only triggered on stronger RoBERTa signals
-- `WORD_COUNT_CAP = 200` — free agents skipped on long statements
+- `ROBERTA_THRESHOLD` is now 0.60 (up from 0.50) - free agents only triggered on stronger RoBERTa signals
+- `WORD_COUNT_CAP = 200` - free agents skipped on long statements
 
 ### Free agents service fix
 - `free-agents.service` systemd `Environment=` line was overriding `PATH` to venv-only, breaking `subprocess.run(["curl", ...])` with `ENOENT`
@@ -312,7 +312,7 @@ The old dev port mapping (5001/5002/5003) is still in effect locally, but in pro
 - Result: 0 429s in last 5 min (was hundreds)
 
 ### OpenRouter status
-- DeepInfra and OpenRouter have been disabled in this commit history — Groq is the primary validator (per `9dfffb0 Disable unreliable OpenRouter/DeepInfra - Groq is primary validator`)
+- DeepInfra and OpenRouter have been disabled in this commit history - Groq is the primary validator (per `9dfffb0 Disable unreliable OpenRouter/DeepInfra - Groq is primary validator`)
 - OpenRouter still appears in the `useTrainingSession` agent list for legacy reasons; will be re-evaluated
 
 ### Mobile UI

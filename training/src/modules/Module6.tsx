@@ -14,8 +14,8 @@ interface Result    { depth: Depth; reflection: string; }
 
 const QUESTIONS: Question[] = [
   { id: 'q1', text: 'What is the structural difference between being busy and being productive?', hint: 'Consider what each optimizes for, and who benefits from the confusion between them.' },
-  { id: 'q2', text: 'Why does the person with the most control over their attention tend to produce asymmetric value — not just more output, but disproportionately more?', hint: 'Think about how insight compounds differently than effort.' },
-  { id: 'q3', text: 'What makes a deadline generative — one that produces better work — rather than merely pressuring?', hint: 'Consider what a generative deadline closes off, not just when it falls.' },
+  { id: 'q2', text: 'Why does the person with the most control over their attention tend to produce asymmetric value - not just more output, but disproportionately more?', hint: 'Think about how insight compounds differently than effort.' },
+  { id: 'q3', text: 'What makes a deadline generative - one that produces better work - rather than merely pressuring?', hint: 'Consider what a generative deadline closes off, not just when it falls.' },
   { id: 'q4', text: 'What does it mean to protect your attention at the level of a system rather than at the level of individual decisions?', hint: null },
 ];
 
@@ -54,7 +54,7 @@ export default function Module6() {
       setResult(data);
       setResults(prev => { const n = [...prev]; n[index] = data; return n; });
     } catch {
-      setError('Evaluation unavailable — try again.');
+      setError('Evaluation unavailable - try again.');
     } finally {
       setLoading(false);
     }
@@ -76,13 +76,13 @@ export default function Module6() {
     <>
       <div className="mod-container">
         <div className="mod-header" style={{ borderBottomColor: `rgba(139,92,246,0.2)` }}>
-          <div className="mod-pillar-tag" style={{ color: PILLAR_COLOR }}>PILLAR 6 — TEMPORAL DISCIPLINE</div>
+          <div className="mod-pillar-tag" style={{ color: PILLAR_COLOR }}>PILLAR 6 - TEMPORAL DISCIPLINE</div>
           <div className="mod-pillar-sub">Deep Work · Attention Economics · Deadline Architecture</div>
         </div>
 
         <div className="mod-instructions">
           <strong>How this works:</strong> You will answer four Socratic questions about time, attention, and the architecture of productive work.
-          Temporal discipline is not scheduling — it is the strategic management of the only non-renewable resource in a governance system. Answer from your own experience.
+          Temporal discipline is not scheduling - it is the strategic management of the only non-renewable resource in a governance system. Answer from your own experience.
         </div>
 
         <div className="mod-progress">
@@ -142,7 +142,7 @@ function Summary({ results, onRestart }: { results: (Result | null)[]; onRestart
       <div className="mod-complete-banner" style={{ background: 'rgba(139,92,246,0.08)', borderBottomColor: 'rgba(139,92,246,0.2)' }}>
         <div className="mod-complete-icon" style={{ background: PILLAR_COLOR }}>✓</div>
         <div>
-          <div className="mod-complete-title">Pillar 6 — Complete</div>
+          <div className="mod-complete-title">Pillar 6 - Complete</div>
           <div className="mod-complete-sub" style={{ color: DEPTH_COLOR[overallDepth] }}>
             Overall depth: {DEPTH_LABEL[overallDepth]}
           </div>
@@ -151,7 +151,7 @@ function Summary({ results, onRestart }: { results: (Result | null)[]; onRestart
 
       <div className="mod-container">
         <div className="mod-header" style={{ borderBottomColor: 'rgba(139,92,246,0.2)' }}>
-          <div className="mod-pillar-tag" style={{ color: PILLAR_COLOR }}>PILLAR 6 — TEMPORAL DISCIPLINE</div>
+          <div className="mod-pillar-tag" style={{ color: PILLAR_COLOR }}>PILLAR 6 - TEMPORAL DISCIPLINE</div>
         </div>
 
         <div className="mod-summary-list">

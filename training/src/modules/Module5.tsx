@@ -13,10 +13,10 @@ interface Question { id: string; text: string; hint: string | null; }
 interface Result    { depth: Depth; reflection: string; }
 
 const QUESTIONS: Question[] = [
-  { id: 'q1', text: 'What happens to your decision-making quality when you are sleep-deprived — and why does the most sleep-deprived person often feel the least impaired?', hint: 'This is a question about self-assessment, not just physiology.' },
+  { id: 'q1', text: 'What happens to your decision-making quality when you are sleep-deprived - and why does the most sleep-deprived person often feel the least impaired?', hint: 'This is a question about self-assessment, not just physiology.' },
   { id: 'q2', text: 'Most people treat stress as something to eliminate. When is stress not only unavoidable but necessary for growth?', hint: 'Consider what happens to a muscle that is never challenged.' },
   { id: 'q3', text: 'What is the difference between the absence of disease and the presence of health?', hint: null },
-  { id: 'q4', text: 'If the goal of longevity is to compress morbidity — to live fully and then decline quickly — what decisions made today most determine the quality of your final decade?', hint: null },
+  { id: 'q4', text: 'If the goal of longevity is to compress morbidity - to live fully and then decline quickly - what decisions made today most determine the quality of your final decade?', hint: null },
 ];
 
 const DEPTH_COLOR: Record<Depth, string> = { surface: '#F43F5E', developing: '#F97316', deep: '#3FF4D5' };
@@ -54,7 +54,7 @@ export default function Module5() {
       setResult(data);
       setResults(prev => { const n = [...prev]; n[index] = data; return n; });
     } catch {
-      setError('Evaluation unavailable — try again.');
+      setError('Evaluation unavailable - try again.');
     } finally {
       setLoading(false);
     }
@@ -76,13 +76,13 @@ export default function Module5() {
     <>
       <div className="mod-container">
         <div className="mod-header" style={{ borderBottomColor: `rgba(244,63,94,0.2)` }}>
-          <div className="mod-pillar-tag" style={{ color: PILLAR_COLOR }}>PILLAR 5 — PHYSIOLOGICAL OPTIMIZATION</div>
+          <div className="mod-pillar-tag" style={{ color: PILLAR_COLOR }}>PILLAR 5 - PHYSIOLOGICAL OPTIMIZATION</div>
           <div className="mod-pillar-sub">Sleep Architecture · Metabolic Flexibility · Stress Adaptation · Longevity</div>
         </div>
 
         <div className="mod-instructions">
           <strong>How this works:</strong> You will answer four Socratic questions about the biological prerequisites for sustained high-quality deliberation.
-          Peak performance is not optional infrastructure — it is a governance competency. Answer from your own experience and understanding.
+          Peak performance is not optional infrastructure - it is a governance competency. Answer from your own experience and understanding.
         </div>
 
         <div className="mod-progress">
@@ -142,7 +142,7 @@ function Summary({ results, onRestart }: { results: (Result | null)[]; onRestart
       <div className="mod-complete-banner" style={{ background: 'rgba(244,63,94,0.08)', borderBottomColor: 'rgba(244,63,94,0.2)' }}>
         <div className="mod-complete-icon" style={{ background: PILLAR_COLOR }}>✓</div>
         <div>
-          <div className="mod-complete-title">Pillar 5 — Complete</div>
+          <div className="mod-complete-title">Pillar 5 - Complete</div>
           <div className="mod-complete-sub" style={{ color: DEPTH_COLOR[overallDepth] }}>
             Overall depth: {DEPTH_LABEL[overallDepth]}
           </div>
@@ -151,7 +151,7 @@ function Summary({ results, onRestart }: { results: (Result | null)[]; onRestart
 
       <div className="mod-container">
         <div className="mod-header" style={{ borderBottomColor: 'rgba(244,63,94,0.2)' }}>
-          <div className="mod-pillar-tag" style={{ color: PILLAR_COLOR }}>PILLAR 5 — PHYSIOLOGICAL OPTIMIZATION</div>
+          <div className="mod-pillar-tag" style={{ color: PILLAR_COLOR }}>PILLAR 5 - PHYSIOLOGICAL OPTIMIZATION</div>
         </div>
 
         <div className="mod-summary-list">

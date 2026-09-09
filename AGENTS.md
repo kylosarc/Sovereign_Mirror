@@ -1,9 +1,9 @@
-# Sovereign Mirror — Agent Guidelines
+# Sovereign Mirror - Agent Guidelines
 
 ## Process Rules
 
 - State assumptions explicitly; don't pick silently between interpretations.
-- Minimum code that solves the problem — no speculative abstractions.
+- Minimum code that solves the problem - no speculative abstractions.
 - Surgical changes only: don't "improve" adjacent code/comments/formatting. Remove only imports/vars your change orphaned.
 - For non-trivial work, state a numbered plan with a verification step per item.
 
@@ -24,7 +24,7 @@ npx vitest run src/logic/pGate.test.ts
 cd server && node index.js
 ```
 
-**No lint script is configured.** Python side uses `ruff` but there's no committed config/script — don't assume a lint command exists.
+**No lint script is configured.** Python side uses `ruff` but there's no committed config/script - don't assume a lint command exists.
 
 ## Architecture
 
@@ -38,23 +38,23 @@ cd server && node index.js
 
 - Zustand → Redux sync: `src/state/syncBridge/syncBridge.ts` (one-directional via `subscribe`)
 - `VeracityEnforcer` middleware throws if drift > 0.01 between Zustand/Redux
-- In `useFrame`, read Zustand via `getState()` — never through hooks
+- In `useFrame`, read Zustand via `getState()` - never through hooks
 
 ### Logic kernel (`src/logic/`)
 
-Five pure, side-effect-free gates. A mirror lives in `server/logic/kernel.js` — keep both in sync when changing math.
+Five pure, side-effect-free gates. A mirror lives in `server/logic/kernel.js` - keep both in sync when changing math.
 
-1. `veracityGate.ts` — `max(0, V_active - V_control)`
-2. `pGate.ts` — 7-cycle confirmation, quorum = `min(N, ceil(sqrt(N)) + 2)`
-3. `inverionDivide.ts` — remediation (NOT deletion) of deprecated nodes
-4. `abolitionOfPain.ts` — pain threshold enforcement
-5. `atrophyTimer.ts` — T_limit = 86,400,000ms (24h)
+1. `veracityGate.ts` - `max(0, V_active - V_control)`
+2. `pGate.ts` - 7-cycle confirmation, quorum = `min(N, ceil(sqrt(N)) + 2)`
+3. `inverionDivide.ts` - remediation (NOT deletion) of deprecated nodes
+4. `abolitionOfPain.ts` - pain threshold enforcement
+5. `atrophyTimer.ts` - T_limit = 86,400,000ms (24h)
 
 Constants in `src/logic/types.ts`: `GOLDEN_RATIO`, `THRESHOLD_ENTROPY` (0.07), `CONFIRMATION_CYCLES` (7), `BASE_TICK_RATE` (400ms).
 
 ### Server (`server/index.js`)
 
-Plain Node `http.createServer` — **no Express** (despite `server/package.json` listing it; routes are manual `if (url.pathname === ...)` dispatch). Add new endpoints in the same style.
+Plain Node `http.createServer` - **no Express** (despite `server/package.json` listing it; routes are manual `if (url.pathname === ...)` dispatch). Add new endpoints in the same style.
 
 Routes: `/api/health`, `/api/rtsw/latest`, `/api/pgate/engage`, `/api/veracity/calculate`, `/api/quorum/calculate`, `/api/atrophy/calculate`, `/api/kernel/version`, `/api/feedback*`.
 
@@ -76,8 +76,8 @@ Fallacy detection engines (`engines/FallacyDataset.ts`, `engines/FallacyMapEngin
 
 ### 3D visualization
 
-- `src/components/three/ResonanceTrajectory.tsx` — main canvas. `MAX_NODES = 100`. Sierpinski depth ≤ 3 (≥4 crashes browsers).
-- `src/components/three/OrbitalRings.tsx` — 5-layer ring HUD, rings face camera.
+- `src/components/three/ResonanceTrajectory.tsx` - main canvas. `MAX_NODES = 100`. Sierpinski depth ≤ 3 (≥4 crashes browsers).
+- `src/components/three/OrbitalRings.tsx` - 5-layer ring HUD, rings face camera.
 - Required guards: `isFinite()`/`isNaN()` before `setMatrixAt`, capped deltas (`Math.min(delta, 0.05)`), geometry disposal in `useEffect` cleanup, `frustumCulled={false}` on moving InstancedMesh.
 
 ### Cloudflare deployment
@@ -88,7 +88,7 @@ Fallacy detection engines (`engines/FallacyDataset.ts`, `engines/FallacyMapEngin
 
 - Vitest configured for `src/**/*.test.ts`, node environment, globals enabled
 - Coverage covers `src/logic/**/*.ts` (excludes `src/logic/types.ts`)
-- No integration test prerequisites — tests are pure unit tests
+- No integration test prerequisites - tests are pure unit tests
 
 ## Key Constraints
 
@@ -99,7 +99,7 @@ Fallacy detection engines (`engines/FallacyDataset.ts`, `engines/FallacyMapEngin
 
 ## Repo Hygiene
 
-- Root has large generated/backup artifacts (`backup/`, `*.tar.gz`, `dist/`, SSH keys) — don't treat them as source.
-- `kylos-qpadl/` is a git submodule (Rust, post-quantum signatures) — won't appear in this repo's commits.
+- Root has large generated/backup artifacts (`backup/`, `*.tar.gz`, `dist/`, SSH keys) - don't treat them as source.
+- `kylos-qpadl/` is a git submodule (Rust, post-quantum signatures) - won't appear in this repo's commits.
 - `origin/master` and `main` were historically unrelated branches. `master` is superseded; don't merge it again.
 - `TOUCHPOINTS.md` is the attack-surface inventory for the crypto subsystem.

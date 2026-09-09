@@ -239,7 +239,7 @@ watch -n 1 cat src/mirror/core/current_state.json
 
 ---
 
-## Session Log — June 2026
+## Session Log - June 2026
 
 ### Actual current architecture
 The Python `simulate_stream.py` is not currently running. The visualization is driven by `BrowserSimulation.ts` (a TypeScript equivalent that runs entirely in the browser, no Python process required).

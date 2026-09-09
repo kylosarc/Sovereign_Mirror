@@ -35,7 +35,7 @@ export function DepthReveal({ result, input, onNext, isLast, nextLabel }: Props)
   useEffect(() => {
     if (!dotRef.current || !labelRef.current || !lineRef.current || !reflRef.current || !echoRef.current || !actionsRef.current) return;
 
-    // Spring animation for the depth dot — natural bounce
+    // Spring animation for the depth dot - natural bounce
     animateMini(dotRef.current, { scale: [0, 1] }, { duration: 0.5, ease: [0.34, 1.56, 0.64, 1] });
 
     // Staggered reveals with easing curves

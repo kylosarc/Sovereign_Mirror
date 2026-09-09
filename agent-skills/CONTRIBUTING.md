@@ -13,10 +13,10 @@ Thanks for your interest in contributing! This project is a collection of produc
 
 Skills should be:
 
-- **Specific** — Actionable steps, not vague advice
-- **Verifiable** — Clear exit criteria with evidence requirements
-- **Battle-tested** — Based on real engineering workflows, not theoretical ideals
-- **Minimal** — Only the content needed to guide the agent correctly
+- **Specific** - Actionable steps, not vague advice
+- **Verifiable** - Clear exit criteria with evidence requirements
+- **Battle-tested** - Based on real engineering workflows, not theoretical ideals
+- **Minimal** - Only the content needed to guide the agent correctly
 
 ### Structure
 
@@ -27,19 +27,19 @@ Every new skill must have:
 
 New skills should generally follow the standard anatomy:
 
-- **Overview** — What this skill does and why it matters
-- **When to Use** — Triggering conditions
-- **Process** — Step-by-step workflow
-- **Common Rationalizations** — Excuses agents use to skip steps, with rebuttals
-- **Red Flags** — Warning signs that the skill is being applied incorrectly
-- **Verification** — How to confirm the skill was applied correctly
+- **Overview** - What this skill does and why it matters
+- **When to Use** - Triggering conditions
+- **Process** - Step-by-step workflow
+- **Common Rationalizations** - Excuses agents use to skip steps, with rebuttals
+- **Red Flags** - Warning signs that the skill is being applied incorrectly
+- **Verification** - How to confirm the skill was applied correctly
 
 ### What Not to Do
 
-- Don't duplicate content between skills — reference other skills instead
+- Don't duplicate content between skills - reference other skills instead
 - Don't add skills that are vague advice instead of actionable processes
 - Don't create supporting files unless content exceeds 100 lines
-- Don't put reference material inside skill directories — use `references/` instead
+- Don't put reference material inside skill directories - use `references/` instead
 
 ## Modifying Existing Skills
 
@@ -49,7 +49,7 @@ New skills should generally follow the standard anatomy:
 
 ## Testing Hooks
 
-The session-start hook (`hooks/session-start.sh`) injects the `using-agent-skills` meta-skill into every new Claude Code session. A regression test at `hooks/session-start-test.sh` validates the hook's JSON payload — both when `jq` is available and when it isn't.
+The session-start hook (`hooks/session-start.sh`) injects the `using-agent-skills` meta-skill into every new Claude Code session. A regression test at `hooks/session-start-test.sh` validates the hook's JSON payload - both when `jq` is available and when it isn't.
 
 Run it before opening any PR that touches:
 
@@ -90,10 +90,10 @@ By contributing, you agree that your contributions will be licensed under the MI
 
 ---
 
-## Session Log — June 2026
+## Session Log - June 2026
 
 ### Contribution conventions reinforced
-- **Session Log section in every doc**: when you make changes, append a "Session Log — <date>" section to every relevant md file. This is now standard practice for the Sovereign Mirror project.
+- **Session Log section in every doc**: when you make changes, append a "Session Log - <date>" section to every relevant md file. This is now standard practice for the Sovereign Mirror project.
 - **TypeScript strict mode**: `noUnusedLocals` + `noUnusedParameters` are enforced. Every new variable must be used. Every callback must use its parameters.
 - **Three.js / R3F guards**: `frustumCulled={false}` on InstancedMesh, `isFinite()` and `isNaN()` guards on every matrix/uniform write, NaN continue for instance matrix updates.
 - **Server rate limit**: per-`(ip, path)` keying is the default. Don't revert to a global per-IP limit.

@@ -14,7 +14,7 @@ interface Result    { depth: Depth; reflection: string; }
 
 const QUESTIONS: Question[] = [
   { id: 'q1', text: 'How do you figure out if you are right in an argument?', hint: 'Take your time. There may be more to this question than first appears.' },
-  { id: 'q2', text: 'What is the distinction between jealousy and envy?', hint: 'Consider the structure of each emotion — how many people does each one require?' },
+  { id: 'q2', text: 'What is the distinction between jealousy and envy?', hint: 'Consider the structure of each emotion - how many people does each one require?' },
   { id: 'q3', text: 'Is the Golden Rule the best framework for navigating ethical dilemmas? If not, what would be better?', hint: null },
   { id: 'q4', text: 'Is it acceptable to be silent when someone is telling you something that is important to them?', hint: null },
 ];
@@ -53,7 +53,7 @@ export default function Module2() {
       setResult(data);
       setResults(prev => { const n = [...prev]; n[index] = data; return n; });
     } catch {
-      setError('Evaluation unavailable — try again.');
+      setError('Evaluation unavailable - try again.');
     } finally {
       setLoading(false);
     }
@@ -78,7 +78,7 @@ export default function Module2() {
           <div className="mod-complete-icon">✓</div>
           <div>
             <div className="mod-complete-title">Pillar 2 Complete</div>
-            <div className="mod-complete-sub">Relational Integrity — reflection recorded</div>
+            <div className="mod-complete-sub">Relational Integrity - reflection recorded</div>
           </div>
         </div>
       )}
@@ -86,13 +86,13 @@ export default function Module2() {
       <div className="mod-container">
 
         <div className="mod-header">
-          <div className="mod-pillar-tag">PILLAR 2 — RELATIONAL INTEGRITY</div>
+          <div className="mod-pillar-tag">PILLAR 2 - RELATIONAL INTEGRITY</div>
           <div className="mod-pillar-sub">Conflict Resolution · Empathy · Covenant-Based Coordination</div>
         </div>
 
         <div className="mod-instructions">
           <strong>How this works:</strong> You will answer four Socratic questions about relational and ethical reasoning.
-          Each response is evaluated for depth of reflection. Answer genuinely — there are no trick answers,
+          Each response is evaluated for depth of reflection. Answer genuinely - there are no trick answers,
           only shallow and deep ones.
         </div>
 
@@ -153,16 +153,16 @@ function Summary({ results, onRestart }: { results: (Result | null)[]; onRestart
       <div className="mod-complete-banner">
         <div className="mod-complete-icon">✓</div>
         <div>
-          <div className="mod-complete-title">Pillar 2 — Complete</div>
+          <div className="mod-complete-title">Pillar 2 - Complete</div>
           <div className="mod-complete-sub">Overall depth: {DEPTH_LABEL[overallDepth]}</div>
         </div>
       </div>
 
       <div className="mod-container">
         <div className="mod-header">
-          <div className="mod-pillar-tag">PILLAR 2 — RELATIONAL INTEGRITY</div>
+          <div className="mod-pillar-tag">PILLAR 2 - RELATIONAL INTEGRITY</div>
           <div className="mod-pillar-sub" style={{ color: DEPTH_COLOR[overallDepth] }}>
-            OVERALL DEPTH — {DEPTH_LABEL[overallDepth]}
+            OVERALL DEPTH - {DEPTH_LABEL[overallDepth]}
           </div>
         </div>
 

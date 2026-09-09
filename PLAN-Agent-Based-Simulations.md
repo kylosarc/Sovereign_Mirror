@@ -329,21 +329,21 @@ curl -X POST http://localhost:5000/api/simulate \
 ```
 ---
 
-## Session Log — June 2026
+## Session Log - June 2026
 
 ### ABM → real fallacy data wiring (DEFERRED)
 Per user direction: ABM integration with real RoBERTa outputs is deferred until Layer A (data foundation) is complete. The current ABM still runs synthetic agents.
 
 ### Phase 1 status (mostly done, but with caveats)
 - [x] Python simulation backend skeleton (`server/simulation/api.py`)
-- [x] Basic agent class with veracity attributes (`server/simulation/agents.py` — `RealNodeAgent`)
+- [x] Basic agent class with veracity attributes (`server/simulation/agents.py` - `RealNodeAgent`)
 - [x] Simple cooperator/defector game (in `agents.py` and `game_logic.py`)
 - [x] REST endpoint for triggering simulations (`/api/simulation/*`)
-- [~] Mock data for frontend testing — partial. `src/mirror/core/BrowserSimulation.ts` cycles through 8 milestones every 15s, but the simulation isn't pulling from the ABM in real-time.
+- [~] Mock data for frontend testing - partial. `src/mirror/core/BrowserSimulation.ts` cycles through 8 milestones every 15s, but the simulation isn't pulling from the ABM in real-time.
 
 ### Phase 2 status (deferred)
-- [~] Full payoff matrix with veracity scaling — present in `game_logic.py` but not wired to the visualization
-- [~] Strategy types: TFT, Always Defect, Always Cooperate, Random — partial
+- [~] Full payoff matrix with veracity scaling - present in `game_logic.py` but not wired to the visualization
+- [~] Strategy types: TFT, Always Defect, Always Cooperate, Random - partial
 - [ ] Network topology effects
 - [ ] Evolutionary selection pressure
 

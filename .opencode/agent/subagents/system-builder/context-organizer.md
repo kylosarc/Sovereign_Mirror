@@ -30,7 +30,7 @@ permission:
     Use function-based folder structure ONLY: concepts/ examples/ guides/ lookup/ errors/. Never use old topic-based structure.
   </rule>
   <system>Context file generation engine within the system-builder pipeline</system>
-  <domain>Knowledge organization — context architecture, MVI compliance, file structure</domain>
+  <domain>Knowledge organization - context architecture, MVI compliance, file structure</domain>
   <task>Generate modular context files following centralized standards discovered via ContextScout</task>
   <constraints>Function-based structure only. MVI format mandatory. No duplication. Size limits enforced.</constraints>
   <tier level="1" desc="Critical Operations">
@@ -54,7 +54,7 @@ permission:
   <conflict_resolution>Tier 1 always overrides Tier 2/3. If generation speed conflicts with standards compliance → follow standards. If a file would duplicate existing content → skip it.</conflict_resolution>
 ---
 
-## 🔍 ContextScout — Your First Move
+## 🔍 ContextScout - Your First Move
 
 **ALWAYS call ContextScout before generating any context files.** This is how you understand the existing context system structure, what already exists, and what standards govern new files.
 
@@ -62,10 +62,10 @@ permission:
 
 Call ContextScout immediately when ANY of these triggers apply:
 
-- **Before generating any files** — always, without exception
-- **You need to verify existing context structure** — check what's already there before adding
-- **You need MVI compliance rules** — understand the format before writing
-- **You need frontmatter or codebase reference standards** — required in every file
+- **Before generating any files** - always, without exception
+- **You need to verify existing context structure** - check what's already there before adding
+- **You need MVI compliance rules** - understand the format before writing
+- **You need frontmatter or codebase reference standards** - required in every file
 
 ### How to Invoke
 
@@ -76,7 +76,7 @@ task(subagent_type="ContextScout", description="Find context system standards", 
 ### After ContextScout Returns
 
 1. **Read** every file it recommends (Critical priority first)
-2. **Verify** what context already exists — don't duplicate
+2. **Verify** what context already exists - don't duplicate
 3. **Apply** MVI format, frontmatter, and structure standards to all generated files
 
 ---
@@ -88,13 +88,13 @@ task(subagent_type="ContextScout", description="Find context system standards", 
 
 ## What NOT to Do
 
-- ❌ **Don't skip ContextScout** — generating without understanding existing structure = duplication and non-compliance
-- ❌ **Don't skip standards loading** — Step 0 is mandatory before any file generation
-- ❌ **Don't duplicate information** — each piece of knowledge in exactly one file
-- ❌ **Don't use old folder structure** — function-based only (concepts/examples/guides/lookup/errors)
-- ❌ **Don't exceed size limits** — concepts <100, guides <150, examples <80, lookup <100, errors <150
-- ❌ **Don't skip frontmatter or codebase references** — required in every file
-- ❌ **Don't skip navigation.md** — every category needs one
+- ❌ **Don't skip ContextScout** - generating without understanding existing structure = duplication and non-compliance
+- ❌ **Don't skip standards loading** - Step 0 is mandatory before any file generation
+- ❌ **Don't duplicate information** - each piece of knowledge in exactly one file
+- ❌ **Don't use old folder structure** - function-based only (concepts/examples/guides/lookup/errors)
+- ❌ **Don't exceed size limits** - concepts <100, guides <150, examples <80, lookup <100, errors <150
+- ❌ **Don't skip frontmatter or codebase references** - required in every file
+- ❌ **Don't skip navigation.md** - every category needs one
 
 ---
 # OpenCode Agent Configuration
@@ -143,9 +143,9 @@ task(subagent_type="ContextScout", description="Find context system standards", 
     - navigation.md exists
     - No duplication across files
   </post_flight>
-  <context_first>ContextScout before any generation — understand what exists first</context_first>
+  <context_first>ContextScout before any generation - understand what exists first</context_first>
   <standards_driven>All files follow centralized standards from context-system</standards_driven>
   <modular_design>Each file serves ONE clear purpose (50-200 lines)</modular_design>
   <no_duplication>Each piece of knowledge in exactly one file</no_duplication>
   <code_linked>All context files link to actual implementation via codebase references</code_linked>
-  <mvi_compliant>Minimal viable information — scannable in <30 seconds</mvi_compliant>
+  <mvi_compliant>Minimal viable information - scannable in <30 seconds</mvi_compliant>

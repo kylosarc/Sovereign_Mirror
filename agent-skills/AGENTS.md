@@ -69,13 +69,13 @@ This ensures OpenCode behaves similarly to Claude Code with full workflow enforc
 
 This repo has three composable layers. They have different jobs and should not be confused:
 
-- **Skills** (`skills/<name>/SKILL.md`) — workflows with steps and exit criteria. The *how*. Mandatory hops when an intent matches.
-- **Personas** (`agents/<role>.md`) — roles with a perspective and an output format. The *who*.
-- **Slash commands** (`.claude/commands/*.md`) — user-facing entry points. The *when*. The orchestration layer.
+- **Skills** (`skills/<name>/SKILL.md`) - workflows with steps and exit criteria. The *how*. Mandatory hops when an intent matches.
+- **Personas** (`agents/<role>.md`) - roles with a perspective and an output format. The *who*.
+- **Slash commands** (`.claude/commands/*.md`) - user-facing entry points. The *when*. The orchestration layer.
 
 Composition rule: **the user (or a slash command) is the orchestrator. Personas do not invoke other personas.** A persona may invoke skills.
 
-The only multi-persona orchestration pattern this repo endorses is **parallel fan-out with a merge step** — used by `/ship` to run `code-reviewer`, `security-auditor`, and `test-engineer` concurrently and synthesize their reports. Do not build a "router" persona that decides which other persona to call; that's the job of slash commands and intent mapping.
+The only multi-persona orchestration pattern this repo endorses is **parallel fan-out with a merge step** - used by `/ship` to run `code-reviewer`, `security-auditor`, and `test-engineer` concurrently and synthesize their reports. Do not build a "router" persona that decides which other persona to call; that's the job of slash commands and intent mapping.
 
 See [agents/README.md](agents/README.md) for the decision matrix and [references/orchestration-patterns.md](references/orchestration-patterns.md) for the full pattern catalog.
 
@@ -144,13 +144,13 @@ bash /mnt/skills/user/{skill-name}/scripts/{script}.sh [args]
 
 ### Best Practices for Context Efficiency
 
-Skills are loaded on-demand — only the skill name and description are loaded at startup. The full `SKILL.md` loads into context only when the agent decides the skill is relevant. To minimize context usage:
+Skills are loaded on-demand - only the skill name and description are loaded at startup. The full `SKILL.md` loads into context only when the agent decides the skill is relevant. To minimize context usage:
 
-- **Keep SKILL.md under 500 lines** — put detailed reference material in separate files
-- **Write specific descriptions** — helps the agent know exactly when to activate the skill
-- **Use progressive disclosure** — reference supporting files that get read only when needed
-- **Prefer scripts over inline code** — script execution doesn't consume context (only output does)
-- **File references work one level deep** — link directly from SKILL.md to supporting files
+- **Keep SKILL.md under 500 lines** - put detailed reference material in separate files
+- **Write specific descriptions** - helps the agent know exactly when to activate the skill
+- **Use progressive disclosure** - reference supporting files that get read only when needed
+- **Prefer scripts over inline code** - script execution doesn't consume context (only output does)
+- **File references work one level deep** - link directly from SKILL.md to supporting files
 
 ### Script Requirements
 
@@ -186,7 +186,7 @@ If the skill requires network access, instruct users to add required domains at 
 
 ---
 
-## Session Log — June 2026
+## Session Log - June 2026
 
 ### Operational notes
 - Hetzner server is the active production target. `178.156.135.222:80` → nginx → 3001 (express) / 5001-5003 (Python services)
@@ -201,8 +201,8 @@ If the skill requires network access, instruct users to add required domains at 
 - Mobile flex-direction switching (column on mobile, row on desktop) is simpler than 2 separate layouts
 
 ### What didn't work
-- Initial assumption that the rings were "face-on" — they were rotated 90° onto the XZ plane and showing as thin lines. Camera at z=16 was looking edge-on. Required removing the `rotation={[Math.PI/2, 0, 0]}` from all 11 ring elements
-- Initial attempt to "fix the Test API button" by changing the slider — the test API was already working; the user just had no visual confirmation. Lesson: confirm the failure mode before changing the code path
+- Initial assumption that the rings were "face-on" - they were rotated 90° onto the XZ plane and showing as thin lines. Camera at z=16 was looking edge-on. Required removing the `rotation={[Math.PI/2, 0, 0]}` from all 11 ring elements
+- Initial attempt to "fix the Test API button" by changing the slider - the test API was already working; the user just had no visual confirmation. Lesson: confirm the failure mode before changing the code path
 
 ### Open questions
 - Should the ABM Python service batch its `/api/ledger/entry` writes (currently 100+/min)?
