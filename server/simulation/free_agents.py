@@ -27,8 +27,11 @@ OPENROUTER_URL = "https://openrouter.ai/api/v1/chat/completions"
 OPENROUTER_MODELS_URL = "https://openrouter.ai/api/v1/models"
 DEEPINFRA_URL = "https://api.deepinfra.com/v1/openai/chat/completions"
 
-# Preferred free models - queried serially (single model avoids slow dynamic fallback)
+# Preferred free models - queried serially with fallback
 PREFERRED_FREE_MODELS = [
+    "nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free",
+    "nvidia/nemotron-3-super-120b-a12b:free",
+    "nousresearch/hermes-3-llama-3.1-405b:free",
     "meta-llama/llama-3.3-70b-instruct:free",
 ]
 
@@ -91,8 +94,15 @@ def _parse_llm_json(content: str) -> Optional[dict]:
     return None
 
 
-def _query_openrouter_model(model: str, text: str, key: str) -> AgentResult:
-    """Query a single OpenRouter model. Uses curl subprocess as fallback for WSL DNS issues."""
+def _query_llm_provider(
+    provider: str,
+    url: str,
+    model: str,
+    text: str,
+    key: str,
+    timeout: int = 10,
+) -> AgentResult:
+    """Generic LLM query function with curl fallback for WSL DNS issues."""
     payload = json.dumps(
         {
             "model": model,
@@ -105,7 +115,7 @@ def _query_openrouter_model(model: str, text: str, key: str) -> AgentResult:
             ],
             "temperature": 0.1,
             "max_tokens": 500,
-            "stream": False,  # Force non-streaming response
+            "stream": False,
         }
     )
 
@@ -114,7 +124,7 @@ def _query_openrouter_model(model: str, text: str, key: str) -> AgentResult:
 
     try:
         req = urllib.request.Request(
-            OPENROUTER_URL,
+            url,
             data=payload.encode("utf-8"),
             headers={
                 "Authorization": f"Bearer {key}",
@@ -122,7 +132,7 @@ def _query_openrouter_model(model: str, text: str, key: str) -> AgentResult:
             },
             method="POST",
         )
-        with urllib.request.urlopen(req, timeout=8) as response:
+        with urllib.request.urlopen(req, timeout=timeout) as response:
             response_text = response.read().decode("utf-8")
     except Exception:
         # Fallback: use curl subprocess (works even when WSL urllib DNS fails)
@@ -134,10 +144,10 @@ def _query_openrouter_model(model: str, text: str, key: str) -> AgentResult:
                     "curl",
                     "-s",
                     "--max-time",
-                    "10",
+                    str(timeout + 2),
                     "-X",
                     "POST",
-                    OPENROUTER_URL,
+                    url,
                     "-H",
                     f"Authorization: Bearer {key}",
                     "-H",
@@ -147,13 +157,13 @@ def _query_openrouter_model(model: str, text: str, key: str) -> AgentResult:
                 ],
                 capture_output=True,
                 text=True,
-                timeout=12,
+                timeout=timeout + 4,
             )
             if result.returncode == 0 and result.stdout:
                 response_text = result.stdout
         except Exception as curl_err:
             return AgentResult(
-                agent="openrouter",
+                agent=provider,
                 model=model,
                 detected=False,
                 fallacy_type=None,
@@ -164,7 +174,7 @@ def _query_openrouter_model(model: str, text: str, key: str) -> AgentResult:
 
     if not response_text:
         return AgentResult(
-            agent="openrouter",
+            agent=provider,
             model=model,
             detected=False,
             fallacy_type=None,
@@ -177,7 +187,7 @@ def _query_openrouter_model(model: str, text: str, key: str) -> AgentResult:
         data = json.loads(response_text)
         if "error" in data:
             return AgentResult(
-                agent="openrouter",
+                agent=provider,
                 model=model,
                 detected=False,
                 fallacy_type=None,
@@ -186,11 +196,9 @@ def _query_openrouter_model(model: str, text: str, key: str) -> AgentResult:
                 error=str(data["error"])[:100],
             )
         message = data["choices"][0]["message"]
-        # Some reasoning models return null content - extract JSON from reasoning field
         content = message.get("content") or ""
         if not content:
             reasoning_text = message.get("reasoning") or ""
-            # Try to find JSON in the reasoning output
             json_match = re.search(
                 r'\{[^{}]*"detected"[^{}]*\}', reasoning_text, re.DOTALL
             )
@@ -198,7 +206,7 @@ def _query_openrouter_model(model: str, text: str, key: str) -> AgentResult:
                 content = json_match.group()
             else:
                 return AgentResult(
-                    agent="openrouter",
+                    agent=provider,
                     model=model,
                     detected=False,
                     fallacy_type=None,
@@ -209,7 +217,7 @@ def _query_openrouter_model(model: str, text: str, key: str) -> AgentResult:
         result = _parse_llm_json(content)
         if result:
             return AgentResult(
-                agent="openrouter",
+                agent=provider,
                 model=model,
                 detected=bool(result.get("detected", False)),
                 fallacy_type=result.get("fallacy_type"),
@@ -217,7 +225,7 @@ def _query_openrouter_model(model: str, text: str, key: str) -> AgentResult:
                 reasoning=result.get("reasoning", ""),
             )
         return AgentResult(
-            agent="openrouter",
+            agent=provider,
             model=model,
             detected=False,
             fallacy_type=None,
@@ -227,7 +235,7 @@ def _query_openrouter_model(model: str, text: str, key: str) -> AgentResult:
         )
     except Exception as e:
         return AgentResult(
-            agent="openrouter",
+            agent=provider,
             model=model,
             detected=False,
             fallacy_type=None,
@@ -235,6 +243,11 @@ def _query_openrouter_model(model: str, text: str, key: str) -> AgentResult:
             reasoning="",
             error=str(e)[:100],
         )
+
+
+def _query_openrouter_model(model: str, text: str, key: str) -> AgentResult:
+    """Query a single OpenRouter model."""
+    return _query_llm_provider("openrouter", OPENROUTER_URL, model, text, key)
 
 
 def _fetch_dynamic_free_models(key: str, limit: int = 6) -> list[str]:
@@ -258,7 +271,7 @@ def _fetch_dynamic_free_models(key: str, limit: int = 6) -> list[str]:
 
 
 def query_openrouter_concurrent(text: str) -> list[AgentResult]:
-    """Query all preferred free models serially. Falls back to dynamic list if all fail."""
+    """Query preferred free models with fallback. Returns first successful result."""
     key = _get_openrouter_key()
     if not key:
         return [
@@ -273,12 +286,14 @@ def query_openrouter_concurrent(text: str) -> list[AgentResult]:
             )
         ]
 
-    results: list[AgentResult] = []
     for model in PREFERRED_FREE_MODELS:
         result = _query_openrouter_model(model, text, key)
-        results.append(result)
+        # Return on success (no error) or if this is the last model
+        if not result.error or model == PREFERRED_FREE_MODELS[-1]:
+            return [result]
 
-    return results
+    # Should not reach here, but return last result
+    return [result]
 
 
 def query_groq(text: str) -> AgentResult:
@@ -294,96 +309,7 @@ def query_groq(text: str) -> AgentResult:
             reasoning="",
             error="GROQ_API_KEY not set",
         )
-
-    payload = json.dumps(
-        {
-            "model": "llama-3.1-8b-instant",
-            "messages": [
-                {"role": "system", "content": SYSTEM_PROMPT},
-                {
-                    "role": "user",
-                    "content": f"Analyze this statement for logical fallacies: {text}",
-                },
-            ],
-            "temperature": 0.1,
-            "max_tokens": 200,
-        }
-    )
-
-    try:
-        import subprocess
-
-        result = subprocess.run(
-            [
-                "curl",
-                "-s",
-                "--max-time",
-                "10",
-                "-X",
-                "POST",
-                GROQ_URL,
-                "-H",
-                f"Authorization: Bearer {key}",
-                "-H",
-                "Content-Type: application/json",
-                "-d",
-                payload,
-            ],
-            capture_output=True,
-            text=True,
-            timeout=12,
-        )
-        if result.returncode != 0 or not result.stdout:
-            return AgentResult(
-                agent="groq",
-                model="llama-3.1-8b-instant",
-                detected=False,
-                fallacy_type=None,
-                confidence=0.0,
-                reasoning="",
-                error=f"curl failed: {result.stderr[:80]}",
-            )
-        data = json.loads(result.stdout)
-        if "error" in data:
-            return AgentResult(
-                agent="groq",
-                model="llama-3.1-8b-instant",
-                detected=False,
-                fallacy_type=None,
-                confidence=0.0,
-                reasoning="",
-                error=str(data["error"])[:100],
-            )
-        content = data["choices"][0]["message"]["content"]
-        parsed = _parse_llm_json(content)
-        if parsed:
-            return AgentResult(
-                agent="groq",
-                model="llama-3.1-8b-instant",
-                detected=bool(parsed.get("detected", False)),
-                fallacy_type=parsed.get("fallacy_type"),
-                confidence=float(parsed.get("confidence", 0.0)),
-                reasoning=parsed.get("reasoning", ""),
-            )
-        return AgentResult(
-            agent="groq",
-            model="llama-3.1-8b-instant",
-            detected=False,
-            fallacy_type=None,
-            confidence=0.0,
-            reasoning="",
-            error="Could not parse JSON response",
-        )
-    except Exception as e:
-        return AgentResult(
-            agent="groq",
-            model="llama-3.1-8b-instant",
-            detected=False,
-            fallacy_type=None,
-            confidence=0.0,
-            reasoning="",
-            error=str(e)[:100],
-        )
+    return _query_llm_provider("groq", GROQ_URL, "llama-3.1-8b-instant", text, key)
 
 
 def query_deepinfra(text: str) -> AgentResult:
@@ -399,97 +325,13 @@ def query_deepinfra(text: str) -> AgentResult:
             reasoning="",
             error="DEEPINFRA_API_KEY not set",
         )
-
-    payload = json.dumps(
-        {
-            "model": "meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo",
-            "messages": [
-                {"role": "system", "content": SYSTEM_PROMPT},
-                {
-                    "role": "user",
-                    "content": f"Analyze this statement for logical fallacies: {text}",
-                },
-            ],
-            "temperature": 0.1,
-            "max_tokens": 200,
-            "stream": False,
-        }
+    return _query_llm_provider(
+        "deepinfra",
+        DEEPINFRA_URL,
+        "meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo",
+        text,
+        key,
     )
-
-    try:
-        import subprocess
-
-        result = subprocess.run(
-            [
-                "curl",
-                "-s",
-                "--max-time",
-                "10",
-                "-X",
-                "POST",
-                DEEPINFRA_URL,
-                "-H",
-                f"Authorization: Bearer {key}",
-                "-H",
-                "Content-Type: application/json",
-                "-d",
-                payload,
-            ],
-            capture_output=True,
-            text=True,
-            timeout=12,
-        )
-        if result.returncode != 0 or not result.stdout.strip():
-            return AgentResult(
-                agent="deepinfra",
-                model="meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo",
-                detected=False,
-                fallacy_type=None,
-                confidence=0.0,
-                reasoning="",
-                error=f"curl failed: {result.stderr[:80]}",
-            )
-        data = json.loads(result.stdout)
-        if "error" in data:
-            return AgentResult(
-                agent="deepinfra",
-                model="meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo",
-                detected=False,
-                fallacy_type=None,
-                confidence=0.0,
-                reasoning="",
-                error=str(data["error"])[:100],
-            )
-        content = data["choices"][0]["message"].get("content", "") or ""
-        parsed = _parse_llm_json(content)
-        if parsed:
-            return AgentResult(
-                agent="deepinfra",
-                model="meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo",
-                detected=bool(parsed.get("detected", False)),
-                fallacy_type=parsed.get("fallacy_type"),
-                confidence=float(parsed.get("confidence", 0.0)),
-                reasoning=parsed.get("reasoning", ""),
-            )
-        return AgentResult(
-            agent="deepinfra",
-            model="meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo",
-            detected=False,
-            fallacy_type=None,
-            confidence=0.0,
-            reasoning="",
-            error=f"Could not parse response: {content[:100]}",
-        )
-    except Exception as e:
-        return AgentResult(
-            agent="deepinfra",
-            model="meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo",
-            detected=False,
-            fallacy_type=None,
-            confidence=0.0,
-            reasoning="",
-            error=str(e)[:100],
-        )
 
 
 def compute_consensus(results: list[AgentResult]) -> dict:

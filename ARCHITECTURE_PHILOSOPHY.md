@@ -59,7 +59,7 @@ You cannot dance with math you cannot see. The visual layer is load-bearing.
 
 ### The Ecological Anchor
 
-A governance system that operates in abstraction from physical reality is a closed loop. Sovereign Mirror anchors to the planet: solar wind flux from NOAA, temperature anomaly from three ocean reference points measured against the pre-industrial 1850-1900 baseline. The ecological health index is not decorative. It is a quorum input. The system is aware of the world it governs within.
+A governance system that operates in abstraction from physical reality is a closed loop. Sovereign Mirror anchors to the planet: solar wind flux from NOAA, temperature anomaly from three ocean reference points measured against the pre-industrial 1850-1900 baseline. **Current status: both signals are telemetry only.** They drive the visualization (particle motion/color, ring degradation) and are displayed as `ecoHealth`, but neither is read by `calculateQuorum`, `veracityGate`, or any other gate function in `src/logic/` or `server/logic/kernel.js`. If a real quorum/veracity dependency on planetary signal is wanted, it needs to be added deliberately — including deciding how the system behaves when NOAA or Open-Meteo are unreachable, since a live external feed cannot be a silent input to a consensus mechanism without an explicit fallback policy. Until that's built, don't describe this as a quorum input.
 
 The baseline is bolted to the floor. The 1991-2020 WMO normal was a rolling foundation — the cart on casters. Pre-industrial is the anchor. The anomaly reads honestly from there: currently +2.85°C at weighted observation points, ecoHealth 52%. The structure knows what it is standing in.
 

@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Kylos ARC Training
  * Description: Training pillar overview and detail pages for Kylos ARC
- * Version: 2.5.2
+ * Version: 2.6.1
  * Author: Shan Simmons
  */
 
@@ -159,7 +159,7 @@ class Kylos_Training {
             $react_js = KYLOS_TRAINING_PATH . 'dist/assets/index.js';
             $react_css = KYLOS_TRAINING_PATH . 'dist/assets/index.css';
             if (file_exists($react_js)) {
-                wp_enqueue_script('kylos-training-app', KYLOS_TRAINING_URL . 'dist/assets/index.js', [], '2.5.2', true);
+                wp_enqueue_script('kylos-training-app', KYLOS_TRAINING_URL . 'dist/assets/index.js', [], '2.6.1', true);
                 $slug_to_pillar = [
                 'intellectual_veracity'     => '1',
                 'relational_integrity'      => '2',
@@ -190,7 +190,7 @@ class Kylos_Training {
             ]);
             }
             if (file_exists($react_css)) {
-                wp_enqueue_style('kylos-training-app', KYLOS_TRAINING_URL . 'dist/assets/index.css', [], '2.5.2');
+                wp_enqueue_style('kylos-training-app', KYLOS_TRAINING_URL . 'dist/assets/index.css', [], '2.6.1');
             }
         }
     }

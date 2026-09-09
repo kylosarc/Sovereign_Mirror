@@ -1,0 +1,104 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://sovereign-mirror.local/schemas/token-weights-matrix.v1.json",
+  "title": "SovereignMirrorTokenWeightsMatrix",
+  "description": "User-defined, cryptographically signed token and semantic weight matrix for the Epistemic Filter.",
+  "type": "object",
+  "required": [
+    "version",
+    "specAlignment",
+    "profileName",
+    "categories",
+    "operatorSignature"
+  ],
+  "properties": {
+    "version": {
+      "type": "string",
+      "pattern": "^1\\.[0-9]+\\.[0-9]+$"
+    },
+    "specAlignment": {
+      "type": "string",
+      "const": "Tropelex-Pillar2-ZeroDefault"
+    },
+    "profileName": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 64
+    },
+    "createdAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "categories": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "categoryId",
+          "defaultAction",
+          "tokens"
+        ],
+        "properties": {
+          "categoryId": {
+            "type": "string"
+          },
+          "defaultAction": {
+            "type": "string",
+            "enum": [
+              "FLAG_SEV_1",
+              "HALT_SEV_2",
+              "PASS"
+            ]
+          },
+          "tokens": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "pattern",
+                "weight"
+              ],
+              "properties": {
+                "pattern": {
+                  "type": "string"
+                },
+                "isRegex": {
+                  "type": "boolean",
+                  "default": false
+                },
+                "weight": {
+                  "type": "number",
+                  "minimum": 0.0,
+                  "maximum": 1.0
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "operatorSignature": {
+      "type": "object",
+      "required": [
+        "algorithm",
+        "publicKey",
+        "signature"
+      ],
+      "properties": {
+        "algorithm": {
+          "type": "string",
+          "enum": [
+            "Ed25519",
+            "HMAC-SHA256"
+          ]
+        },
+        "publicKey": {
+          "type": "string"
+        },
+        "signature": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

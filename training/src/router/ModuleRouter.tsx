@@ -15,10 +15,10 @@ const MODULE_META: Record<string, { short: string; full: string; live: boolean }
   '3': { short: 'ENV. STEWARDSHIP', full: 'Environmental Stewardship',live: true  },
   '4': { short: 'TECH. FLUENCY',    full: 'Technological Fluency',    live: true  },
   '5': { short: 'PHYSIO. OPTIM.',   full: 'Physiological Optimization',live: true  },
-  '6': { short: 'TEMPORAL DISC.',   full: 'Temporal Discipline',      live: false },
-  '7': { short: 'CREATIVE SYNTH.',  full: 'Creative Synthesis',       live: false },
-  '8': { short: 'COLLAB. GOV.',     full: 'Collaborative Governance', live: false },
-  '9': { short: 'FLOURISHING',      full: 'The Flourishing Metric',   live: false },
+  '6': { short: 'TEMPORAL DISC.',   full: 'Temporal Discipline',      live: true  },
+  '7': { short: 'CREATIVE SYNTH.',  full: 'Creative Synthesis',       live: true  },
+  '8': { short: 'COLLAB. GOV.',     full: 'Collaborative Governance', live: true  },
+  '9': { short: 'FLOURISHING',      full: 'The Flourishing Metric',   live: true  },
 };
 
 const moduleMap: Record<string, () => JSX.Element> = {

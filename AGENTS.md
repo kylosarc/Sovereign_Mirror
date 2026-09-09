@@ -1,240 +1,105 @@
-# Sovereign Mirror - Agent Guidelines
+# Sovereign Mirror — Agent Guidelines
 
-## 1. Think Before Coding
+## Process Rules
 
-**Don't assume. Don't hide confusion. Surface tradeoffs.**
-
-Before implementing:
-- State your assumptions explicitly. If uncertain, ask.
-- If multiple interpretations exist, present them - don't pick silently.
-- If a simpler approach exists, say so. Push back when warranted.
-- If something is unclear, stop. Name what's confusing. Ask.
-
-## 2. Simplicity First
-
-**Minimum code that solves the problem. Nothing speculative.**
-
-- No features beyond what was asked.
-- No abstractions for single-use code.
-- No "flexibility" or "configurability" that wasn't requested.
-- No error handling for impossible scenarios.
-- If you write 200 lines and it could be 50, rewrite it.
-
-Ask yourself: "Would a senior engineer say this is overcomplicated?" If yes, simplify.
-
-## 3. Surgical Changes
-
-**Touch only what you must. Clean up only your own mess.**
-
-When editing existing code:
-- Don't "improve" adjacent code, comments, or formatting.
-- Don't refactor things that aren't broken.
-- Match existing style, even if you'd do it differently.
-- If you notice unrelated dead code, mention it - don't delete it.
-
-When your changes create orphans:
-- Remove imports/variables/functions that YOUR changes made unused.
-- Don't remove pre-existing dead code unless asked.
-
-The test: Every changed line should trace directly to the user's request.
-
-## 4. Goal-Driven Execution
-
-**Define success criteria. Loop until verified.**
-
-Transform tasks into verifiable goals:
-- "Add validation" → "Write tests for invalid inputs, then make them pass"
-- "Fix the bug" → "Write a test that reproduces it, then make it pass"
-- "Refactor X" → "Ensure tests pass before and after"
-
-For multi-step tasks, state a brief plan:
-```
-1. [Step] → verify: [check]
-2. [Step] → verify: [check]
-3. [Step] → verify: [check]
-```
-
-Strong success criteria let you loop independently. Weak criteria ("make it work") require constant clarification.
-
----
-
-## Project Overview
-Distributed governance simulator built on Radical Veracity principles. Hybrid state: Jotai (atoms), Zustand (HUD), Redux (Ledger). Symbolic 3D visualization with golden threads and Sierpinski fractal morphing.
-
----
+- State assumptions explicitly; don't pick silently between interpretations.
+- Minimum code that solves the problem — no speculative abstractions.
+- Surgical changes only: don't "improve" adjacent code/comments/formatting. Remove only imports/vars your change orphaned.
+- For non-trivial work, state a numbered plan with a verification step per item.
 
 ## Build Commands
 
 ```bash
-# Development
-npm run dev              # Start Vite dev server
+npm run dev            # Vite dev server, port 3000 (proxies /api, /classify, /validate → localhost:3001)
+npm run build          # tsc typecheck + vite build
+npm run test           # vitest (watch mode)
+npm run test:run       # vitest single pass
+npm run test:coverage  # vitest + v8 coverage (covers src/logic/**/*.ts)
+npm run server         # Node server on port 3001 (server/index.js)
 
-# Production
-npm run build             # TypeScript check + Vite build
-npm run preview           # Preview production build
+# Single test file
+npx vitest run src/logic/pGate.test.ts
 
-# Server
-npm run server            # Run Node.js Express server (src/services/apiService.ts)
+# Server standalone
+cd server && node index.js
 ```
 
-**Single Test Command**: No test framework configured yet. Run manually via:
-```bash
-npx tsx src/logic/pGate.ts   # Test specific logic module
-```
+**No lint script is configured.** Python side uses `ruff` but there's no committed config/script — don't assume a lint command exists.
 
----
+## Architecture
 
-## Code Style Guidelines
+### Three-layer state (intentionally different libraries)
 
-### TypeScript
-- **Strict mode enabled** (`strict: true` in tsconfig.json)
-- No unused locals or parameters (`noUnusedLocals`, `noUnusedParameters`)
-- Use `interface` for object shapes, `type` for unions/primitives
-- Prefer explicit return types on exported functions
+| Layer | Library | Location | Purpose |
+|-------|---------|----------|---------|
+| Atoms | Jotai | `src/state/atoms/` | Per-node reactive state |
+| HUD | Zustand | `src/state/stores/` | Flux, noise, sunrise opacity |
+| Ledger | Redux | `src/state/ledger/` | Audit trail, veracity log |
 
-### Imports
-- External libs: `three`, `@react-three/fiber`, `@reduxjs/toolkit`, `jotai`, `zustand`
-- Internal: relative paths (`../../logic/types`)
-- No barrel re-exports unless explicitly needed
+- Zustand → Redux sync: `src/state/syncBridge/syncBridge.ts` (one-directional via `subscribe`)
+- `VeracityEnforcer` middleware throws if drift > 0.01 between Zustand/Redux
+- In `useFrame`, read Zustand via `getState()` — never through hooks
 
-### Naming Conventions
-- Components: PascalCase (`ResonanceTrajectory`, `SystemicSliders`)
-- Functions/Variables: camelCase (`calculateQuorum`, `nodeIds`)
-- Constants: SCREAMING_SNAKE_CASE (`GOLDEN_RATIO`, `MAX_NODES`)
-- Types/Interfaces: PascalCase (`NodeAtom`, `AuditEntry`)
+### Logic kernel (`src/logic/`)
 
-### Error Handling
-- Validate all math operations with `isFinite()` before assignment
-- Guard against NaN: `if (isNaN(matrix.elements[0])) continue`
-- Cap deltas: `Math.min(delta, 0.05)` to prevent huge jumps
-- Use `Math.min(value, 0.99)` to prevent singularities in lerp/slerp
+Five pure, side-effect-free gates. A mirror lives in `server/logic/kernel.js` — keep both in sync when changing math.
 
-### Three.js / R3F Specific
-- **InstancedMesh**: Always set `frustumCulled={false}` when instances move dynamically
-- **Geometry disposal**: Always dispose in useEffect cleanup
-- **useFrame**: Read Zustand state via `getState()` inside useFrame, not through hooks
-- **Matrix validation**: Check `isNaN()` before `mesh.setMatrixAt()`
+1. `veracityGate.ts` — `max(0, V_active - V_control)`
+2. `pGate.ts` — 7-cycle confirmation, quorum = `min(N, ceil(sqrt(N)) + 2)`
+3. `inverionDivide.ts` — remediation (NOT deletion) of deprecated nodes
+4. `abolitionOfPain.ts` — pain threshold enforcement
+5. `atrophyTimer.ts` — T_limit = 86,400,000ms (24h)
 
----
+Constants in `src/logic/types.ts`: `GOLDEN_RATIO`, `THRESHOLD_ENTROPY` (0.07), `CONFIRMATION_CYCLES` (7), `BASE_TICK_RATE` (400ms).
 
-## Project Architecture
+### Server (`server/index.js`)
 
-### State Layers
-| Layer | Library | Purpose |
-|-------|---------|---------|
-| Atoms | Jotai | Per-node reactive state |
-| HUD | Zustand | Flux, noise, sunrise opacity |
-| Ledger | Redux | Audit trail, veracity log |
+Plain Node `http.createServer` — **no Express** (despite `server/package.json` listing it; routes are manual `if (url.pathname === ...)` dispatch). Add new endpoints in the same style.
 
-### Sync Bridge
-- Zustand → Redux sync via `src/state/syncBridge/syncBridge.ts`
-- Use `subscribe` to reactively update Ledger
+Routes: `/api/health`, `/api/rtsw/latest`, `/api/pgate/engage`, `/api/veracity/calculate`, `/api/quorum/calculate`, `/api/atrophy/calculate`, `/api/kernel/version`, `/api/feedback*`.
 
-### Logic Kernel (`src/logic/`)
-Five mandatory gates that must remain pure:
-1. **veracityGate.ts** - `max(0, V_active - V_control)`
-2. **pGate.ts** - 7-cycle confirmation, quorum formula: `min(N, ceil(sqrt(N)) + 2)`
-3. **inverionDivide.ts** - Remediation (NOT deletion) of deprecated nodes
-4. **abolitionOfPain.ts** - Pain threshold enforcement
-5. **atrophyTimer.ts** - T_limit: 86,400,000ms (24h)
+`server/feedbackStore.js` persists agent confidence weights to SQLite (`better-sqlite3`). `applyVerdict` nudges weights ±0.1, clamped [0.1, 5.0].
 
-### Key Constants (from `src/logic/types.ts`)
-```typescript
-GOLDEN_RATIO = 0.618
-THRESHOLD_ENTROPY = 0.07  // ±7.0%
-ATROPHY_T_LIMIT = 86400000
-CONFIRMATION_CYCLES = 7
-BASE_TICK_RATE = 400ms
-```
+### Python simulation (`server/simulation/`)
 
----
+Mesa-based ABM (`model.py`, `agents.py`, `network.py`, `free_agents.py`). Fallacy classifier scores statements against `fallacy_data.json`. Bridge to JS ledger via `real_time_bridge.py`.
 
-## 3D Visualization (`ResonanceTrajectory.tsx`)
+**Gotcha**: Python venv deletion silently breaks systemd services (`free-agents`, `simulation-abm`, `roberta-classifier`). Check `venv/bin/python` exists first when debugging "works locally, broken on server".
 
-### Performance Limits
-- **MAX_NODES = 100** (instanced mesh count)
-- **Sierpinski depth ≤ 3** (depth=4+ crashes most browsers)
-- Geometry disposal required in useEffect cleanup
+### Training module (`training/`)
 
-### Flux System
-- Flux clamped at 0.95 to prevent lerp collapse
-- Morph factor: `clamp(smoothedFlux, 0, 1)`
-- Fractal appears when flux > 0.5
+Separate Vite app. Entry: `training/src/main.tsx`. Router: `training/src/router/ModuleRouter.tsx`. Modules: `training/src/modules/Module1.tsx` through `Module9.tsx`. Deployed at `kylosarc.com/training/` (WordPress plugin).
 
-### Stability Guards
-```typescript
-if (delta > 0.1 || !isFinite(delta)) return;
-if (!isFinite(morphFactor)) return;
-if (isNaN(dummy.matrix.elements[0])) continue;
-```
+Pillar 1 is live (wraps `CognoscentaeUltrans`). Pillars 2–9 are `ModuleStub` placeholders. Don't rename pillars or reorder without updating both `ModuleRouter.tsx` and the live WordPress site.
 
----
+Fallacy detection engines (`engines/FallacyDataset.ts`, `engines/FallacyMapEngine.ts`) are included in the root `tsconfig.json` and share `fallacy_data.json`.
 
-## File Structure
-```
-src/
-  components/
-    three/ResonanceTrajectory.tsx  # Main 3D canvas
-    ui/                            # React UI components
-    hud/VeracityLog.tsx            # HUD layer display
-  state/
-    stores/
-      nodeStore.ts    # Zustand: flux, nodeIds
-      hudStore.ts    # Zustand: noise, opacity
-    atoms/           # Jotai atoms
-    syncBridge/      # Zustand → Redux sync
-  logic/             # Pure functions (5 gates)
-  services/          # API service (client-side)
-server/
-  index.js           # Express server fallback
-```
+### 3D visualization
 
----
+- `src/components/three/ResonanceTrajectory.tsx` — main canvas. `MAX_NODES = 100`. Sierpinski depth ≤ 3 (≥4 crashes browsers).
+- `src/components/three/OrbitalRings.tsx` — 5-layer ring HUD, rings face camera.
+- Required guards: `isFinite()`/`isNaN()` before `setMatrixAt`, capped deltas (`Math.min(delta, 0.05)`), geometry disposal in `useEffect` cleanup, `frustumCulled={false}` on moving InstancedMesh.
 
-## Common Issues & Fixes
+### Cloudflare deployment
 
-### Crash on Flux Increase
-1. Reduce MAX_NODES to 100
-2. Lower Sierpinski depth to 2-3
-3. Add `frustumCulled={false}` to InstancedMesh
-4. Add NaN guard before setMatrixAt
+`functions/api/*.ts` are Cloudflare Pages Functions versions of gate endpoints. Keep aligned with `server/logic/kernel.js` if math changes.
 
-### Context Lost / GL_OUT_OF_MEMORY
-- Geometry not disposed - check useEffect cleanup
-- Too many instances - reduce MAX_NODES
-- Sierpinski depth too high - max depth=3
+## Testing
 
-### State Drift
-- VeracityEnforcer middleware throws if drift > 0.01
-- Use syncBridge to keep Zustand/Redux in sync
+- Vitest configured for `src/**/*.test.ts`, node environment, globals enabled
+- Coverage covers `src/logic/**/*.ts` (excludes `src/logic/types.ts`)
+- No integration test prerequisites — tests are pure unit tests
 
----
+## Key Constraints
 
-## Dependencies
-- **React 18.2**, **Three.js 0.160**, **@react-three/fiber 8.15**
-- **Zustand 4.5**, **Jotai 2.6**, **@reduxjs/toolkit 2.11**
-- **Tailwind 3.4**, **Vite 7.3**, **TypeScript 5.3**
+- TypeScript strict mode: `noUnusedLocals`, `noUnusedParameters`, `noFallthroughCasesInSwitch`
+- Path alias: `@/*` → `src/*`
+- `tsconfig.json` excludes `training/` from main build (training has its own `tsconfig.json`)
+- `.env` is gitignored (6 `.env` files untracked). See `ENVIRONMENT.md` for which keys are load-bearing.
 
----
+## Repo Hygiene
 
-## Session Log — June 2026
-
-### Active feature work
-- **Mobile responsiveness**: All dashboard panels now scroll independently. Ultrans is 1 column on mobile (was 3 with divider). `src/index.css` adds `.cui-wrapper`, `.cui-container`, `.cui-main` (column on mobile, row on desktop), `.left-panel` / `.right-panel` (each `flex: 1 1 0; min-height: 0; overflow-y: auto` with thin amber scrollbars). `Dashboard.tsx:102` changed `md:overflow-hidden` to `md:overflow-hidden overflow-y-auto` so the main scrolls on mobile.
-- **5-layer orbital rings**: `OrbitalRings.tsx` was rewritten. Rings now face the camera (no Z-axis flattening). Includes 5 thick rings (radii 0.8–3.85), 24/16/12/8/6 spokes per ring, 32 particles per ring drifting along the circumference, wireframe outer sphere, rotating reticle crosshair, pulse ring, glow ring. Kinetic particle opacity reduced 0.65 → 0.35 to keep rings visible.
-- **P-Gate Test API feedback**: `PGateButton.tsx` shows engagement result inline with `Target: 0.750 → Flux: X.XXX` and a `✓ Flux set to 0.75` / `✗ Flux mismatch` indicator.
-- **Cognoscentae Ultrans UI**: loading spinner + "ROUTING TO..." indicator during `analyzeInput`. Spectrograph shows weighted score + per-agent breakdown (groq, openrouter) with `✓` / `✗` verdict buttons. Fixed "Radical Veracity Passed" always-true string to read `lastBreakdown.weightedScore` directly.
-- **Rate limit**: `server/index.js` bumped from 100/min → 5000/min and changed `getRateLimitKey` to include `req.url` (per-path keying) so the ABM firehose on `/api/ledger/entry` no longer starves the user. Result: 0 429s in last 5 min (was hundreds).
-
-### Critical bugs fixed
-- **Empty statement log**: Caused by the rate-limit cascade. The ABM was flooding `/api/ledger/entry` at >100 req/min, burning the global token bucket. The browser's analyze request was 429ing, throwing inside the function arguments, and aborting before `setLastBreakdown` / `setStatementLog` ran. Per-path keying fixes it. Bundle `index-BiBnOqX2.js` includes `useEffect` diagnostics (`[TRAINING] lastBreakdown state changed`, `[TRAINING] statementLog state changed`) to confirm.
-- **Test API button "fails to set alpha 0.75"**: The P-Gate *was* engaging at 0.75 server-side, but the user had no visual confirmation. Now `PGateButton.tsx` shows the actual flux value after the request — green ✓ if `Math.abs(flux - 0.75) < 0.001`, red ✗ otherwise.
-
-### Security
-- Zero secrets in tracked files. `.env` gitignored (all 6 `.env` files untracked). Removed 13 tracked `*.pyc` + 1 tarball via `git rm --cached`. Expanded `.gitignore` for `.venv`, `__pycache__/`, `*.tar.gz`, SSH keys, deploy artifacts, CUDA binaries, SQL setup files with embedded DB passwords.
-
-### Git
-- Feature branch `feat/mobile-overflow-and-rings` (commit `f2f5641`) ready locally. Push to `origin/main` blocked — no GitHub credentials in the environment.
-
-### Open / next
-- Layer A: data foundation (per-user sessions table, fallacy corpus dedupe, rebuttal API). Item 8 (rebuttals) is essentially free — `fallacy_data.json` already has `explanation` + `response` fields, and `FallacyDataset.ts` has `loadFallacyDataset()` + `findMatchingFallacy()` ready. Just needs a UI call.
+- Root has large generated/backup artifacts (`backup/`, `*.tar.gz`, `dist/`, SSH keys) — don't treat them as source.
+- `kylos-qpadl/` is a git submodule (Rust, post-quantum signatures) — won't appear in this repo's commits.
+- `origin/master` and `main` were historically unrelated branches. `master` is superseded; don't merge it again.
+- `TOUCHPOINTS.md` is the attack-surface inventory for the crypto subsystem.

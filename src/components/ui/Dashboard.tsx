@@ -189,7 +189,7 @@ export function Dashboard() {
                     <span>COGNOSCENTAE ULTRANS</span>
                     <span className="text-[8px] opacity-50">PSYCHOLOGY</span>
                   </div>
-                  <a href="https://dist-alpha-topaz-27.vercel.app" target="_blank" rel="noopener noreferrer" style={{ color: 'rgba(255,183,0,0.6)', fontSize: '0.75rem', fontFamily: 'monospace', textDecoration: 'none' }}>
+                  <a href="https://kylosarc.com/training/intellectual_veracity/" target="_blank" rel="noopener noreferrer" style={{ color: 'rgba(255,183,0,0.6)', fontSize: '0.75rem', fontFamily: 'monospace', textDecoration: 'none' }}>
                     OPEN TRAINING MODULE →
                   </a>
                 </div>
