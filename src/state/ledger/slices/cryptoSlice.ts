@@ -14,18 +14,9 @@ interface CryptoState {
   error: string | null;
 }
 
-const DEFAULT_LAYERS: CryptoLayerStatus[] = [
-  { id: 'mayo1', level: 1, enabled: true, oqs_name: 'MAYO-1' },
-  { id: 'mayo3', level: 3, enabled: true, oqs_name: 'MAYO-3' },
-  { id: 'mayo5', level: 5, enabled: true, oqs_name: 'MAYO-5' },
-  { id: 'falcon512', level: 1, enabled: true, oqs_name: 'Falcon-512' },
-  { id: 'ml_dsa_65', level: 3, enabled: true, oqs_name: 'ML-DSA-65' },
-  { id: 'sphincs_256f', level: 5, enabled: true, oqs_name: 'SPHINCS+-SHA2-256f-simple' },
-];
-
 const initialState: CryptoState = {
-  layers: DEFAULT_LAYERS,
-  lastUpdated: Date.now(),
+  layers: [],
+  lastUpdated: 0,
   loading: false,
   error: null,
 };

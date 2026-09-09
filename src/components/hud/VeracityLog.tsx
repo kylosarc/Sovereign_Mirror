@@ -10,27 +10,19 @@ function formatTimestamp(ts: number): string {
 
 function VeracityEventRow({ event }: { event: VeracityEvent }) {
   const labels: Record<string, string> = {
-    VERACITY_CALCULATED: 'GATE_PASS',
-    VERACITY_GATE_CROSSED: 'GATE_INFO_DEMARCATE',
-    RESONANCE_SPIKE_DETECTED: 'GATE_HALT_EVAL',
-    ATROPHY_TRIGGERED: 'GATE_STATE_FREEZE',
-  };
-
-  const getTierColor = (score: number) => {
-    if (score >= 0.8) return 'text-healed-sage';
-    if (score >= 0.5) return 'text-solar-amber';
-    return 'text-veracity-gate-bypass';
+    VERACITY_CALCULATED: 'V_SCORE',
+    VERACITY_GATE_CROSSED: 'ZKPROOF_PASS',
+    RESONANCE_SPIKE_DETECTED: 'ENTROPY_SPIKE',
+    ATROPHY_TRIGGERED: 'DECAY_APPLIED',
   };
 
   return (
     <div className="grid grid-cols-12 gap-1 md:gap-2 text-on-surface-variant group hover:bg-white/5 p-0.5 md:p-1 transition-colors text-[9px] md:text-[11px]">
       <div className="col-span-3 font-data-mono truncate">{formatTimestamp(event.timestamp)}</div>
       <div className="col-span-2 font-data-mono text-ignition-white">#0x{event.nodeId.slice(0, 4)}</div>
-      <div className="col-span-5 font-data-mono truncate font-semibold text-white/90">
-        {labels[event.eventType] || event.eventType}
-      </div>
+      <div className="col-span-5 font-data-mono truncate">{labels[event.eventType] || event.eventType}</div>
       <div className="col-span-2 text-right font-data-mono">
-        <span className={getTierColor(event.veracityScore)}>V={event.veracityScore.toFixed(2)}</span>
+        <span className="text-solar-amber">V={event.veracityScore.toFixed(2)}</span>
       </div>
     </div>
   );
@@ -52,9 +44,7 @@ function PhysicalizationEventRow({ event }: { event: PhysicalizationEvent }) {
     <div className="grid grid-cols-12 gap-1 md:gap-2 text-on-surface-variant group hover:bg-white/5 p-0.5 md:p-1 transition-colors text-[9px] md:text-[11px]">
       <div className="col-span-3 font-data-mono truncate">{formatTimestamp(event.timestamp)}</div>
       <div className="col-span-2 font-data-mono text-ignition-white">#0x{event.nodeId.slice(0, 4)}</div>
-      <div className={`col-span-5 font-data-mono truncate ${isCrypto ? 'text-healed-sage font-bold' : ''}`}>
-        {labels[event.eventType] || event.eventType}
-      </div>
+      <div className={`col-span-5 font-data-mono truncate ${isCrypto ? 'text-healed-sage' : ''}`}>{labels[event.eventType] || event.eventType}</div>
       <div className="col-span-2 text-right font-data-mono">
         <span className={event.affirmingNodes >= event.quorumSize ? 'text-solar-amber' : 'text-veracity-gate-bypass'}>
           Q={event.affirmingNodes}/{event.quorumSize}
@@ -103,9 +93,9 @@ export function VeracityLog() {
       <div className="flex justify-between items-center mb-1 md:mb-2 shrink-0">
         <div className="flex items-center gap-1 md:gap-3">
           <span className="material-symbols-outlined text-solar-amber text-sm md:text-base">receipt_long</span>
-          <span className="font-data-mono text-[10px] md:text-sm text-ignition-white">BOUND_SESSION_LEDGER</span>
+          <span className="font-data-mono text-[10px] md:text-sm text-ignition-white">VERACITY_LEDGER</span>
         </div>
-        <span className="font-status-label text-[8px] md:text-[10px] text-on-surface-variant">SHA256_ACTIVE</span>
+        <span className="font-status-label text-[8px] md:text-[10px] text-on-surface-variant">LIVE_FEED</span>
       </div>
       <div className="flex-1 overflow-y-auto scrollbar-thin">
         {allEvents.length === 0 ? (
@@ -115,8 +105,8 @@ export function VeracityLog() {
             <div className="grid grid-cols-12 gap-1 md:gap-2 text-on-surface-variant/40 border-b border-ignition-white/5 pb-1 mb-1 md:mb-2 text-[9px] md:text-[10px] font-data-mono shrink-0">
               <div className="col-span-3">TIME</div>
               <div className="col-span-2">NODE</div>
-              <div className="col-span-5">GATE_SEV</div>
-              <div className="col-span-2 text-right">METRIC</div>
+              <div className="col-span-5">EVENT</div>
+              <div className="col-span-2 text-right">STATUS</div>
             </div>
             {allEvents.map((event, i) => {
               if (event._kind === 'veracity') {
