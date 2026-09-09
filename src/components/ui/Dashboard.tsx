@@ -7,7 +7,7 @@ import { EcologyMap } from './EcologyMap';
 import { VeracityLog } from '../hud/VeracityLog';
 import { CryptoStatusPanel } from './CryptoStatusPanel';
 
-type NavSection = 'analytics' | 'grain' | 'bolt' | 'architecture' | 'training' | 'crypto';
+type NavSection = 'analytics' | 'grain' | 'bolt' | 'architecture' | 'training';
 
 export function Dashboard() {
   const [activeSection, setActiveSection] = useState<NavSection>('analytics');
@@ -16,8 +16,6 @@ export function Dashboard() {
   const handleNavClick = (section: string) => {
     const sectionMap: Record<string, NavSection> = {
       'Systemic Parameters': 'analytics',
-      'QPADL Crypto': 'crypto',
-      'Crypto': 'crypto',
       'Trajectory Matrix': 'grain',
       'Flux Density': 'bolt',
       'Quantum Alignment': 'architecture',
@@ -33,7 +31,6 @@ export function Dashboard() {
 
   const navItems: { id: NavSection; icon: string; label: string; sectionKey: string }[] = [
     { id: 'analytics', icon: 'analytics', label: 'Parameters', sectionKey: 'Systemic Parameters' },
-    { id: 'crypto', icon: 'shield_lock', label: 'QPADL Crypto', sectionKey: 'QPADL Crypto' },
     { id: 'grain', icon: 'grain', label: 'Trajectory', sectionKey: 'Trajectory Matrix' },
     { id: 'bolt', icon: 'bolt', label: 'Flux', sectionKey: 'Flux Density' },
     { id: 'architecture', icon: 'architecture', label: 'Quantum', sectionKey: 'Quantum Alignment' },
@@ -160,15 +157,6 @@ export function Dashboard() {
                     </div>
                     <PGateButton nodeId="NODE_001" />
                   </div>
-
-                  <CryptoStatusPanel />
-                </>
-              )}
-
-              {activeSection === 'crypto' && (
-                <>
-                  <CryptoStatusPanel />
-                  <QuantumAlignmentPanel />
                 </>
               )}
 
