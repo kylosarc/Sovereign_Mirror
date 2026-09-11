@@ -1,37 +1,25 @@
-File: SYSTEM_LOGIC.md
+# Sovereign Mirror — Core System Logic
 
-Project Goal: Build 'The Sovereign Mirror' Evolution Simulator.
+## Pure Logic Kernel
 
-Core Logic Gates:
+The Sovereign Mirror execution model enforces deterministic state transitions with zero hidden side effects.
 
-1. Veracity Gate: Signal influence must be calculated as $V_{active} - V_{control}$. If $V_{control} > V_{active}$, the signal weight is 0.00.
+### Core Mathematical Rules
 
-2. Physicalization Gate (P-Gate): A boolean switch. isReadyToPhysicalize is true ONLY when NodeResonance > ProjectThreshold.
+1. **Veracity Calculus**:
+   $$V_{	ext{advance}} = \max(0, V_{	ext{active}} - V_{	ext{control}})$$
 
-3. The Inverion Divide: A reserved data-class for history revisionism protocols.
+2. **Quorum Consensus Requirement**:
+   $$	ext{Quorum}(N) = \lfloor \sqrt{N} floor + 2$$
+   $$	ext{Required Confirmation Cycles} = 7$$
 
-4. Abolition of Pain Protocol: A global constant that forces the system to prioritize projects that reduce SystemicFriction.
+3. **Inverion State Demarcation**:
+   - $V < 0.15$: `OBJECTIVE_REALITY` $ightarrow$ Pass.
+   - $0.15 \le V \le 0.60$: `TRANSITIONAL` $ightarrow$ Audit Log Only.
+   - $V > 0.60$: `SUBJECTIVE_NOISE` $ightarrow$ Prompt Sentinel Intercept.
 
-5. Atrophy Timer: A recursive function that decays VirtualResonance if not applied to a physicalized project within T_limit.
+4. **Harmonic Balance Constant**:
+   $$\Phi = rac{1 + \sqrt{5}}{2} pprox 1.6180339887 \implies 	ext{Golden Ratio Spacing } = 0.618$$
 
----
-
-## Session Log - June 2026
-
-### Core logic gates - verified pure
-All five gates (`veracityGate`, `pGate`, `inverionDivide`, `abolitionOfPain`, `atrophyTimer`) remain pure functions. No side effects, no state mutations. Validated in `src/logic/`.
-
-### Threshold re-tuning
-- `ROBERTA_THRESHOLD`: 0.50 → **0.60** (free-agent validation only triggered on stronger RoBERTa signals; reduces noise)
-- `WORD_COUNT_CAP`: 200 (free agents skipped on long statements)
-- `FALLACY_CRITICAL_THRESHOLD` unchanged at 0.15 (radical veracity pass/fail)
-
-### Adaptive weight logic (NEW in `server/feedbackStore.js`)
-- `applyVerdict(verdict, agentScores)`:
-  - `correct`: agents that voted `detected` get `+0.1` weight; agents that voted `not detected` get `-0.1`
-  - `incorrect`: reverse - agents that voted `not detected` get `+0.1`; agents that voted `detected` get `-0.1`
-- All weights clamped to `[0.1, 5.0]`
-- Stored in SQLite at `/opt/sovereign-mirror/data/feedback.db`, table `agent_weights` (PRIMARY KEY = agent name)
-
-### Cross-cluster considerations
-The atrophytimer and pGate logic remain cluster-portable. The `feedbackStore` is a per-node store today; in a multi-node federation, weights would be synchronized via the Ledger (every verdict and every analysis already gets logged).
+5. **Entropy Bound**:
+   $$\Delta_{	ext{entropy}} \le \pm 7.0\%$$

@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQ — Sovereign Mirror</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=JetBrains+Mono:wght@300;400;500;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <style>
+        :root {
+            --bg-base: #030712;
+            --bg-surface: #0b1329;
+            --bg-elevated: #111e3f;
+            --border-glow: rgba(217, 119, 6, 0.35);
+            --border-subtle: rgba(255, 255, 255, 0.08);
+            --gold-primary: #f59e0b;
+            --gold-light: #fbbf24;
+            --cyan-active: #06b6d4;
+            --cyan-glow: rgba(6, 182, 212, 0.4);
+            --red-fission: #f43f5e;
+            --orange-sync: #f97316;
+            --text-primary: #f8fafc;
+            --text-secondary: #94a3b8;
+            --text-muted: #64748b;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            background-color: var(--bg-base);
+            color: var(--text-primary);
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            background-image: 
+                radial-gradient(circle at 50% 0%, rgba(245, 158, 11, 0.08) 0%, transparent 60%),
+                radial-gradient(circle at 10% 40%, rgba(6, 182, 212, 0.05) 0%, transparent 40%);
+            min-height: 100vh;
+        }
+        header {
+            border-bottom: 1px solid var(--border-subtle);
+            background: rgba(11, 19, 41, 0.85);
+            backdrop-filter: blur(12px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            text-decoration: none;
+            color: inherit;
+        }
+        .brand-logo {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            border: 1px solid var(--gold-primary);
+            box-shadow: 0 0 10px var(--border-glow);
+        }
+        .brand-title {
+            font-family: 'Cinzel', serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            letter-spacing: 0.15em;
+            color: var(--gold-primary);
+        }
+        .brand-sub {
+            font-size: 0.7rem;
+            font-family: 'JetBrains Mono', monospace;
+            color: var(--cyan-active);
+            letter-spacing: 0.1em;
+        }
+        nav {
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
+        }
+        nav a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 500;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 0.35rem;
+        }
+        nav a:hover, nav a.active {
+            color: var(--gold-light);
+        }
+        .btn-portal {
+            background: linear-gradient(135deg, rgba(245, 158, 11, 0.15), rgba(245, 158, 11, 0.05));
+            border: 1px solid var(--gold-primary);
+            color: var(--gold-light) !important;
+            padding: 0.4rem 0.9rem;
+            border-radius: 6px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            box-shadow: 0 0 8px rgba(245, 158, 11, 0.2);
+        }
+        .btn-portal:hover {
+            background: var(--gold-primary);
+            color: #000 !important;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 2.5rem auto;
+            padding: 0 1.5rem;
+        }
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(245, 158, 11, 0.1);
+            border: 1px solid var(--border-glow);
+            padding: 0.35rem 0.75rem;
+            border-radius: 9999px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            color: var(--gold-light);
+            margin-bottom: 1rem;
+        }
+        h1 {
+            font-family: 'Cinzel', serif;
+            font-size: 2.5rem;
+            font-weight: 900;
+            letter-spacing: 0.05em;
+            color: #ffffff;
+            margin-bottom: 0.75rem;
+        }
+        .lead {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            max-width: 800px;
+            margin-bottom: 2rem;
+        }
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2.5rem;
+        }
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.25rem;
+            margin-bottom: 2.5rem;
+        }
+        .card {
+            background: var(--bg-surface);
+            border: 1px solid var(--border-subtle);
+            border-radius: 12px;
+            padding: 1.5rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+        .card:hover {
+            border-color: var(--border-glow);
+            transform: translateY(-2px);
+            box-shadow: 0 12px 24px -10px rgba(0,0,0,0.5), 0 0 15px rgba(245, 158, 11, 0.1);
+        }
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 3px;
+            height: 100%;
+            background: var(--gold-primary);
+            opacity: 0.7;
+        }
+        .card.cyan::before { background: var(--cyan-active); }
+        .card.red::before { background: var(--red-fission); }
+        .card.orange::before { background: var(--orange-sync); }
+        
+        .card h3 {
+            font-size: 1.15rem;
+            margin-bottom: 0.5rem;
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .card p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 0.75rem;
+        }
+        pre {
+            background: #020617;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            padding: 1rem;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            color: #e2e8f0;
+            overflow-x: auto;
+            margin: 1rem 0;
+        }
+        code {
+            font-family: 'JetBrains Mono', monospace;
+            color: var(--gold-light);
+            background: rgba(245, 158, 11, 0.1);
+            padding: 0.15rem 0.35rem;
+            border-radius: 4px;
+            font-size: 0.85em;
+        }
+        pre code {
+            background: transparent;
+            padding: 0;
+            color: inherit;
+        }
+        .tag {
+            display: inline-block;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.7rem;
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            background: rgba(255, 255, 255, 0.06);
+            color: var(--text-muted);
+            margin-right: 0.35rem;
+        }
+        .badge-cyan { background: rgba(6, 182, 212, 0.15); color: var(--cyan-active); border: 1px solid rgba(6, 182, 212, 0.3); }
+        .badge-gold { background: rgba(245, 158, 11, 0.15); color: var(--gold-light); border: 1px solid var(--border-glow); }
+        .badge-red { background: rgba(244, 63, 94, 0.15); color: var(--red-fission); border: 1px solid rgba(244, 63, 94, 0.3); }
+        footer {
+            border-top: 1px solid var(--border-subtle);
+            padding: 2.5rem 2rem;
+            text-align: center;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-top: 4rem;
+        }
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 1rem;
+        }
+        .footer-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        .footer-links a:hover { color: var(--gold-light); }
+    </style>
+    
+</head>
+<body>
+    <header>
+        <a href="index.html" class="brand">
+            <img src="images/sovereign-mirror-mesh.png" alt="Sovereign Mirror Logo" class="brand-logo" onerror="this.style.display='none'">
+            <div>
+                <div class="brand-title">SOVEREIGN MIRROR</div>
+                <div class="brand-sub">COGNOSCENTAE ULTRANS // RADICAL VERACITY</div>
+            </div>
+        </a>
+        <nav>
+            <a href="index.html">Overview</a>
+            <a href="getting-started.html">Getting Started</a>
+            <a href="api-reference.html">API Reference</a>
+            <a href="faq.html" class="active">FAQ</a>
+            <a href="http://178.156.135.222" target="_blank" class="btn-portal">Live Node (178.156.135.222)</a>
+        </nav>
+    </header>
+
+    <main class="container">
+        <div class="hero-badge">PHILOSOPHY & SYSTEM DYNAMICS</div>
+        <h1>Frequently Asked Questions</h1>
+        <p class="lead">Core concepts, architectural rationale, mathematical gates, post-quantum verification, and game-theoretic principles behind the Sovereign Mirror.</p>
+
+        <section style="margin-bottom: 3rem;">
+            <div class="card gold" style="margin-bottom: 1.5rem;">
+                <h3>What is the Sovereign Mirror in simple terms?</h3>
+                <p>The Sovereign Mirror is a live, real-time distributed digital governance simulation. In traditional systems, banks, platforms, and central authorities record and verify actions on your behalf, creating vulnerabilities to manipulation and censorship. In the Sovereign Mirror, sovereignty is mathematically distributed across every node in a golden-ratio toroidal mesh: decisions emerge from pure mathematical rules, not centralized human discretion.</p>
+            </div>
+
+            <div class="card cyan" style="margin-bottom: 1.5rem;">
+                <h3>What do the particle colors represent in the 3D visual canvas?</h3>
+                <p>Each glowing particle represents an active network node. The color indicates real-time consensus conditions:</p>
+                <ul style="margin-left: 1.5rem; color: var(--text-secondary); font-size: 0.9rem; line-height: 1.8;">
+                    <li><strong style="color: var(--cyan-active);">Cyan / Teal Glow:</strong> Active and healthy governance — nodes are submitting valid proofs and reaching consensus.</li>
+                    <li><strong style="color: var(--orange-sync);">Yellow / Orange:</strong> Synchronizing — nodes are coordinating P-Gate confirmation cycles toward quorum.</li>
+                    <li><strong style="color: var(--red-fission);">Red / White:</strong> High-stress state ("Dumbbell Fission") — network under elevated stress or entropy divergence.</li>
+                    <li><strong style="color: var(--text-muted);">Dim / Gray:</strong> Standby mode — network in a quiescent rest state.</li>
+                </ul>
+            </div>
+
+            <div class="card" style="margin-bottom: 1.5rem;">
+                <h3>How does the 15-second Governance Cycle work?</h3>
+                <p>Every ~15 seconds, the simulation transitions through four sequential phases:</p>
+                <ol style="margin-left: 1.5rem; color: var(--text-secondary); font-size: 0.9rem; line-height: 1.8;">
+                    <li><strong>01 ACTIVE:</strong> Normal voting, veracity calculation, and proposal ingestion.</li>
+                    <li><strong>02 SYNC:</strong> Peer coordination and P-Gate cycle accumulation.</li>
+                    <li><strong>03 FISSION:</strong> Stress-testing against adversarial payload bursts or game-theoretic defections.</li>
+                    <li><strong>04 STANDBY:</strong> Ledger consolidation and rest before cycling back to ACTIVE.</li>
+                </ol>
+            </div>
+
+            <div class="card orange" style="margin-bottom: 1.5rem;">
+                <h3>What is the Epistemic Filter and Zero-Default Token Weights Matrix?</h3>
+                <p>The Epistemic Filter enforces strict value-neutrality. Unlike systems with hardcoded moral assertions, the Sovereign Mirror initializes with <code>0.0</code> default linguistic weights at design time. Operators explicitly define mathematical token weights per session, ensuring semantic classification remains transparent, auditable, and non-prescriptive.</p>
+            </div>
+
+            <div class="card red" style="margin-bottom: 1.5rem;">
+                <h3>Why does the Inverion Divide "remediate rather than delete"?</h3>
+                <p>Deleting dissenting or deprecated nodes creates unverified historical gaps and introduces centralized administrative power. Under the Inverion Divide, deprecated nodes and rejected proposals are sequestered into an immutable, auditable state partition. This preserves complete historical provenance while removing malignant vectors from active consensus.</p>
+            </div>
+
+            <div class="card gold">
+                <h3>How is the Three-Tier Reactive State structured?</h3>
+                <p>The frontend coordinates three purpose-built state libraries to eliminate rendering bottlenecks:</p>
+                <ul style="margin-left: 1.5rem; color: var(--text-secondary); font-size: 0.9rem; line-height: 1.8;">
+                    <li><strong style="color:var(--cyan-active);">ATOMS (Jotai):</strong> High-frequency per-node state — pGate confirmation cycles, active timestamps, and coordinate vectors.</li>
+                    <li><strong style="color:var(--gold-light);">HUD (Zustand):</strong> Global dashboard telemetry — flux, noise filter, sunrise opacity, temperature, tick rate.</li>
+                    <li><strong style="color:var(--red-fission);">LEDGER (Redux Toolkit):</strong> Immutable audit trail — veracity logs and physicalization event queues.</li>
+                </ul>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-links">
+            <a href="index.html">Overview</a>
+            <a href="getting-started.html">Getting Started</a>
+            <a href="api-reference.html">API Reference</a>
+            <a href="faq.html">FAQ</a>
+            <a href="https://github.com/kylosarc/Sovereign_Mirror" target="_blank">GitHub</a>
+            <a href="http://178.156.135.222" target="_blank">Live Server</a>
+            <a href="https://kylosarc.com/sovereign-mirror" target="_blank">Project Portal</a>
+        </div>
+        <p>Kylos Arc // Cognoscentae Ultrans — Sovereign Mirror. Post-Darwinian Human Operating System.</p>
+    </footer>
+</body>
+</html>

@@ -156,7 +156,7 @@ without one.
 ### `FALLACY_PATTERNS` regex table (`training/src/engines/FallacyMapEngine.ts`) - uncertain provenance, documented honestly
 
 - **Identification**: entered the repo in a single commit (`5ec478f`,
-  2026-05-30, author `shansimmons-eng`), bundled into a broader feature
+  2026-05-30, author `kylosarc`), bundled into a broader feature
   commit ("Add Node Training section to Dashboard with CognoscentaeUltrans
   UI, create Agent-Based Simulation plan"). No separate import commit
   exists - unlike `fallacy_data.json`, there's no sign this was downloaded

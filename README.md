@@ -1,131 +1,168 @@
 # Sovereign Mirror
 
-A non-moral, procedural computing interface engineered to structurally isolate and safeguard human cognitive focus.
+<p align="center">
+  <a href="https://kylosarc.github.io/Sovereign_Mirror/"><img src="https://img.shields.io/badge/Docs-Full%20Guide-7c3aed?style=for-the-badge&logo=bookstack&logoColor=white" alt="Docs"/></a>
+  <a href="api-reference.html"><img src="https://img.shields.io/badge/API-Reference-0284c7?style=for-the-badge&logo=fastapi&logoColor=white" alt="API Reference"/></a>
+  <a href="getting-started.html"><img src="https://img.shields.io/badge/Getting%20Started-Guide-059669?style=for-the-badge&logo=rocket&logoColor=white" alt="Getting Started"/></a>
+  <a href="faq.html"><img src="https://img.shields.io/badge/FAQ-Reference-d97706?style=for-the-badge&logo=help-circle&logoColor=white" alt="FAQ"/></a>
+</p>
+
+<p align="center">
+  <img src="https://img.shields.io/badge/React-18.2-61DAFB?style=flat-square&logo=react&logoColor=black" alt="React 18.2"/>
+  <img src="https://img.shields.io/badge/TypeScript-5.3-3178C6?style=flat-square&logo=typescript&logoColor=white" alt="TypeScript 5.3"/>
+  <img src="https://img.shields.io/badge/Three.js-0.160-000000?style=flat-square&logo=threedotjs&logoColor=white" alt="Three.js"/>
+  <img src="https://img.shields.io/badge/R3F-8.15-white?style=flat-square&logo=three.js&logoColor=black" alt="R3F 8.15"/>
+  <img src="https://img.shields.io/badge/TailwindCSS-3.4-38B2AC?style=flat-square&logo=tailwind-css&logoColor=white" alt="Tailwind CSS 3.4"/>
+  <img src="https://img.shields.io/badge/Vite-6.4-646CFF?style=flat-square&logo=vite&logoColor=white" alt="Vite 6.4"/>
+  <img src="https://img.shields.io/badge/PQC-Kyber%20%7C%20Dilithium%20%7C%20MAYO--1-059669?style=flat-square" alt="Post Quantum Crypto"/>
+  <img src="https://img.shields.io/badge/State-Jotai%20%7C%20Zustand%20%7C%20Redux-purple?style=flat-square" alt="Hybrid State"/>
+</p>
 
 ---
 
-## Thesis & Architecture Specification
+<p align="center">
+  <img src="images/sovereign-mirror-mesh.png" alt="Sovereign Mirror Golden-Ratio Toroidal Mesh Core" width="540" />
+</p>
 
-The Sovereign Mirror does not possess, simulate, or exercise moral judgment, nor does it claim unconditioned semantic neutrality. Recognizing that semantic classification is inherently probabilistic rather than absolute, the system functions as a transparent, graded bounding box: executing localized filters, post-quantum cryptographic verification, and real-time gate severities to insulate human agency from known, catalogued vectors of telemetry exploitation and information manipulation.
-
-For full architectural blueprints, see:
-- [ARCHITECTURE.md](file:///home/retroporter/cup/ARCHITECTURE.md) | Comprehensive 4-Pillar Specification
-- [SAFETY.md](file:///home/retroporter/cup/SAFETY.md) | Tropelex Gate Policy and Safety Convergence
-- [token-weights-matrix.schema.json](file:///home/retroporter/cup/token-weights-matrix.schema.json) | Operator Token Matrix JSON Validation Schema
-
----
-
-## The 4 Core Pillars
-
-```
-┌─────────────────────────────────────────────────────────────────────────┐
-│ 1. Catalogued Focus-Isolation (Known-Pattern Proxy Interception)        │
-│    • Deterministic signature database targeting explicit telemetry.     │
-│    • Uncatalogued vectors bypass initial database (Scope Boundary).     │
-├─────────────────────────────────────────────────────────────────────────┤
-│ 2. The Epistemic Filter (Information Demarcation)                       │
-│    • Value-Neutral: Strips structural noise automatically.              │
-│    • Zero-Default: 0.0 default linguistic weights at design time.       │
-├─────────────────────────────────────────────────────────────────────────┤
-│ 3. Decoupled Gate Severities (Tropelex Alignment)                       │
-│    • Tiered procedural constraints (GATE_PASS to GATE_STATE_FREEZE).    │
-│    • Non-moralized runtime execution exceptions.                        │
-├─────────────────────────────────────────────────────────────────────────┤
-│ 4. Bound Policy Architecture (Tamper-Evident Session Tracking)          │
-│    • Execution pre-authorized by operator private key signature.        │
-│    • Append-only SHA-256 forward-linked session ledger.                 │
-└─────────────────────────────────────────────────────────────────────────┘
-```
+> [!NOTE]
+> **KYLOS ARC // COGNOSCENTAE ULTRANS — SOVEREIGN MIRROR**  
+> A distributed governance simulator built on **Radical Veracity** — visualizing veracity scores, P-Gate confirmations, and node physicalization in real time.
+>
+> 🌐 **Live Demo Node**: [http://178.156.135.222](http://178.156.135.222)  
+> 🔗 **Project Portal**: [kylosarc.com/sovereign-mirror](https://kylosarc.com/sovereign-mirror)  
+> 📦 **GitHub Repository**: [github.com/kylosarc/Sovereign_Mirror](https://github.com/kylosarc/Sovereign_Mirror)
 
 ---
 
-## Live Post-Quantum Cryptographic Architecture (QPADL)
+## What Is the Sovereign Mirror?
 
-Sovereign Mirror integrates a live, hardware-accelerated Post-Quantum Cryptographic (PQC) engine built on `liboqs` (`kylos-crypto-server`). The cryptographic layer is structured as a three-family arch system, ensuring that if any single mathematical family suffers an algorithmic break, the remaining arches redistribute the load and hold without collapsing the security vault.
+A **sovereign** is a person or entity that holds supreme, ultimate authority. Kylos Arc asserts that every person — every node — has an inherent right to sovereignty without exception.
 
-```
-                  ┌───────────────────────────────┐
-                  │    POST-QUANTUM CRYPTO VAULT  │
-                  └───────────────┬───────────────┘
-                                  │
-         ┌────────────────────────┼────────────────────────┐
-         │                        │                        │
-         ▼                        ▼                        ▼
-┌───────────────────┐  ┌────────────────────┐  ┌───────────────────────┐
-│  MQ SIGNATURES    │  │   LATTICE-BASED    │  │      HASH-BASED       │
-│  (Multivariate)   │  │  (Module Lattices) │  │  (State-Free Trees)   │
-├───────────────────┤  ├────────────────────┤  ├───────────────────────┤
-│ • MAYO-1 (L1)     │  │ • Falcon-512 (L1)  │  │ • SPHINCS+-256f (L5)  │
-│ • MAYO-3 (L3)     │  │ • ML-DSA-65  (L3)  │  │   (Hash Anchor)       │
-│ • MAYO-5 (L5)     │  │   (Primary Lattice)│  │                       │
-└───────────────────┘  └────────────────────┘  └───────────────────────┘
-```
+The **Sovereign Mirror** is a living, animated dashboard and simulation of a digital governance system with **no centralized control**. Sovereignty is distributed across every node in the network via a golden-ratio (`0.618`) toroidal mesh pattern that preserves dynamic equilibrium.
 
-### Supported Algorithm Families
+In plain terms: **Imagine a town hall where everyone votes simultaneously, the vote is tallied automatically by pure mathematics, and no single entity can manipulate the outcome.**
 
-1. **Multivariate Quadratic (MQ) Signatures (`MAYO-1`, `MAYO-3`, `MAYO-5`)**:
-   - **Role**: Ultra-fast signature verification for high-frequency telemetry demarcation and runtime gate verification.
-   - **NIST Security Levels**: Level 1 (MAYO-1), Level 3 (MAYO-3), Level 5 (MAYO-5).
+---
 
-2. **Lattice-Based Signatures (`ML-DSA-65`, `Falcon-512`)**:
-   - **Role**: Primary lattice infrastructure for policy signing, operator authorization, and state transitions.
-   - **NIST Security Levels**: Level 1 (Falcon-512), Level 3 (ML-DSA-65, NIST FIPS 204 standard).
+## Visualizing the Network: Particle States
 
-3. **Hash-Based Signatures (`SPHINCS+-SHA2-256f-simple`)**:
-   - **Role**: Stateful and state-free hash anchor providing fallback security independent of lattice or algebraic assumptions.
-   - **NIST Security Levels**: Level 5 (Maximum security category).
+Each particle on the 3D canvas represents an active node in the distributed governance mesh. Color reveals real-time consensus conditions:
 
-### Cryptographic Server Daemon & Live Endpoints
-
-The trusted backend kernel manages `kylos-crypto-server` as a persistent, supervised child process communicating over JSON-RPC:
-
-| HTTP Method | Path | Description |
+| Particle Glow | State | Description |
 | :--- | :--- | :--- |
-| `GET` | `/api/crypto/status` | Reports active algorithm layers, NIST security levels, and daemon health. |
-| `POST` | `/api/crypto/keypair` | Generates a new post-quantum public/private keypair for any supported algorithm. |
-| `POST` | `/api/crypto/sign` | Cryptographically signs a message payload using the operator's secret key. |
-| `POST` | `/api/crypto/verify` | Verifies the signature authenticity against the provided public key. |
+| 🔵 **Cyan / Teal Glow** | **Active** | Healthy governance — nodes are voting and reaching mathematical consensus. |
+| 🟠 **Yellow / Orange** | **Sync** | The network is coordinating — nodes are synchronizing P-Gate validation cycles. |
+| 🔴 **Red / White** | **Dumbbell Fission** | High-stress state — the network is undergoing entropy divergence or adversarial pressure. |
+| ⚪ **Dim / Gray** | **Standby** | Dormant mode — the system is at rest, awaiting ingress proposals. |
 
-### In-Browser HUD Harness
+### The 15-Second Simulation Loop
 
-Operators can inspect and test the live cryptography directly within the Sovereign Mirror interface:
-- **Parameters View**: The `QPADL CRYPTO` panel is embedded in the primary dashboard, displaying live green status indicators for all 6 active algorithms.
-- **Dedicated Navigation**: Select `QPADL Crypto` in the sidebar to open the dedicated cryptographic operations panel.
-- **Real-Time Signature Harness**: Select any algorithm and click `Test Key & Sign` to generate keys and execute live signing benchmarks directly against the running daemon.
+Every 15 seconds, the system cycles through four governance stages:
+`01 ACTIVE` ➔ `02 SYNC` ➔ `03 FISSION` ➔ `04 STANDBY` ➔ cycles back to `01 ACTIVE`.
 
 ---
 
-## Quick Start
+## The Five Mandatory Logic Gates
+
+Every governance decision in Sovereign Mirror passes through five pure functions (zero side effects, zero hidden state):
+
+```
+┌─────────────────────────────────────────────────────────────────────────────┐
+│ 1. Veracity Gate:       max(0, V_active - V_control)                        │
+│    • Only net-positive truth advances the system.                           │
+├─────────────────────────────────────────────────────────────────────────────┤
+│ 2. P-Gate:              7-cycle confirmation · Quorum = √N + 2              │
+│    • Requires broad multi-cycle consensus before physicalization.           │
+├─────────────────────────────────────────────────────────────────────────────┤
+│ 3. Inverion Divide:     Remediate, not delete                               │
+│    • Deprecated nodes are preserved in an auditable historical state.       │
+├─────────────────────────────────────────────────────────────────────────────┤
+│ 4. Abolition of Pain:   pain ≥ threshold → Triggered                        │
+│    • Enforces an inviolable pain-free operating floor for every node.       │
+├─────────────────────────────────────────────────────────────────────────────┤
+│ 5. Atrophy Timer:       T_limit = 86,400,000 ms (24h)                       │
+│    • Inactive nodes are automatically flagged for peer review.              │
+└─────────────────────────────────────────────────────────────────────────────┘
+```
+
+---
+
+## Radical Veracity & Post-Quantum Cryptographic Verification
+
+The Sovereign Mirror utilizes a mathematical, value-neutral architecture to verify state authenticity and isolate focus:
+
+- **Epistemic Demarcation**: Operates on a zero-default token weights matrix (`token-weights-matrix.schema.json`), avoiding prescriptive moral bias.
+- **Post-Quantum Cryptography (PQC)**: Kyber-768, Dilithium, and MAYO-1 asymmetric signature exchange for quantum-resistant node authorization.
+- **Tamper-Evident Ledger**: Append-only SHA-256 forward-linked session ledger ensuring complete provenance and non-repudiation.
+
+### Inverion State Thresholds
+
+- `< 0.15` — **`OBJECTIVE_REALITY`**: Verified pass.
+- `0.15 – 0.60` — **`TRANSITIONAL`**: Subjective or ungrounded; logged to audit trail.
+- `≥ 0.60` — **`SUBJECTIVE_NOISE`**: High variance/noise; prompt is intercepted for operator remediation.
+
+---
+
+## Hybrid Three-Tier State Architecture
+
+To sustain 60 FPS in Three.js alongside high-frequency consensus transactions, the state layer is decoupled into three dedicated tiers:
+
+```
+                  ┌─────────────────────────────────────────┐
+                  │          SOVEREIGN MIRROR HUD           │
+                  └────────────────────┬────────────────────┘
+                                       │
+        ┌──────────────────────────────┼──────────────────────────────┐
+        ▼                              ▼                              ▼
+ ┌──────────────┐               ┌──────────────┐               ┌──────────────┐
+ │ ATOMS (Jotai)│               │ HUD (Zustand)│               │LEDGER (Redux)│
+ ├──────────────┤               ├──────────────┤               ├──────────────┤
+ │ Per-node     │               │ Global HUD   │               │ Immutable    │
+ │ reactive     │               │ telemetry    │               │ audit trail  │
+ │ state (pGate │               │ (flux, noise │               │ (veracity log│
+ │ cycles, pos) │               │ temp, tick)  │               │ & events)    │
+ └──────────────┘               └──────────────┘               └──────────────┘
+```
+
+---
+
+## Real-Time NOAA Solar Wind Integration
+
+Real-time space weather data from the **NOAA Space Weather Prediction Center** (SWPC) feeds directly into the simulation kernel, driving particle velocity, plasma density, and chromatic perturbation in the 3D canvas based on solar wind flux.
+
+---
+
+## Key Mathematical Constants
+
+| Constant | Value | Role |
+| :--- | :--- | :--- |
+| `GOLDEN_RATIO` | `0.6180339887` | Toroidal mesh node spacing and harmonic distribution |
+| `CONFIRMATION_CYCLES` | `7` | Required consecutive P-Gate cycles for state physicalization |
+| `BASE_TICK_RATE` | `400ms` | Baseline network heartbeat frequency |
+| `MAX_NODES` | `100` | Baseline local simulation node capacity |
+| `THRESHOLD_ENTROPY` | `±7.0%` | Maximum allowable variance before triggering Inverion divide |
+
+---
+
+## Quickstart
 
 ```bash
+# Clone repository
+git clone https://github.com/kylosarc/Sovereign_Mirror.git
+cd Sovereign_Mirror
+
 # Install dependencies
 npm install
+pip install -r requirements.txt
 
-# Start development server
+# Start local dev server
 npm run dev
-
-# Build for production
-npm run build
-
-# Start trusted kernel server
-npm run server
 ```
 
----
-
-## Tropelex Gate Severity Hierarchy
-
-| Gate Level | Identifier | System Action | Operator Surface |
-| :--- | :--- | :--- | :--- |
-| **Tier 0** | `GATE_PASS` | Unimpeded execution | Silent stream pass |
-| **Tier 1** | `GATE_INFO_DEMARCATE` | Non-informational syntax strip | Structural diff badge |
-| **Tier 2** | `GATE_HALT_EVAL` | Execution paused on token match | Operator inspection prompt |
-| **Tier 3** | `GATE_STATE_FREEZE` | Unsigned policy mutation blocked | Cryptographic signature prompt |
+Visit `http://localhost:5173` to explore the live dashboard.
 
 ---
 
-## Links & Ecosystem
+## License & Governance
 
-- [KylosArc.com](https://kylosarc.com) | Project Home
-- [Tropelex Convergence](file:///home/retroporter/cup/SAFETY.md) | Shared Gate Severity Architecture
-- [Post-Quantum Attack Surface](file:///home/retroporter/cup/TOUCHPOINTS.md) | Crypto Subsystem Inventory
+Licensed under the MIT License. Developed by **Kylos Arc // Cognoscentae Ultrans**.

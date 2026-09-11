@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Reference — Sovereign Mirror</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=JetBrains+Mono:wght@300;400;500;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <style>
+        :root {
+            --bg-base: #030712;
+            --bg-surface: #0b1329;
+            --bg-elevated: #111e3f;
+            --border-glow: rgba(217, 119, 6, 0.35);
+            --border-subtle: rgba(255, 255, 255, 0.08);
+            --gold-primary: #f59e0b;
+            --gold-light: #fbbf24;
+            --cyan-active: #06b6d4;
+            --cyan-glow: rgba(6, 182, 212, 0.4);
+            --red-fission: #f43f5e;
+            --orange-sync: #f97316;
+            --text-primary: #f8fafc;
+            --text-secondary: #94a3b8;
+            --text-muted: #64748b;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            background-color: var(--bg-base);
+            color: var(--text-primary);
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            background-image: 
+                radial-gradient(circle at 50% 0%, rgba(245, 158, 11, 0.08) 0%, transparent 60%),
+                radial-gradient(circle at 10% 40%, rgba(6, 182, 212, 0.05) 0%, transparent 40%);
+            min-height: 100vh;
+        }
+        header {
+            border-bottom: 1px solid var(--border-subtle);
+            background: rgba(11, 19, 41, 0.85);
+            backdrop-filter: blur(12px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            text-decoration: none;
+            color: inherit;
+        }
+        .brand-logo {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            border: 1px solid var(--gold-primary);
+            box-shadow: 0 0 10px var(--border-glow);
+        }
+        .brand-title {
+            font-family: 'Cinzel', serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            letter-spacing: 0.15em;
+            color: var(--gold-primary);
+        }
+        .brand-sub {
+            font-size: 0.7rem;
+            font-family: 'JetBrains Mono', monospace;
+            color: var(--cyan-active);
+            letter-spacing: 0.1em;
+        }
+        nav {
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
+        }
+        nav a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 500;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 0.35rem;
+        }
+        nav a:hover, nav a.active {
+            color: var(--gold-light);
+        }
+        .btn-portal {
+            background: linear-gradient(135deg, rgba(245, 158, 11, 0.15), rgba(245, 158, 11, 0.05));
+            border: 1px solid var(--gold-primary);
+            color: var(--gold-light) !important;
+            padding: 0.4rem 0.9rem;
+            border-radius: 6px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            box-shadow: 0 0 8px rgba(245, 158, 11, 0.2);
+        }
+        .btn-portal:hover {
+            background: var(--gold-primary);
+            color: #000 !important;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 2.5rem auto;
+            padding: 0 1.5rem;
+        }
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(245, 158, 11, 0.1);
+            border: 1px solid var(--border-glow);
+            padding: 0.35rem 0.75rem;
+            border-radius: 9999px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            color: var(--gold-light);
+            margin-bottom: 1rem;
+        }
+        h1 {
+            font-family: 'Cinzel', serif;
+            font-size: 2.5rem;
+            font-weight: 900;
+            letter-spacing: 0.05em;
+            color: #ffffff;
+            margin-bottom: 0.75rem;
+        }
+        .lead {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            max-width: 800px;
+            margin-bottom: 2rem;
+        }
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2.5rem;
+        }
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.25rem;
+            margin-bottom: 2.5rem;
+        }
+        .card {
+            background: var(--bg-surface);
+            border: 1px solid var(--border-subtle);
+            border-radius: 12px;
+            padding: 1.5rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+        .card:hover {
+            border-color: var(--border-glow);
+            transform: translateY(-2px);
+            box-shadow: 0 12px 24px -10px rgba(0,0,0,0.5), 0 0 15px rgba(245, 158, 11, 0.1);
+        }
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 3px;
+            height: 100%;
+            background: var(--gold-primary);
+            opacity: 0.7;
+        }
+        .card.cyan::before { background: var(--cyan-active); }
+        .card.red::before { background: var(--red-fission); }
+        .card.orange::before { background: var(--orange-sync); }
+        
+        .card h3 {
+            font-size: 1.15rem;
+            margin-bottom: 0.5rem;
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .card p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 0.75rem;
+        }
+        pre {
+            background: #020617;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            padding: 1rem;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            color: #e2e8f0;
+            overflow-x: auto;
+            margin: 1rem 0;
+        }
+        code {
+            font-family: 'JetBrains Mono', monospace;
+            color: var(--gold-light);
+            background: rgba(245, 158, 11, 0.1);
+            padding: 0.15rem 0.35rem;
+            border-radius: 4px;
+            font-size: 0.85em;
+        }
+        pre code {
+            background: transparent;
+            padding: 0;
+            color: inherit;
+        }
+        .tag {
+            display: inline-block;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.7rem;
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            background: rgba(255, 255, 255, 0.06);
+            color: var(--text-muted);
+            margin-right: 0.35rem;
+        }
+        .badge-cyan { background: rgba(6, 182, 212, 0.15); color: var(--cyan-active); border: 1px solid rgba(6, 182, 212, 0.3); }
+        .badge-gold { background: rgba(245, 158, 11, 0.15); color: var(--gold-light); border: 1px solid var(--border-glow); }
+        .badge-red { background: rgba(244, 63, 94, 0.15); color: var(--red-fission); border: 1px solid rgba(244, 63, 94, 0.3); }
+        footer {
+            border-top: 1px solid var(--border-subtle);
+            padding: 2.5rem 2rem;
+            text-align: center;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-top: 4rem;
+        }
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 1rem;
+        }
+        .footer-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        .footer-links a:hover { color: var(--gold-light); }
+    </style>
+    
+</head>
+<body>
+    <header>
+        <a href="index.html" class="brand">
+            <img src="images/sovereign-mirror-mesh.png" alt="Sovereign Mirror Logo" class="brand-logo" onerror="this.style.display='none'">
+            <div>
+                <div class="brand-title">SOVEREIGN MIRROR</div>
+                <div class="brand-sub">COGNOSCENTAE ULTRANS // RADICAL VERACITY</div>
+            </div>
+        </a>
+        <nav>
+            <a href="index.html">Overview</a>
+            <a href="getting-started.html">Getting Started</a>
+            <a href="api-reference.html" class="active">API Reference</a>
+            <a href="faq.html">FAQ</a>
+            <a href="http://178.156.135.222" target="_blank" class="btn-portal">Live Node (178.156.135.222)</a>
+        </nav>
+    </header>
+
+    <main class="container">
+        <div class="hero-badge">SYSTEM PROTOCOLS & GATE CONTRACTS</div>
+        <h1>Sovereign Mirror API Specification</h1>
+        <p class="lead">Mathematical formalisms, pure-function gate interfaces, post-quantum cryptographic primitives, and simulation state telemetry contracts.</p>
+
+        <!-- Five Logic Gates -->
+        <section style="margin-bottom: 3.5rem;">
+            <h2 style="font-family:'Cinzel',serif; font-size:1.6rem; color:#fff; margin-bottom: 1.25rem;">The Five Mandatory Logic Gates</h2>
+            <div class="grid-2">
+                <div class="card gold">
+                    <span class="tag badge-gold">GATE 01</span>
+                    <h3>Veracity Gate</h3>
+                    <p>Enforces net-positive truth advancement. Evaluates linguistic and mathematical veracity against control vectors.</p>
+                    <pre><code>V_advance = max(0, V_active - V_control)
+
+# Evaluation Rule:
+if V_advance &lt;= 0:
+    REJECT(GATE_FAIL_ZERO_ADVANCE)</code></pre>
+                </div>
+
+                <div class="card cyan">
+                    <span class="tag badge-cyan">GATE 02</span>
+                    <h3>P-Gate (Physicalization Confirmation)</h3>
+                    <p>Enforces multi-cycle network consensus before any governance action is physicalized to state.</p>
+                    <pre><code>Quorum = floor(sqrt(N)) + 2
+Confirmation_Cycles = 7
+
+# State Transition:
+if cycles &gt;= 7 and votes &gt;= Quorum:
+    TRANSITION_TO(PHYSICALIZED)</code></pre>
+                </div>
+
+                <div class="card orange">
+                    <span class="tag badge-orange">GATE 03</span>
+                    <h3>Inverion Divide</h3>
+                    <p>Remediation architecture over deletion. Deprecated nodes and dissenting proposals are sealed into an auditable historical partition.</p>
+                    <pre><code>Inverion_State:
+  &lt; 0.15      -&gt; OBJECTIVE_REALITY (Pass)
+  0.15 - 0.60 -&gt; TRANSITIONAL (Log only)
+  &gt;= 0.60     -&gt; SUBJECTIVE_NOISE (Intercept)</code></pre>
+                </div>
+
+                <div class="card cyan">
+                    <span class="tag badge-cyan">GATE 04</span>
+                    <h3>Abolition of Pain</h3>
+                    <p>Pure-function threshold gate enforcing an inviolable pain-free operating floor across all nodes.</p>
+                    <pre><code>if pain_index &gt;= PAIN_FLOOR_THRESHOLD:
+    TRIGGER(ABOLITION_REMEDIATION_PROTOCOL)
+    FREEZE_STRESS_VECTORS()</code></pre>
+                </div>
+
+                <div class="card red">
+                    <span class="tag badge-red">GATE 05</span>
+                    <h3>Atrophy Timer</h3>
+                    <p>Flags inactive or stalled nodes for automatic peer review and resource reallocation.</p>
+                    <pre><code>T_limit = 86,400,000 ms  # 24 Hours
+
+if (current_time - node.last_active) &gt; T_limit:
+    FLAG(NODE_ATROPHY_REVIEW)</code></pre>
+                </div>
+
+                <div class="card gold">
+                    <span class="tag badge-gold">PROPERTY</span>
+                    <h3>Pure-Function Invariant</h3>
+                    <p>All gate functions are strictly pure: zero side effects, zero mutations, zero network I/O in kernels, guaranteeing deterministic verifiability.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Post-Quantum Cryptography & Ledger API -->
+        <section style="margin-bottom: 3.5rem;">
+            <h2 style="font-family:'Cinzel',serif; font-size:1.6rem; color:#fff; margin-bottom: 1.25rem;">Post-Quantum Cryptography & Ledger API</h2>
+            
+            <div class="card" style="margin-bottom: 1.5rem;">
+                <span class="tag badge-gold">POST /api/crypto/verify</span>
+                <h3 style="color:#fff; margin-top:0.3rem;">Post-Quantum Key Exchange & Signature Verification</h3>
+                <p>Verifies operator and node actions using lattice-based PQC algorithms (Kyber-768 / Dilithium / MAYO-1):</p>
+                <pre><code>POST http://localhost:5000/api/crypto/verify
+Content-Type: application/json
+
+{
+  "algorithm": "MAYO-1",
+  "public_key": "base64_encoded_pqc_key...",
+  "signature": "base64_encoded_signature...",
+  "payload": {
+    "node_id": "0xNODE_04",
+    "vote": "AFFIRM",
+    "cycle": 7,
+    "timestamp": 1789108967284
+  }
+}
+
+// Response (200 OK):
+{
+  "status": "VALID",
+  "pqc_algorithm": "MAYO-1",
+  "verified": true,
+  "ledger_entry_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+}</code></pre>
+            </div>
+
+            <div class="card cyan">
+                <span class="tag badge-cyan">GET / WS :5001</span>
+                <h3 style="color:#fff; margin-top:0.3rem;">/api/simulation/state — Mesa ABM Telemetry</h3>
+                <p>Retrieves real-time particle coordinates, game theory payoffs, and toroidal mesh dynamics:</p>
+                <pre><code>GET http://localhost:5001/api/simulation/state
+
+// Response (200 OK):
+{
+  "tick": 14208,
+  "governance_phase": "01_ACTIVE",
+  "phase_seconds_remaining": 8.4,
+  "node_count": 100,
+  "p_gate_confirmed_nodes": 68,
+  "golden_ratio_entropy": 0.618033,
+  "solar_wind_flux": 0.750,
+  "game_theory_profile": "STAG_HUNT",
+  "nodes": [
+    { "id": "0xNODE_01", "p_cycles": 7, "state": "CYAN_ACTIVE", "v": 0.94 },
+    { "id": "0xNODE_02", "p_cycles": 3, "state": "YELLOW_SYNC", "v": 0.68 }
+  ]
+}</code></pre>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-links">
+            <a href="index.html">Overview</a>
+            <a href="getting-started.html">Getting Started</a>
+            <a href="api-reference.html">API Reference</a>
+            <a href="faq.html">FAQ</a>
+            <a href="https://github.com/kylosarc/Sovereign_Mirror" target="_blank">GitHub</a>
+            <a href="http://178.156.135.222" target="_blank">Live Server</a>
+            <a href="https://kylosarc.com/sovereign-mirror" target="_blank">Project Portal</a>
+        </div>
+        <p>Kylos Arc // Cognoscentae Ultrans — Sovereign Mirror. Post-Darwinian Human Operating System.</p>
+    </footer>
+</body>
+</html>
